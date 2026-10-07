@@ -1,0 +1,2 @@
+results/data/figure_5_2.npz filter=lfs diff=lfs merge=lfs -text
+results/**/sweep_convergence.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

@@ -1,0 +1,783 @@
+{
+  "run": "6B",
+  "validated_at_utc": "2026-10-07T18:00:54.236813+00:00",
+  "versions": {
+    "python": "3.14.2",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.2",
+    "pytest": "9.1.1"
+  },
+  "arrays": {
+    "figure_5_1": {
+      "times_s": {
+        "shape": [
+          4001
+        ],
+        "dtype": "float64"
+      },
+      "plot_V_over_2pi_MHz": {
+        "shape": [
+          5
+        ],
+        "dtype": "float64"
+      },
+      "omega_rad_s": {
+        "shape": [],
+        "dtype": "float64"
+      },
+      "delta_rad_s": {
+        "shape": [],
+        "dtype": "float64"
+      },
+      "phase_rad": {
+        "shape": [],
+        "dtype": "float64"
+      },
+      "basis_labels": {
+        "shape": [
+          4
+        ],
+        "dtype": "<U2"
+      },
+      "observable_labels": {
+        "shape": [
+          5
+        ],
+        "dtype": "<U10"
+      },
+      "plot_states": {
+        "shape": [
+          5,
+          4001,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "plot_probabilities": {
+        "shape": [
+          5,
+          4001,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "validation_V_over_2pi_MHz": {
+        "shape": [
+          7
+        ],
+        "dtype": "float64"
+      },
+      "validation_limits": {
+        "shape": [
+          7
+        ],
+        "dtype": "<U14"
+      },
+      "validation_states": {
+        "shape": [
+          7,
+          4001,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "analytical_states": {
+        "shape": [
+          7,
+          4001,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "validation_probabilities": {
+        "shape": [
+          7,
+          4001,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "analytical_probabilities": {
+        "shape": [
+          7,
+          4001,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "residuals": {
+        "shape": [
+          7,
+          4001,
+          5
+        ],
+        "dtype": "float64"
+      }
+    },
+    "figure_5_2": {
+      "cubic_0_times_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "cubic_0_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "cubic_0_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "cubic_0_reference_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "cubic_0_reference_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "cubic_0_detuning_rad_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "cubic_1_times_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "cubic_1_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "cubic_1_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "cubic_1_reference_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "cubic_1_reference_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "cubic_1_detuning_rad_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "cubic_2_times_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "cubic_2_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "cubic_2_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "cubic_2_reference_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "cubic_2_reference_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "cubic_2_detuning_rad_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "cubic_3_times_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "cubic_3_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "cubic_3_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "cubic_3_reference_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "cubic_3_reference_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "cubic_3_detuning_rad_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "cubic_4_times_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "cubic_4_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "cubic_4_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "cubic_4_reference_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "cubic_4_reference_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "cubic_4_detuning_rad_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "linear_0_times_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "linear_0_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "linear_0_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "linear_0_reference_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "linear_0_reference_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "linear_0_detuning_rad_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "linear_1_times_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "linear_1_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "linear_1_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "linear_1_reference_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "linear_1_reference_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "linear_1_detuning_rad_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "linear_2_times_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "linear_2_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "linear_2_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "linear_2_reference_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "linear_2_reference_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "linear_2_detuning_rad_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "linear_3_times_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "linear_3_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "linear_3_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "linear_3_reference_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "linear_3_reference_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "linear_3_detuning_rad_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "linear_4_times_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "linear_4_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "linear_4_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "linear_4_reference_states": {
+        "shape": [
+          131073,
+          4
+        ],
+        "dtype": "complex128"
+      },
+      "linear_4_reference_probabilities": {
+        "shape": [
+          131073,
+          5
+        ],
+        "dtype": "float64"
+      },
+      "linear_4_detuning_rad_s": {
+        "shape": [
+          131073
+        ],
+        "dtype": "float64"
+      },
+      "interaction_mhz": {
+        "shape": [
+          5
+        ],
+        "dtype": "float64"
+      },
+      "observable_labels": {
+        "shape": [
+          5
+        ],
+        "dtype": "<U10"
+      }
+    }
+  },
+  "probability_reconstruction_max_error": 6.661338147750939e-16,
+  "maximum_saved_probability_sum_error": 1.5498713423767185e-12,
+  "maximum_saved_exchange_symmetry_error": 7.821521208484228e-14,
+  "production_cases": [
+    {
+      "profile": "cubic",
+      "V_over_2pi_MHz": 0.0,
+      "steps": 131072,
+      "maximum_P_00_error": 1.2436888799816082e-05,
+      "maximum_P_Psi_plus_error": 1.5316589187464036e-05,
+      "final_fidelity_error": 1.4622210775527833e-08,
+      "peak_fidelity_error": 2.2676704958257687e-10
+    },
+    {
+      "profile": "cubic",
+      "V_over_2pi_MHz": 0.5,
+      "steps": 131072,
+      "maximum_P_00_error": 1.295117048233374e-05,
+      "maximum_P_Psi_plus_error": 2.284155156734302e-05,
+      "final_fidelity_error": 2.1410038682168064e-05,
+      "peak_fidelity_error": 2.2445606050469635e-06
+    },
+    {
+      "profile": "cubic",
+      "V_over_2pi_MHz": 1.0,
+      "steps": 131072,
+      "maximum_P_00_error": 1.3706017851999874e-05,
+      "maximum_P_Psi_plus_error": 2.9276604234018677e-05,
+      "final_fidelity_error": 1.1138008579936187e-05,
+      "peak_fidelity_error": 3.083695100158934e-06
+    },
+    {
+      "profile": "cubic",
+      "V_over_2pi_MHz": 5.0,
+      "steps": 131072,
+      "maximum_P_00_error": 1.7102044336136935e-05,
+      "maximum_P_Psi_plus_error": 2.0046091340431005e-05,
+      "final_fidelity_error": 1.047744469340195e-05,
+      "peak_fidelity_error": 2.8961695368590057e-06
+    },
+    {
+      "profile": "cubic",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 131072,
+      "maximum_P_00_error": 1.8806953193006848e-05,
+      "maximum_P_Psi_plus_error": 1.8806093797785195e-05,
+      "final_fidelity_error": 2.654177239103106e-07,
+      "peak_fidelity_error": 1.6176825323732658e-08
+    },
+    {
+      "profile": "linear",
+      "V_over_2pi_MHz": 0.0,
+      "steps": 131072,
+      "maximum_P_00_error": 2.343690060824244e-05,
+      "maximum_P_Psi_plus_error": 2.1048594098627138e-05,
+      "final_fidelity_error": 9.395940719914009e-09,
+      "peak_fidelity_error": 9.234353020998176e-06
+    },
+    {
+      "profile": "linear",
+      "V_over_2pi_MHz": 0.5,
+      "steps": 131072,
+      "maximum_P_00_error": 2.3560918583576118e-05,
+      "maximum_P_Psi_plus_error": 2.1895403517879775e-05,
+      "final_fidelity_error": 1.9627951113043718e-06,
+      "peak_fidelity_error": 9.320976730259334e-06
+    },
+    {
+      "profile": "linear",
+      "V_over_2pi_MHz": 1.0,
+      "steps": 131072,
+      "maximum_P_00_error": 2.3630672729368918e-05,
+      "maximum_P_Psi_plus_error": 2.3296014007218036e-05,
+      "final_fidelity_error": 2.246536062872062e-06,
+      "peak_fidelity_error": 9.3957788077359e-06
+    },
+    {
+      "profile": "linear",
+      "V_over_2pi_MHz": 5.0,
+      "steps": 131072,
+      "maximum_P_00_error": 2.4031419752046368e-05,
+      "maximum_P_Psi_plus_error": 2.3021201014133963e-05,
+      "final_fidelity_error": 2.9821623819259457e-06,
+      "peak_fidelity_error": 1.034789027112848e-05
+    },
+    {
+      "profile": "linear",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 131072,
+      "maximum_P_00_error": 2.4613783612736917e-05,
+      "maximum_P_Psi_plus_error": 2.4612339014240536e-05,
+      "final_fidelity_error": 2.6960904556116994e-07,
+      "peak_fidelity_error": 1.2024239648578128e-05
+    }
+  ],
+  "csv_rows_verified": 36,
+  "production_steps": 131072,
+  "production_dt_s": 7.62939453125e-12,
+  "production_refinement_attempts": null,
+  "artifact_hashes_sha256": {
+    "results/audit_sweep/data/figure_5_2.npz": "539754ecb2323bcbc4ddd637c8e8407ba8252c22042d40426480a1f783934433",
+    "results/audit_sweep/data/sweep_convergence.csv": "4d609199f10ee19d1c0d3d66ac5561bde6ed1023193720a511d177f2f4ec0e2c",
+    "results/audit_sweep/data/sweep_validation.json": "01c312259f8db5b903b67f4cfb6540658440cc8520f1ca40fcaaa2b7cb20070d",
+    "results/audit_sweep/figures/figure_5_2.pdf": "3b4f2b8f623da37e1315aae44d2717b6ba123e8b14f7834f9faae7c50f314b3b",
+    "results/audit_sweep/figures/figure_5_2.png": "332bd01f488a58177e602892d5b0bca313ada8636d86647e02a81bc3afb89f74",
+    "results/audit_sweep/figures/sweep_comparison.pdf": "8068bbb4729401e5021f316c35942ca55e205c2bd3383b0bc233ff0ac240cd43",
+    "results/audit_sweep/figures/sweep_comparison.png": "f04d5a01a5c60898f2aff7ce33276b199d968aaf57da0db8398596ab9033353f",
+    "results/audit_sweep/figures/sweep_convergence.pdf": "eed79d75a67b47bdb29719711531d3107390af2bccef18d2c78e97efc366ea4a",
+    "results/audit_sweep/figures/sweep_convergence.png": "80d5776757fcd92e105ca0aca2ec9a8c463726d8c1452b4e44d575b2f8eed9c8",
+    "results/data/figure_5_1.npz": "9c041124198231ede78191716b79130355083fda6a73120efd9c61b18e73c07e",
+    "results/data/figure_5_2.npz": "9fbcdd1bffd158c459440c8acc60316f976570e35c593da3874e8cb094c3997c",
+    "results/data/static_validation.json": "94f7af78e168125c64f53c0fd3784ed1fa023c3ff3b1cd0c97adce0164e6a727",
+    "results/data/sweep_convergence.csv": "2f45b172ab7dc795f4c1e4747cb48cc4a81857ceed46c9a10018e0147074f05d",
+    "results/data/sweep_validation.json": "06d573bf49063584e92b56ab9a8e6f721bad99164299d34d7de392d782969a41",
+    "results/figures/figure_5_1.pdf": "3dd3985ee6e7adfaa2f7f8d4bdc0564784c4d59b1d8fd23c867c0b7274aa69d0",
+    "results/figures/figure_5_1.png": "471d681875b68343605479e0c9ed577dec5dc0406d380f64d159a67e1a1c492b",
+    "results/figures/figure_5_2.pdf": "32d3f729be3a165469c372cfa6ab939960f5f6647e579f2894ecd30be42fafde",
+    "results/figures/figure_5_2.png": "635d32174bb80fa74ffbe33aaf26f0c114ceca7a9705df4f8ecd5fa59df6af5a",
+    "results/figures/static_residuals.pdf": "f6266e4439a9a28eccfe2f71ff5b70f1d3eadd9d5305580d1e966a5ee2483521",
+    "results/figures/static_residuals.png": "7fff0f9ab98709ac5c99309fea2834eb93e661502c0b74b61f9481a96948ac6c",
+    "results/figures/sweep_comparison.pdf": "3d8a9e311a430c35c6409cb00392c8a3e14b3e740669cb7755d51033a9efe515",
+    "results/figures/sweep_comparison.png": "a929c555a79c516865b57d76f310a372905dd5b79ec15c71cb25eda8a4513ff6",
+    "results/figures/sweep_convergence.pdf": "db6c8c706b872279165b54488c2b52955052c33606e50d4bed752f5ae4a66101",
+    "results/figures/sweep_convergence.png": "42b4a7681540d082ccb5132701666ac50564697ec311b3db542d5d828aecff3d"
+  },
+  "status": "passed",
+  "tests": {
+    "command": ".venv/bin/python -m pytest -rP",
+    "passed": 254,
+    "summary": "254 passed in 33.82s",
+    "phase_invariance_comparisons": 45,
+    "maximum_phase_probability_error": 1.099120794e-14,
+    "output": "============================= test session starts ==============================\nplatform linux -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0\nrootdir: /workspaces/Quantum-Computing\nconfigfile: pyproject.toml\ntestpaths: tests\ncollected 254 items\n\ntests/test_hamiltonian.py .....................................          [ 14%]\ntests/test_phase_invariance.py ...............                           [ 20%]\ntests/test_states_and_observables.py .................................   [ 33%]\ntests/test_static_limits.py .........................                    [ 43%]\ntests/test_static_solver.py .....................................        [ 57%]\ntests/test_sweeps_and_convergence.py .................................   [ 70%]\ntests/test_trotter.py .....................................              [ 85%]\ntests/test_validation_and_units.py ..................................... [100%]\n\n==================================== PASSES ====================================\n___________________ test_constant_phase_invariance[static-0] ___________________\n----------------------------- Captured stdout call -----------------------------\nphase invariance: static V=0 MHz phi=0.37 P00_error=1.998401444e-15 P_Psi_plus_error=1.554312234e-15\nphase invariance: static V=0 MHz phi=1.5707963 P00_error=6.661338148e-16 P_Psi_plus_error=8.881784197e-16\nphase invariance: static V=0 MHz phi=-1.2 P00_error=1.110223025e-15 P_Psi_plus_error=1.332267630e-15\n__________________ test_constant_phase_invariance[static-0.5] __________________\n----------------------------- Captured stdout call -----------------------------\nphase invariance: static V=0.5 MHz phi=0.37 P00_error=1.887379142e-15 P_Psi_plus_error=1.165734176e-15\nphase invariance: static V=0.5 MHz phi=1.5707963 P00_error=6.661338148e-16 P_Psi_plus_error=6.661338148e-16\nphase invariance: static V=0.5 MHz phi=-1.2 P00_error=2.664535259e-15 P_Psi_plus_error=9.714451465e-16\n___________________ test_constant_phase_invariance[static-1] ___________________\n----------------------------- Captured stdout call -----------------------------\nphase invariance: static V=1 MHz phi=0.37 P00_error=2.220446049e-15 P_Psi_plus_error=1.443289932e-15\nphase invariance: static V=1 MHz phi=1.5707963 P00_error=1.110223025e-15 P_Psi_plus_error=8.326672685e-16\nphase invariance: static V=1 MHz phi=-1.2 P00_error=2.775557562e-15 P_Psi_plus_error=2.553512957e-15\n___________________ test_constant_phase_invariance[static-5] ___________________\n----------------------------- Captured stdout call -----------------------------\nphase invariance: static V=5 MHz phi=0.37 P00_error=1.443289932e-15 P_Psi_plus_error=1.665334537e-15\nphase invariance: static V=5 MHz phi=1.5707963 P00_error=1.665334537e-15 P_Psi_plus_error=2.109423747e-15\nphase invariance: static V=5 MHz phi=-1.2 P00_error=8.881784197e-16 P_Psi_plus_error=1.443289932e-15\n__________________ test_constant_phase_invariance[static-100] __________________\n----------------------------- Captured stdout call -----------------------------\nphase invariance: static V=100 MHz phi=0.37 P00_error=7.771561172e-16 P_Psi_plus_error=1.110223025e-15\nphase invariance: static V=100 MHz phi=1.5707963 P00_error=4.440892099e-16 P_Psi_plus_error=8.881784197e-16\nphase invariance: static V=100 MHz phi=-1.2 P00_error=1.776356839e-15 P_Psi_plus_error=2.442490654e-15\n___________________ test_constant_phase_invariance[cubic-0] ____________________\n----------------------------- Captured stdout call -----------------------------\nphase invariance: cubic V=0 MHz phi=0.37 P00_error=3.552713679e-15 P_Psi_plus_error=2.053912596e-15\nphase invariance: cubic V=0 MHz phi=1.5707963 P00_error=4.107825191e-15 P_Psi_plus_error=2.498001805e-15\nphase invariance: cubic V=0 MHz phi=-1.2 P00_error=2.442490654e-15 P_Psi_plus_error=1.665334537e-15\n__________________ test_constant_phase_invariance[cubic-0.5] ___________________\n----------------------------- Captured stdout call -----------------------------\nphase invariance: cubic V=0.5 MHz phi=0.37 P00_error=6.883382753e-15 P_Psi_plus_error=7.660538870e-15\nphase invariance: cubic V=0.5 MHz phi=1.5707963 P00_error=4.884981308e-15 P_Psi_plus_error=3.219646771e-15\nphase invariance: cubic V=0.5 MHz phi=-1.2 P00_error=4.440892099e-15 P_Psi_plus_error=4.996003611e-15\n___________________ test_constant_phase_invariance[cubic-1] ____________________\n----------------------------- Captured stdout call -----------------------------\nphase invariance: cubic V=1 MHz phi=0.37 P00_error=5.329070518e-15 P_Psi_plus_error=2.997602166e-15\nphase invariance: cubic V=1 MHz phi=1.5707963 P00_error=4.218847494e-15 P_Psi_plus_error=2.664535259e-15\nphase invariance: cubic V=1 MHz phi=-1.2 P00_error=4.884981308e-15 P_Psi_plus_error=1.887379142e-15\n___________________ test_constant_phase_invariance[cubic-5] ____________________\n----------------------------- Captured stdout call -----------------------------\nphase invariance: cubic V=5 MHz phi=0.37 P00_error=4.662936703e-15 P_Psi_plus_error=1.887379142e-15\nphase invariance: cubic V=5 MHz phi=1.5707963 P00_error=3.552713679e-15 P_Psi_plus_error=3.330669074e-15\nphase invariance: cubic V=5 MHz phi=-1.2 P00_error=3.275157923e-15 P_Psi_plus_error=7.549516567e-15\n__________________ test_constant_phase_invariance[cubic-100] ___________________\n----------------------------- Captured stdout call -----------------------------\nphase invariance: cubic V=100 MHz phi=0.37 P00_error=2.997602166e-15 P_Psi_plus_error=6.661338148e-15\nphase invariance: cubic V=100 MHz phi=1.5707963 P00_error=2.997602166e-15 P_Psi_plus_error=3.774758284e-15\nphase invariance: cubic V=100 MHz phi=-1.2 P00_error=2.664535259e-15 P_Psi_plus_error=3.219646771e-15\n___________________ test_constant_phase_invariance[linear-0] ___________________\n----------------------------- Captured stdout call -----------------------------\nphase invariance: linear V=0 MHz phi=0.37 P00_error=5.551115123e-15 P_Psi_plus_error=1.637578961e-15\nphase invariance: linear V=0 MHz phi=1.5707963 P00_error=4.773959006e-15 P_Psi_plus_error=5.551115123e-16\nphase invariance: linear V=0 MHz phi=-1.2 P00_error=7.549516567e-15 P_Psi_plus_error=9.159339953e-16\n__________________ test_constant_phase_invariance[linear-0.5] __________________\n----------------------------- Captured stdout call -----------------------------\nphase invariance: linear V=0.5 MHz phi=0.37 P00_error=1.088018564e-14 P_Psi_plus_error=1.915134717e-15\nphase invariance: linear V=0.5 MHz phi=1.5707963 P00_error=1.099120794e-14 P_Psi_plus_error=1.887379142e-15\nphase invariance: linear V=0.5 MHz phi=-1.2 P00_error=7.882583475e-15 P_Psi_plus_error=1.693090113e-15\n___________________ test_constant_phase_invariance[linear-1] ___________________\n----------------------------- Captured stdout call -----------------------------\nphase invariance: linear V=1 MHz phi=0.37 P00_error=3.996802889e-15 P_Psi_plus_error=1.693090113e-15\nphase invariance: linear V=1 MHz phi=1.5707963 P00_error=5.995204333e-15 P_Psi_plus_error=8.881784197e-16\nphase invariance: linear V=1 MHz phi=-1.2 P00_error=8.548717290e-15 P_Psi_plus_error=6.383782392e-16\n___________________ test_constant_phase_invariance[linear-5] ___________________\n----------------------------- Captured stdout call -----------------------------\nphase invariance: linear V=5 MHz phi=0.37 P00_error=5.551115123e-15 P_Psi_plus_error=1.332267630e-15\nphase invariance: linear V=5 MHz phi=1.5707963 P00_error=3.996802889e-15 P_Psi_plus_error=9.436895709e-16\nphase invariance: linear V=5 MHz phi=-1.2 P00_error=5.107025913e-15 P_Psi_plus_error=1.498801083e-15\n__________________ test_constant_phase_invariance[linear-100] __________________\n----------------------------- Captured stdout call -----------------------------\nphase invariance: linear V=100 MHz phi=0.37 P00_error=4.218847494e-15 P_Psi_plus_error=1.054711873e-15\nphase invariance: linear V=100 MHz phi=1.5707963 P00_error=5.329070518e-15 P_Psi_plus_error=1.360023205e-15\nphase invariance: linear V=100 MHz phi=-1.2 P00_error=5.773159728e-15 P_Psi_plus_error=7.216449660e-16\n________________ test_agreement_with_independent_expm_reference ________________\n----------------------------- Captured stdout call -----------------------------\nMaximum static/expm amplitude discrepancy: 3.389664e-14\nMaximum state-norm deviation: 1.110223e-15\n__________________ test_constant_hamiltonian_refinement_study __________________\n----------------------------- Captured stdout call -----------------------------\nConstant H: dt (ns), maximum amplitude discrepancy, maximum norm deviation\n125.000000 5.762261e-14 3.841372e-14\n 31.250000 1.021941e-13 4.640732e-14\n  7.812500 9.712520e-14 4.107825e-14\n  1.953125 5.058038e-14 1.887379e-14\nMaximum constant-H amplitude discrepancy: 1.021941e-13\nMaximum constant-H norm deviation: 4.640732e-14\n_______ test_detuning_ramp_converges_first_order_against_independent_ode _______\n----------------------------- Captured stdout call -----------------------------\nLinear detuning ramp: dt (ns), maximum amplitude discrepancy versus DOP853\n 50.000000 5.870228e-02\n 25.000000 2.951230e-02\n 12.500000 1.475576e-02\n  6.250000 7.379883e-03\n  3.125000 3.689913e-03\n============================= 254 passed in 33.82s =============================\n"
+  },
+  "commands": [
+    ".venv/bin/python -m pytest -rP",
+    ".venv/bin/python -m compileall -q src scripts tests",
+    "PIP_CACHE_DIR=/tmp/run6b-pip-cache .venv/bin/python -m pip check",
+    "OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/run6b-matplotlib-static .venv/bin/python scripts/figure_5_1.py",
+    "OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/run6b-matplotlib .venv/bin/python -u scripts/figure_5_2.py --milestone --interaction-mhz 0 0.5 1 5 100 --phase 0",
+    "OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/run6b-matplotlib .venv/bin/python /tmp/replot_run6b.py",
+    "OPENBLAS_NUM_THREADS=1 .venv/bin/python /tmp/audit_run6b.py",
+    "git diff --check",
+    "git status --short --untracked-files=all"
+  ],
+  "artifact_audit_script": "import csv\nimport hashlib\nimport json\nimport platform\nfrom datetime import datetime, timezone\nfrom pathlib import Path\nimport numpy as np\nimport scipy\nimport matplotlib\nimport pytest\nfrom quantum_project.convergence import compare_probabilities, largest_passing_timestep\n\nroot = Path('/workspaces/Quantum-Computing')\ndata = root / 'results/data'\nsweep = json.loads((data / 'sweep_validation.json').read_text())\nstatic = json.loads((data / 'static_validation.json').read_text())\nreport = {'run': '6B', 'validated_at_utc': datetime.now(timezone.utc).isoformat(),\n          'versions': {'python': platform.python_version(), 'numpy': np.__version__,\n                       'scipy': scipy.__version__, 'matplotlib': matplotlib.__version__, 'pytest': pytest.__version__},\n          'arrays': {}, 'probability_reconstruction_max_error': 0.0,\n          'maximum_saved_probability_sum_error': 0.0,\n          'maximum_saved_exchange_symmetry_error': 0.0,\n          'production_cases': []}\n\ndef probabilities(states):\n    # Direct coherent projection, independently of the production helper.\n    return np.concatenate((np.abs(states)**2,\n        (np.abs((states[..., 1] + states[..., 2]) / np.sqrt(2))**2)[..., None]), axis=-1)\n\ndef check_states(states, saved, tol):\n    actual = probabilities(states)\n    error = float(np.max(np.abs(actual - saved)))\n    assert error < 2e-15, error\n    norm = float(np.max(np.abs(actual[..., :4].sum(axis=-1) - 1)))\n    symmetry = float(np.max(np.abs(actual[..., 1] - actual[..., 2])))\n    assert norm <= tol and symmetry <= tol\n    assert actual.min() >= -tol and actual.max() <= 1 + tol\n    report['probability_reconstruction_max_error'] = max(report['probability_reconstruction_max_error'], error)\n    report['maximum_saved_probability_sum_error'] = max(report['maximum_saved_probability_sum_error'], norm)\n    report['maximum_saved_exchange_symmetry_error'] = max(report['maximum_saved_exchange_symmetry_error'], symmetry)\n\nfor name in ('figure_5_1', 'figure_5_2'):\n    with np.load(data / f'{name}.npz', allow_pickle=False) as archive:\n        arrays = {k: archive[k] for k in archive.files}\n    report['arrays'][name] = {k: {'shape': list(a.shape), 'dtype': str(a.dtype)} for k, a in arrays.items()}\n    for a in arrays.values():\n        if np.issubdtype(a.dtype, np.number):\n            assert np.isfinite(a).all()\n    if name == 'figure_5_1':\n        np.testing.assert_array_equal(arrays['plot_V_over_2pi_MHz'], [0, .5, 1, 5, 100])\n        np.testing.assert_array_equal(arrays['times_s'], np.linspace(0, 1e-6, 4001))\n        for prefix in ('plot', 'validation', 'analytical'):\n            check_states(arrays[prefix + '_states'], arrays[prefix + '_probabilities'], 1e-12)\n        np.testing.assert_array_equal(arrays['residuals'], arrays['validation_probabilities'] - arrays['analytical_probabilities'])\n    else:\n        np.testing.assert_array_equal(arrays['interaction_mhz'], [0, .5, 1, 5, 100])\n        assert sweep['parameters']['phase_rad'] == 0\n        assert len(sweep['summaries']) == 10 and len(sweep['convergence']) == 20\n        for summary in sweep['summaries']:\n            profile, interaction = summary['profile'], summary['V_over_2pi_MHz']\n            index = list(arrays['interaction_mhz']).index(interaction)\n            prefix = f'{profile}_{index}_'\n            times = arrays[prefix + 'times_s']\n            steps = sweep['production_steps']\n            assert summary['selected_steps'] == steps\n            np.testing.assert_array_equal(times, np.linspace(0, 1e-6, steps + 1))\n            for suffix in ('', 'reference_'):\n                check_states(arrays[prefix + suffix + 'states'], arrays[prefix + suffix + 'probabilities'], 1e-10)\n            actual, reference = arrays[prefix + 'probabilities'], arrays[prefix + 'reference_probabilities']\n            metrics = compare_probabilities(actual, reference, summary['reference_maximum_fidelity'])\n            rows = [r for r in sweep['convergence'] if r['profile'] == profile and r['V_over_2pi_MHz'] == interaction]\n            assert sorted(r['steps'] for r in rows) == [steps, 2 * steps]\n            assert all(r['passes'] for r in rows)\n            row = next(r for r in rows if r['steps'] == steps)\n            for key in ('final_fidelity_error', 'maximum_P_00_error', 'maximum_P_Psi_plus_error', 'peak_fidelity_error'):\n                np.testing.assert_allclose(metrics[key], row[key], atol=1e-15, rtol=1e-10)\n            assert max(metrics['maximum_P_00_error'], metrics['maximum_P_Psi_plus_error']) <= 5e-5\n            if interaction == 100:\n                assert metrics['passes']\n            else:\n                assert row['halved_dt_maximum_plot_difference'] <= 5e-5\n            assert summary['selected_final_fidelity'] == actual[-1, 4]\n            assert summary['selected_maximum_fidelity'] == actual[:, 4].max()\n            report['production_cases'].append({k: row[k] for k in ('profile', 'V_over_2pi_MHz', 'steps', 'maximum_P_00_error', 'maximum_P_Psi_plus_error', 'final_fidelity_error', 'peak_fidelity_error')})\nfor summary in sweep['benchmark_summaries']:\n    rows = [r for r in sweep['benchmark_convergence'] if r['profile'] == summary['profile']]\n    assert len(rows) == 10\n    assert largest_passing_timestep(rows) == summary['largest_tested_passing_dt_s']\nassert max(s['reference_refinement_max_probability_difference'] for s in sweep['summaries']) < 1e-9\nexpected_csv = sweep['benchmark_convergence'] + [r for r in sweep['convergence'] if r['validation_scope'] == 'family plot stability']\nwith (data / 'sweep_convergence.csv').open() as f:\n    csv_rows = list(csv.DictReader(f))\nassert len(csv_rows) == len(expected_csv)\nfor actual, expected in zip(csv_rows, expected_csv):\n    for k, value in actual.items():\n        assert value == str(expected.get(k, '')), (k, value, expected.get(k))\nreport['csv_rows_verified'] = len(csv_rows)\nreport['production_steps'] = sweep['production_steps']\nreport['production_dt_s'] = sweep['production_dt_s']\nreport['production_refinement_attempts'] = sweep.get('production_refinement_attempts')\nreport['artifact_hashes_sha256'] = {}\nfor path in sorted((root / 'results').rglob('*')):\n    if path.is_file() and path.name != 'run6b_validation.json':\n        if path.suffix == '.pdf':\n            assert path.read_bytes().startswith(b'%PDF-')\n        if path.suffix == '.png':\n            assert path.read_bytes().startswith(b'\\x89PNG\\r\\n\\x1a\\n')\n        report['artifact_hashes_sha256'][str(path.relative_to(root))] = hashlib.file_digest(path.open('rb'), 'sha256').hexdigest()\nreport['status'] = 'passed'\n(data / 'run6b_validation.json').write_text(json.dumps(report, indent=2, allow_nan=False) + '\\n')\nprint(json.dumps({k: v for k, v in report.items() if k not in ('arrays', 'artifact_hashes_sha256', 'production_cases')}, indent=2))\n",
+  "replot_script": "from pathlib import Path\nimport importlib.util\nimport json\nimport numpy as np\nroot=Path('/workspaces/Quantum-Computing')\nspec=importlib.util.spec_from_file_location('figure_5_2', root / 'scripts/figure_5_2.py')\nmodule=importlib.util.module_from_spec(spec)\nspec.loader.exec_module(module)\nreport=json.loads((root / 'results/data/sweep_validation.json').read_text())\nwith np.load(root / 'results/data/figure_5_2.npz', allow_pickle=False) as archive:\n    cases={}\n    for profile in module.PROFILES:\n        for index, interaction in enumerate(archive['interaction_mhz']):\n            prefix=f'{profile}_{index}_'\n            cases[(profile, float(interaction))]={key[len(prefix):]: archive[key] for key in archive.files if key.startswith(prefix)}\nrows=report['benchmark_convergence'] + [r for r in report['convergence'] if r['validation_scope']=='family plot stability']\nwith module.plt.rc_context({'font.size': 10, 'pdf.fonttype': 42, 'axes.spines.top': False, 'axes.spines.right': False}):\n    module.make_figures(cases, report['summaries'], rows, root / 'results/figures', report['case_label'])\nprint('Rebuilt all sweep figures from the complete saved Run 6B arrays and reports.')\n",
+  "resume_provenance": {
+    "static": "Regenerated successfully from current script during resumed run.",
+    "sweep_data": "Recovered complete earlier Run 6B NPZ/JSON/CSV outputs; independently audited saved arrays and reported metrics.",
+    "sweep_regeneration_attempt": "Interrupted by server restart during first family pass, after completing both full 100 MHz benchmarks. Did not replace saved sweep data.",
+    "sweep_figures": "Regenerated successfully from recovered complete data using current figure_5_2.make_figures.",
+    "production_refinement_attempts": "Not recorded in recovered report; not inferred."
+  },
+  "checks": {
+    "compileall": "passed",
+    "pip_check": "No broken requirements found.",
+    "visual_inspection": [
+      "figure_5_1.png",
+      "static_residuals.png",
+      "figure_5_2.png",
+      "sweep_comparison.png",
+      "sweep_convergence.png"
+    ],
+    "generation_warnings": [],
+    "note": "Initial pip check emitted an unwritable default-cache warning; repeated with writable temporary cache and no warnings. Artifact audit import emitted a Matplotlib default-cache warning and used its automatic temporary fallback; numerical checks passed.",
+    "git_diff_check": "passed"
+  },
+  "static_generation_output": "Limit          V/(2pi) MHz  Observable    Max absolute       RMS\nnoninteracting           0  P_00        9.99200722e-16  3.82060360e-16\nnoninteracting           0  P_Psi_plus  5.55111512e-16  1.88784367e-16\nnoninteracting       0.001  P_00        1.08760571e-06  5.09649445e-07\nnoninteracting       0.001  P_Psi_plus  1.10374911e-06  4.99300674e-07\nnoninteracting        0.01  P_00        1.08753739e-04  5.09617842e-05\nnoninteracting        0.01  P_Psi_plus  1.10362510e-04  4.99245221e-05\nblockade                10  P_00        8.05984967e-03  3.83129468e-03\nblockade                10  P_Psi_plus  1.18921901e-02  5.67150165e-03\nblockade                30  P_00        9.04577329e-04  4.28905539e-04\nblockade                30  P_Psi_plus  1.29908621e-03  6.33810271e-04\nblockade               100  P_00        8.14874458e-05  3.86346183e-05\nblockade               100  P_Psi_plus  1.15513911e-04  5.70809324e-05\nblockade              -100  P_00        8.14874458e-05  3.86346183e-05\nblockade              -100  P_Psi_plus  1.15513911e-04  5.70809324e-05\n{\n  \"max_probability_normalisation_error\": 1.9984014443252818e-15,\n  \"max_exchange_symmetry_error\": 5.551115123125783e-16,\n  \"minimum_probability\": 0.0,\n  \"maximum_probability\": 1.0000000000000013\n}\nFigures: /workspaces/Quantum-Computing/results/figures\nData and report: /workspaces/Quantum-Computing/results/data\n",
+  "interrupted_sweep_generation_output": "cubic  V/(2pi)=100 MHz dt=0.00762939 ns error/tolerance=0.3761 pass=True\ncubic  V/(2pi)=100 MHz dt=0.0152588 ns error/tolerance=0.7526 pass=True\ncubic  V/(2pi)=100 MHz dt=0.0305176 ns error/tolerance=1.506 pass=False\ncubic  V/(2pi)=100 MHz dt=0.0610352 ns error/tolerance=3.018 pass=False\ncubic  V/(2pi)=100 MHz dt=0.12207 ns error/tolerance=6.058 pass=False\ncubic  V/(2pi)=100 MHz dt=0.244141 ns error/tolerance=12.2 pass=False\ncubic  V/(2pi)=100 MHz dt=0.488281 ns error/tolerance=24.74 pass=False\ncubic  V/(2pi)=100 MHz dt=0.976562 ns error/tolerance=50.82 pass=False\ncubic  V/(2pi)=100 MHz dt=1.95312 ns error/tolerance=106.9 pass=False\ncubic  V/(2pi)=100 MHz dt=3.90625 ns error/tolerance=233.6 pass=False\nlinear V/(2pi)=100 MHz dt=0.00762939 ns error/tolerance=0.4922 pass=True\nlinear V/(2pi)=100 MHz dt=0.0152588 ns error/tolerance=0.9846 pass=True\nlinear V/(2pi)=100 MHz dt=0.0305176 ns error/tolerance=1.97 pass=False\nlinear V/(2pi)=100 MHz dt=0.0610352 ns error/tolerance=3.941 pass=False\nlinear V/(2pi)=100 MHz dt=0.12207 ns error/tolerance=7.888 pass=False\nlinear V/(2pi)=100 MHz dt=0.244141 ns error/tolerance=15.8 pass=False\nlinear V/(2pi)=100 MHz dt=0.488281 ns error/tolerance=31.7 pass=False\nlinear V/(2pi)=100 MHz dt=0.976562 ns error/tolerance=63.89 pass=False\nlinear V/(2pi)=100 MHz dt=1.95312 ns error/tolerance=129.4 pass=False\nlinear V/(2pi)=100 MHz dt=3.90625 ns error/tolerance=261.4 pass=False\ncubic  V/(2pi)=0 MHz dt=0.00762939 ns error/tolerance=0.3063 pass=True\ncubic  V/(2pi)=0 MHz dt=0.0152588 ns error/tolerance=0.6124 pass=True\ncubic  V/(2pi)=0.5 MHz dt=0.00762939 ns error/tolerance=0.4568 pass=True\ncubic  V/(2pi)=0.5 MHz dt=0.0152588 ns error/tolerance=0.9139 pass=True\ncubic  V/(2pi)=1 MHz dt=0.00762939 ns error/tolerance=0.5855 pass=True\ncubic  V/(2pi)=1 MHz dt=0.0152588 ns error/tolerance=1.171 pass=False\ncubic  V/(2pi)=5 MHz dt=0.00762939 ns error/tolerance=0.4009 pass=True\ncubic  V/(2pi)=5 MHz dt=0.0152588 ns error/tolerance=0.8018 pass=True\ncubic  V/(2pi)=100 MHz dt=0.00762939 ns error/tolerance=0.3761 pass=True\ncubic  V/(2pi)=100 MHz dt=0.0152588 ns error/tolerance=0.7526 pass=True\nlinear V/(2pi)=0 MHz dt=0.00762939 ns error/tolerance=0.421 pass=True\nlinear V/(2pi)=0 MHz dt=0.0152588 ns error/tolerance=0.8421 pass=True\nlinear V/(2pi)=0.5 MHz dt=0.00762939 ns error/tolerance=0.4379 pass=True\nlinear V/(2pi)=0.5 MHz dt=0.0152588 ns error/tolerance=0.876 pass=True\n",
+  "sweep_replot_output": "Rebuilt all sweep figures from the complete saved Run 6B arrays and reports.\n",
+  "source_hashes_sha256": {
+    "src/quantum_project/__init__.py": "86cf8b6c15a18e20f8a93bfdc6856f5d8f575b3412491c4574d3b0f51f84c8a4",
+    "src/quantum_project/convergence.py": "3fbb7ff286587ac2f6adf219546a9a9ed69a59b73e3f744f5008ea04128e3eb6",
+    "src/quantum_project/hamiltonian.py": "3be11e0616b2464b3b8b0e51880ec634451e78f59e7855dc245904969ff1ef1a",
+    "src/quantum_project/observables.py": "29fc9deccbecb79968bd019efbc87bfd4fb7f63dc43b459442ca6105d5cc3ab7",
+    "src/quantum_project/states.py": "e6cf72c9f830805bda192918612b75daff76becff558893bc275c7cf4184b2ca",
+    "src/quantum_project/static_limits.py": "ae34a2bfe9abbb7f032c96e6fefb7daa0ea1a58d789e2cef140fe00498bebeda",
+    "src/quantum_project/static_solver.py": "996f46c0b88e92000f6c40d431c518bea25da771bc9c6fbcf69721d96a0af1b1",
+    "src/quantum_project/sweeps.py": "648db9de2326cd2000eef6ac2b6974e56397a9f02913b70e0dbf89141506d6a3",
+    "src/quantum_project/trotter.py": "377c57f344505619928fd8449877d2d3f7cb83e7abc010a7df717803e5ef8e1d",
+    "src/quantum_project/units.py": "b8f697a10473a87f31f128bd1a1779f5b7342248bdfe60a5248b74f23c246192",
+    "src/quantum_project/validation.py": "8391aab2406b837f3123d3926536bdbc69320c0131e45150caa5065d0155a132",
+    "scripts/figure_5_1.py": "fed3b2a150dc1da26968054c3629988d375935366fdd44543459dad14addd6f9",
+    "scripts/figure_5_2.py": "44cd2daf136774d1f228179ca9117744b0c79c5f73c8b9a22d800f9d0cf5502a",
+    "tests/test_hamiltonian.py": "395eef0bcd8f3d2bcc287ad305889d231ec5d90afe18d1029808a044d64132cf",
+    "tests/test_phase_invariance.py": "34903b5ffc216cfb88515a772a28b56ccc0d695de8132f82665f18dc997561c7",
+    "tests/test_states_and_observables.py": "3493746aa59eb3c8d69af5d2ba4a2932d838d2f09a1ad1643063fa6721048d04",
+    "tests/test_static_limits.py": "332c713d536e58f7d693bff67b1d0eb13a7fcb375b65c9b43821b1d01b685ea6",
+    "tests/test_static_solver.py": "a009e5578b93a4f839e345e1c586564a5362497d7a7c63fcfc3f8aac3a818915",
+    "tests/test_sweeps_and_convergence.py": "6450b233d87dee0da97dcb77b8b8c76f6958c4ff8306843a5a2a41fd7c02ca4e",
+    "tests/test_trotter.py": "e3084ad316455d2faf332624325198cbdb88e350384b1e77bc942a747e9e281b",
+    "tests/test_validation_and_units.py": "98c40c515158aa8e1b2bfe1b5a0778aa4683685c3fd39ff0a53716bc59a8f268"
+  },
+  "working_tree_status": [
+    " M README.md",
+    "?? .gitignore",
+    "?? MILESTONE_CHECKLIST.md",
+    "?? docs/milestone_report.md",
+    "?? docs/static_validation.md",
+    "?? docs/sweep_validation.md",
+    "?? docs/time_dependent_validation.md",
+    "?? pyproject.toml",
+    "?? results/audit_sweep/data/figure_5_2.npz",
+    "?? results/audit_sweep/data/sweep_convergence.csv",
+    "?? results/audit_sweep/data/sweep_validation.json",
+    "?? results/audit_sweep/figures/figure_5_2.pdf",
+    "?? results/audit_sweep/figures/figure_5_2.png",
+    "?? results/audit_sweep/figures/sweep_comparison.pdf",
+    "?? results/audit_sweep/figures/sweep_comparison.png",
+    "?? results/audit_sweep/figures/sweep_convergence.pdf",
+    "?? results/audit_sweep/figures/sweep_convergence.png",
+    "?? results/data/figure_5_1.npz",
+    "?? results/data/figure_5_2.npz",
+    "?? results/data/run6b_validation.json",
+    "?? results/data/static_validation.json",
+    "?? results/data/sweep_convergence.csv",
+    "?? results/data/sweep_validation.json",
+    "?? results/figures/figure_5_1.pdf",
+    "?? results/figures/figure_5_1.png",
+    "?? results/figures/figure_5_2.pdf",
+    "?? results/figures/figure_5_2.png",
+    "?? results/figures/static_residuals.pdf",
+    "?? results/figures/static_residuals.png",
+    "?? results/figures/sweep_comparison.pdf",
+    "?? results/figures/sweep_comparison.png",
+    "?? results/figures/sweep_convergence.pdf",
+    "?? results/figures/sweep_convergence.png",
+    "?? scripts/figure_5_1.py",
+    "?? scripts/figure_5_2.py",
+    "?? src/quantum_project/__init__.py",
+    "?? src/quantum_project/convergence.py",
+    "?? src/quantum_project/hamiltonian.py",
+    "?? src/quantum_project/observables.py",
+    "?? src/quantum_project/states.py",
+    "?? src/quantum_project/static_limits.py",
+    "?? src/quantum_project/static_solver.py",
+    "?? src/quantum_project/sweeps.py",
+    "?? src/quantum_project/trotter.py",
+    "?? src/quantum_project/units.py",
+    "?? src/quantum_project/validation.py",
+    "?? tests/test_hamiltonian.py",
+    "?? tests/test_phase_invariance.py",
+    "?? tests/test_states_and_observables.py",
+    "?? tests/test_static_limits.py",
+    "?? tests/test_static_solver.py",
+    "?? tests/test_sweeps_and_convergence.py",
+    "?? tests/test_trotter.py",
+    "?? tests/test_validation_and_units.py"
+  ]
+}

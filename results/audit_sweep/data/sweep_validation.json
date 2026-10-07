@@ -1,0 +1,725 @@
+{
+  "case_label": "Audit benchmark: parameters not verified against booklet",
+  "parameters": {
+    "omega_rad_s": 6283185.307179586,
+    "delta_max_rad_s": 314159265.3589793,
+    "tmax_s": 1e-06,
+    "phase_rad": 0.0,
+    "V_over_2pi_MHz": [
+      100.0
+    ],
+    "initial_state": "00",
+    "basis_order": [
+      "00",
+      "0r",
+      "r0",
+      "rr"
+    ]
+  },
+  "method": "left-endpoint full matrix exponential, unchanged evolve_trotter",
+  "criterion": "peak-scale half-unit fourth-significant-place trajectory errors; scalar final/peak four-digit rounding also identical",
+  "reference": "DOP853 rtol=1e-13 atol=1e-15 max_step=T/4000; verified against rtol=1e-11 atol=1e-13 max_step=T/2000",
+  "interpolation": "DOP853 dense output evaluated at each candidate's exact grid times; no interpolation of candidate probabilities",
+  "peak_time": "candidate sampled maximum with dt resolution; reference dense maximum locally optimised after 40001-point scan; not part of acceptance criterion",
+  "versions": {
+    "python": "3.14.2",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1"
+  },
+  "step_counts": [
+    131072,
+    65536,
+    32768,
+    16384,
+    8192,
+    4096,
+    2048,
+    1024,
+    512,
+    256
+  ],
+  "summaries": [
+    {
+      "profile": "cubic",
+      "V_over_2pi_MHz": 100.0,
+      "reference_final_fidelity": 0.9985433150451399,
+      "reference_maximum_fidelity": 0.9999229974487798,
+      "reference_time_of_maximum_s": 8.339964282791594e-07,
+      "reference_refinement_max_probability_difference": 8.779643678735738e-13,
+      "reference_physical_checks": {
+        "maximum_norm_error": 1.7763568394002505e-15,
+        "maximum_probability_sum_error": 3.552713678800501e-15,
+        "maximum_exchange_symmetry_error": 0.0,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "largest_tested_passing_dt_s": 1.52587890625e-11,
+      "selected_steps": 65536,
+      "selected_final_fidelity": 0.9985438407270525,
+      "selected_maximum_fidelity": 0.9999229651568994,
+      "selected_sampled_peak_time_s": 8.34014892578125e-07
+    },
+    {
+      "profile": "linear",
+      "V_over_2pi_MHz": 100.0,
+      "reference_final_fidelity": 0.1920780226742287,
+      "reference_maximum_fidelity": 0.24792044705719407,
+      "reference_time_of_maximum_s": 5.854976933829378e-07,
+      "reference_refinement_max_probability_difference": 8.86402062860725e-13,
+      "reference_physical_checks": {
+        "maximum_norm_error": 4.107825191113079e-15,
+        "maximum_probability_sum_error": 8.104628079763643e-15,
+        "maximum_exchange_symmetry_error": 0.0,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "largest_tested_passing_dt_s": 1.52587890625e-11,
+      "selected_steps": 65536,
+      "selected_final_fidelity": 0.19207854235488345,
+      "selected_maximum_fidelity": 0.2478963874959372,
+      "selected_sampled_peak_time_s": 5.855102539062499e-07
+    }
+  ],
+  "convergence": [
+    {
+      "profile": "cubic",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 131072,
+      "dt_s": 7.62939453125e-12,
+      "final_bell_fidelity": 0.9985435804628638,
+      "reference_final_bell_fidelity": 0.9985433150451399,
+      "final_fidelity_error": 2.654177239103106e-07,
+      "maximum_P_00_error": 1.8806953193006848e-05,
+      "maximum_P_Psi_plus_error": 1.8806093797785195e-05,
+      "maximum_bell_fidelity_difference": 1.8806093797785195e-05,
+      "peak_bell_fidelity": 0.9999229812719544,
+      "peak_fidelity_error": 1.6176825323732658e-08,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 0.3761218759557039,
+      "scalar_rounding_matches": true,
+      "passes": true,
+      "physical_checks": {
+        "maximum_norm_error": 7.747136265834342e-13,
+        "maximum_probability_sum_error": 1.5498713423767185e-12,
+        "maximum_exchange_symmetry_error": 7.821521208484228e-14,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 8.340072631835937e-07,
+      "reference_peak_time_s": 8.339964282791594e-07
+    },
+    {
+      "profile": "cubic",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 65536,
+      "dt_s": 1.52587890625e-11,
+      "final_bell_fidelity": 0.9985438407270525,
+      "reference_final_bell_fidelity": 0.9985433150451399,
+      "final_fidelity_error": 5.256819125554202e-07,
+      "maximum_P_00_error": 3.76305334445215e-05,
+      "maximum_P_Psi_plus_error": 3.762879392921192e-05,
+      "maximum_bell_fidelity_difference": 3.762879392921192e-05,
+      "peak_bell_fidelity": 0.9999229651568994,
+      "peak_fidelity_error": 3.229188039188813e-08,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 0.7525758785842385,
+      "scalar_rounding_matches": true,
+      "passes": true,
+      "physical_checks": {
+        "maximum_norm_error": 1.5787371410169726e-13,
+        "maximum_probability_sum_error": 3.1596947280831955e-13,
+        "maximum_exchange_symmetry_error": 1.6819878823071122e-14,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 8.34014892578125e-07,
+      "reference_peak_time_s": 8.339964282791594e-07
+    },
+    {
+      "profile": "cubic",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 32768,
+      "dt_s": 3.0517578125e-11,
+      "final_bell_fidelity": 0.9985443457994002,
+      "reference_final_bell_fidelity": 0.9985433150451399,
+      "final_fidelity_error": 1.0307542602783215e-06,
+      "maximum_P_00_error": 7.532756514250227e-05,
+      "maximum_P_Psi_plus_error": 7.532400023224639e-05,
+      "maximum_bell_fidelity_difference": 7.532400023224639e-05,
+      "peak_bell_fidelity": 0.9999229302534254,
+      "peak_fidelity_error": 6.719535439181357e-08,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 1.5064800046449278,
+      "scalar_rounding_matches": true,
+      "passes": false,
+      "physical_checks": {
+        "maximum_norm_error": 9.103828801926284e-15,
+        "maximum_probability_sum_error": 1.8207657603852567e-14,
+        "maximum_exchange_symmetry_error": 2.836619827917275e-14,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 8.34014892578125e-07,
+      "reference_peak_time_s": 8.339964282791594e-07
+    },
+    {
+      "profile": "cubic",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 16384,
+      "dt_s": 6.103515625e-11,
+      "final_bell_fidelity": 0.9985452941058481,
+      "reference_final_bell_fidelity": 0.9985433150451399,
+      "final_fidelity_error": 1.97906070820153e-06,
+      "maximum_P_00_error": 0.00015092104147906849,
+      "maximum_P_Psi_plus_error": 0.00015091356057062022,
+      "maximum_bell_fidelity_difference": 0.00015091356057062022,
+      "peak_bell_fidelity": 0.9999228636770009,
+      "peak_fidelity_error": 1.3377177887630154e-07,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 3.0182712114124044,
+      "scalar_rounding_matches": true,
+      "passes": false,
+      "physical_checks": {
+        "maximum_norm_error": 5.773159728050814e-15,
+        "maximum_probability_sum_error": 1.1546319456101628e-14,
+        "maximum_exchange_symmetry_error": 1.7430501486614958e-14,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 8.3404541015625e-07,
+      "reference_peak_time_s": 8.339964282791594e-07
+    },
+    {
+      "profile": "cubic",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 8192,
+      "dt_s": 1.220703125e-10,
+      "final_bell_fidelity": 0.9985469432932075,
+      "reference_final_bell_fidelity": 0.9985433150451399,
+      "final_fidelity_error": 3.6282480675442486e-06,
+      "maximum_P_00_error": 0.00030290501533836167,
+      "maximum_P_Psi_plus_error": 0.00030288865501992834,
+      "maximum_bell_fidelity_difference": 0.00030288865501992834,
+      "peak_bell_fidelity": 0.999922723191599,
+      "peak_fidelity_error": 2.742571807434757e-07,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 6.057773100398567,
+      "scalar_rounding_matches": true,
+      "passes": false,
+      "physical_checks": {
+        "maximum_norm_error": 5.551115123125783e-15,
+        "maximum_probability_sum_error": 1.1546319456101628e-14,
+        "maximum_exchange_symmetry_error": 3.774758283725532e-15,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 8.341064453125e-07,
+      "reference_peak_time_s": 8.339964282791594e-07
+    },
+    {
+      "profile": "cubic",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 4096,
+      "dt_s": 2.44140625e-10,
+      "final_bell_fidelity": 0.9985492514961957,
+      "reference_final_bell_fidelity": 0.9985433150451399,
+      "final_fidelity_error": 5.9364510557324834e-06,
+      "maximum_P_00_error": 0.0006100561260827808,
+      "maximum_P_Psi_plus_error": 0.0006100179982558851,
+      "maximum_bell_fidelity_difference": 0.0006100179982558851,
+      "peak_bell_fidelity": 0.9999224121323591,
+      "peak_fidelity_error": 5.853164206648387e-07,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 12.200359965117702,
+      "scalar_rounding_matches": true,
+      "passes": false,
+      "physical_checks": {
+        "maximum_norm_error": 5.10702591327572e-15,
+        "maximum_probability_sum_error": 1.021405182655144e-14,
+        "maximum_exchange_symmetry_error": 4.385380947269368e-15,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 8.34228515625e-07,
+      "reference_peak_time_s": 8.339964282791594e-07
+    },
+    {
+      "profile": "cubic",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 2048,
+      "dt_s": 4.8828125e-10,
+      "final_bell_fidelity": 0.9985499050225568,
+      "reference_final_bell_fidelity": 0.9985433150451399,
+      "final_fidelity_error": 6.589977416870951e-06,
+      "maximum_P_00_error": 0.0012370449192390942,
+      "maximum_P_Psi_plus_error": 0.0012369521122131966,
+      "maximum_bell_fidelity_difference": 0.0012369521122131966,
+      "peak_bell_fidelity": 0.9999216625813709,
+      "peak_fidelity_error": 1.334867408830931e-06,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 24.73904224426393,
+      "scalar_rounding_matches": true,
+      "passes": false,
+      "physical_checks": {
+        "maximum_norm_error": 1.6653345369377348e-15,
+        "maximum_probability_sum_error": 3.3306690738754696e-15,
+        "maximum_exchange_symmetry_error": 3.608224830031759e-15,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 8.3447265625e-07,
+      "reference_peak_time_s": 8.339964282791594e-07
+    },
+    {
+      "profile": "cubic",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 1024,
+      "dt_s": 9.765625e-10,
+      "final_bell_fidelity": 0.9985353680453356,
+      "reference_final_bell_fidelity": 0.9985433150451399,
+      "final_fidelity_error": 7.946999804331334e-06,
+      "maximum_P_00_error": 0.0025413192131956697,
+      "maximum_P_Psi_plus_error": 0.002541151163016786,
+      "maximum_bell_fidelity_difference": 0.002541151163016786,
+      "peak_bell_fidelity": 0.9999195809514614,
+      "peak_fidelity_error": 3.4164973183870018e-06,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 50.82302326033572,
+      "scalar_rounding_matches": true,
+      "passes": false,
+      "physical_checks": {
+        "maximum_norm_error": 1.1102230246251565e-15,
+        "maximum_probability_sum_error": 2.4424906541753444e-15,
+        "maximum_exchange_symmetry_error": 2.55351295663786e-15,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 8.349609375e-07,
+      "reference_peak_time_s": 8.339964282791594e-07
+    },
+    {
+      "profile": "cubic",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 512,
+      "dt_s": 1.953125e-09,
+      "final_bell_fidelity": 0.9984433772075121,
+      "reference_final_bell_fidelity": 0.9985433150451399,
+      "final_fidelity_error": 9.993783762785036e-05,
+      "maximum_P_00_error": 0.005346127203011641,
+      "maximum_P_Psi_plus_error": 0.00534594621183182,
+      "maximum_bell_fidelity_difference": 0.00534594621183182,
+      "peak_bell_fidelity": 0.9999122525659179,
+      "peak_fidelity_error": 1.0744882861901672e-05,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 106.9189242366364,
+      "scalar_rounding_matches": false,
+      "passes": false,
+      "physical_checks": {
+        "maximum_norm_error": 1.7763568394002505e-15,
+        "maximum_probability_sum_error": 3.6637359812630166e-15,
+        "maximum_exchange_symmetry_error": 1.3877787807814457e-15,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 8.359375e-07,
+      "reference_peak_time_s": 8.339964282791594e-07
+    },
+    {
+      "profile": "cubic",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 256,
+      "dt_s": 3.90625e-09,
+      "final_bell_fidelity": 0.9980176761513433,
+      "reference_final_bell_fidelity": 0.9985433150451399,
+      "final_fidelity_error": 0.0005256388937966427,
+      "maximum_P_00_error": 0.011680977888455124,
+      "maximum_P_Psi_plus_error": 0.011680503107714069,
+      "maximum_bell_fidelity_difference": 0.011680503107714069,
+      "peak_bell_fidelity": 0.9998271819927151,
+      "peak_fidelity_error": 9.58154560646296e-05,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 233.61006215428137,
+      "scalar_rounding_matches": false,
+      "passes": false,
+      "physical_checks": {
+        "maximum_norm_error": 1.3322676295501878e-15,
+        "maximum_probability_sum_error": 2.886579864025407e-15,
+        "maximum_exchange_symmetry_error": 9.43689570931383e-16,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 8.359375e-07,
+      "reference_peak_time_s": 8.339964282791594e-07
+    },
+    {
+      "profile": "linear",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 131072,
+      "dt_s": 7.62939453125e-12,
+      "final_bell_fidelity": 0.19207829228327425,
+      "reference_final_bell_fidelity": 0.1920780226742287,
+      "final_fidelity_error": 2.6960904556116994e-07,
+      "maximum_P_00_error": 2.4613783612736917e-05,
+      "maximum_P_Psi_plus_error": 2.4612339014240536e-05,
+      "maximum_bell_fidelity_difference": 2.4612339014240536e-05,
+      "peak_bell_fidelity": 0.2479084228175455,
+      "peak_fidelity_error": 1.2024239648578128e-05,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 0.4922467802848107,
+      "scalar_rounding_matches": true,
+      "passes": true,
+      "physical_checks": {
+        "maximum_norm_error": 8.926193117986259e-14,
+        "maximum_probability_sum_error": 1.7852386235972517e-13,
+        "maximum_exchange_symmetry_error": 2.942091015256665e-15,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 5.855026245117187e-07,
+      "reference_peak_time_s": 5.854976933829378e-07
+    },
+    {
+      "profile": "linear",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 65536,
+      "dt_s": 1.52587890625e-11,
+      "final_bell_fidelity": 0.19207854235488345,
+      "reference_final_bell_fidelity": 0.1920780226742287,
+      "final_fidelity_error": 5.196806547591581e-07,
+      "maximum_P_00_error": 4.923258929045993e-05,
+      "maximum_P_Psi_plus_error": 4.9229701597930386e-05,
+      "maximum_bell_fidelity_difference": 4.9229701597930386e-05,
+      "peak_bell_fidelity": 0.2478963874959372,
+      "peak_fidelity_error": 2.4059561256867257e-05,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 0.9845940319586077,
+      "scalar_rounding_matches": true,
+      "passes": true,
+      "physical_checks": {
+        "maximum_norm_error": 1.787459069646502e-14,
+        "maximum_probability_sum_error": 3.574918139293004e-14,
+        "maximum_exchange_symmetry_error": 7.216449660063518e-15,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 5.855102539062499e-07,
+      "reference_peak_time_s": 5.854976933829378e-07
+    },
+    {
+      "profile": "linear",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 32768,
+      "dt_s": 3.0517578125e-11,
+      "final_bell_fidelity": 0.1920789838829727,
+      "reference_final_bell_fidelity": 0.1920780226742287,
+      "final_fidelity_error": 9.612087440158401e-07,
+      "maximum_P_00_error": 9.848519029187486e-05,
+      "maximum_P_Psi_plus_error": 9.847942333776616e-05,
+      "maximum_bell_fidelity_difference": 9.847942333776616e-05,
+      "peak_bell_fidelity": 0.24787229043913458,
+      "peak_fidelity_error": 4.815661805948612e-05,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 1.9695884667553232,
+      "scalar_rounding_matches": true,
+      "passes": false,
+      "physical_checks": {
+        "maximum_norm_error": 2.3869795029440866e-14,
+        "maximum_probability_sum_error": 4.773959005888173e-14,
+        "maximum_exchange_symmetry_error": 4.85722573273506e-15,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 5.855102539062499e-07,
+      "reference_peak_time_s": 5.854976933829378e-07
+    },
+    {
+      "profile": "linear",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 16384,
+      "dt_s": 6.103515625e-11,
+      "final_bell_fidelity": 0.19207963246833798,
+      "reference_final_bell_fidelity": 0.1920780226742287,
+      "final_fidelity_error": 1.609794109291851e-06,
+      "maximum_P_00_error": 0.00019704989333546585,
+      "maximum_P_Psi_plus_error": 0.00019703838307488786,
+      "maximum_bell_fidelity_difference": 0.00019703838307488786,
+      "peak_bell_fidelity": 0.24782394035327227,
+      "peak_fidelity_error": 9.650670392180594e-05,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 3.940767661497757,
+      "scalar_rounding_matches": false,
+      "passes": false,
+      "physical_checks": {
+        "maximum_norm_error": 1.3100631690576847e-14,
+        "maximum_probability_sum_error": 2.6423307986078726e-14,
+        "maximum_exchange_symmetry_error": 1.3322676295501878e-15,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 5.855102539062499e-07,
+      "reference_peak_time_s": 5.854976933829378e-07
+    },
+    {
+      "profile": "linear",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 8192,
+      "dt_s": 1.220703125e-10,
+      "final_bell_fidelity": 0.19207999169826293,
+      "reference_final_bell_fidelity": 0.1920780226742287,
+      "final_fidelity_error": 1.9690240342373766e-06,
+      "maximum_P_00_error": 0.00039441307939602765,
+      "maximum_P_Psi_plus_error": 0.000394390231070213,
+      "maximum_bell_fidelity_difference": 0.000394390231070213,
+      "peak_bell_fidelity": 0.2477269073148703,
+      "peak_fidelity_error": 0.00019353974232377835,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 7.88780462140426,
+      "scalar_rounding_matches": false,
+      "passes": false,
+      "physical_checks": {
+        "maximum_norm_error": 6.5503158452884236e-15,
+        "maximum_probability_sum_error": 1.2989609388114332e-14,
+        "maximum_exchange_symmetry_error": 1.3183898417423734e-15,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 5.855712890625e-07,
+      "reference_peak_time_s": 5.854976933829378e-07
+    },
+    {
+      "profile": "linear",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 4096,
+      "dt_s": 2.44140625e-10,
+      "final_bell_fidelity": 0.19207695842827527,
+      "reference_final_bell_fidelity": 0.1920780226742287,
+      "final_fidelity_error": 1.0642459534193627e-06,
+      "maximum_P_00_error": 0.0007900425282135748,
+      "maximum_P_Psi_plus_error": 0.0007899969396859274,
+      "maximum_bell_fidelity_difference": 0.0007899969396859274,
+      "peak_bell_fidelity": 0.24753063767792255,
+      "peak_fidelity_error": 0.0003898093792715218,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 15.799938793718548,
+      "scalar_rounding_matches": false,
+      "passes": false,
+      "physical_checks": {
+        "maximum_norm_error": 5.440092820663267e-15,
+        "maximum_probability_sum_error": 1.0880185641326534e-14,
+        "maximum_exchange_symmetry_error": 5.551115123125783e-16,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 5.85693359375e-07,
+      "reference_peak_time_s": 5.854976933829378e-07
+    },
+    {
+      "profile": "linear",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 2048,
+      "dt_s": 4.8828125e-10,
+      "final_bell_fidelity": 0.1920558931494598,
+      "reference_final_bell_fidelity": 0.1920780226742287,
+      "final_fidelity_error": 2.2129524768876863e-05,
+      "maximum_P_00_error": 0.0015851838830359677,
+      "maximum_P_Psi_plus_error": 0.0015850468965194764,
+      "maximum_bell_fidelity_difference": 0.0015850468965194764,
+      "peak_bell_fidelity": 0.24712951209391534,
+      "peak_fidelity_error": 0.0007909349632787277,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 31.700937930389525,
+      "scalar_rounding_matches": false,
+      "passes": false,
+      "physical_checks": {
+        "maximum_norm_error": 2.886579864025407e-15,
+        "maximum_probability_sum_error": 5.995204332975845e-15,
+        "maximum_exchange_symmetry_error": 3.469446951953614e-16,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 5.859375e-07,
+      "reference_peak_time_s": 5.854976933829378e-07
+    },
+    {
+      "profile": "linear",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 1024,
+      "dt_s": 9.765625e-10,
+      "final_bell_fidelity": 0.19195395946188923,
+      "reference_final_bell_fidelity": 0.1920780226742287,
+      "final_fidelity_error": 0.00012406321233945916,
+      "maximum_P_00_error": 0.0031947031891520483,
+      "maximum_P_Psi_plus_error": 0.0031944143822891513,
+      "maximum_bell_fidelity_difference": 0.0031944143822891513,
+      "peak_bell_fidelity": 0.2463078233363679,
+      "peak_fidelity_error": 0.001612623720826184,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 63.88828764578302,
+      "scalar_rounding_matches": false,
+      "passes": false,
+      "physical_checks": {
+        "maximum_norm_error": 1.3322676295501878e-15,
+        "maximum_probability_sum_error": 2.6645352591003757e-15,
+        "maximum_exchange_symmetry_error": 4.579669976578771e-16,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 5.859375e-07,
+      "reference_peak_time_s": 5.854976933829378e-07
+    },
+    {
+      "profile": "linear",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 512,
+      "dt_s": 1.953125e-09,
+      "final_bell_fidelity": 0.19151441724323892,
+      "reference_final_bell_fidelity": 0.1920780226742287,
+      "final_fidelity_error": 0.0005636054309897665,
+      "maximum_P_00_error": 0.006471629591223604,
+      "maximum_P_Psi_plus_error": 0.006471038066147822,
+      "maximum_bell_fidelity_difference": 0.006471038066147822,
+      "peak_bell_fidelity": 0.24453981051814389,
+      "peak_fidelity_error": 0.003380636539050186,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 129.42076132295642,
+      "scalar_rounding_matches": false,
+      "passes": false,
+      "physical_checks": {
+        "maximum_norm_error": 2.3314683517128287e-15,
+        "maximum_probability_sum_error": 4.551914400963142e-15,
+        "maximum_exchange_symmetry_error": 3.608224830031759e-16,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 5.859375e-07,
+      "reference_peak_time_s": 5.854976933829378e-07
+    },
+    {
+      "profile": "linear",
+      "V_over_2pi_MHz": 100.0,
+      "steps": 256,
+      "dt_s": 3.90625e-09,
+      "final_bell_fidelity": 0.1897516719632053,
+      "reference_final_bell_fidelity": 0.1920780226742287,
+      "final_fidelity_error": 0.002326350711023384,
+      "maximum_P_00_error": 0.013070708952924726,
+      "maximum_P_Psi_plus_error": 0.013069550928828111,
+      "maximum_bell_fidelity_difference": 0.013069550928828111,
+      "peak_bell_fidelity": 0.2406678651888564,
+      "peak_fidelity_error": 0.00725258186833766,
+      "tolerances": {
+        "P_00": 0.0005,
+        "P_Psi_plus": 5e-05,
+        "final_fidelity": 5e-05,
+        "peak_fidelity": 5e-05
+      },
+      "maximum_error_ratio": 261.3910185765622,
+      "scalar_rounding_matches": false,
+      "passes": false,
+      "physical_checks": {
+        "maximum_norm_error": 1.3322676295501878e-15,
+        "maximum_probability_sum_error": 2.6645352591003757e-15,
+        "maximum_exchange_symmetry_error": 1.6653345369377348e-16,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0
+      },
+      "sampled_peak_time_s": 5.859375e-07,
+      "reference_peak_time_s": 5.854976933829378e-07
+    }
+  ]
+}

@@ -1,0 +1,505 @@
+{
+  "source_interpretation": "Source specifies Omega/(2pi)=1 MHz, blue V=0, red curves spanning 0\u2013100 MHz; individual red-curve V values are not enumerated. The five plot values are repository numerical sampling choices, not an exact source curve list or colour density.",
+  "parameters": {
+    "omega_rad_s": 6283185.307179586,
+    "delta_rad_s": 0.0,
+    "phase_rad": 0.0,
+    "initial_state": "|00>",
+    "basis_order": [
+      "00",
+      "0r",
+      "r0",
+      "rr"
+    ],
+    "plot_V_over_2pi_MHz": [
+      0.0,
+      0.5,
+      1.0,
+      5.0,
+      100.0
+    ],
+    "time_start_s": 0.0,
+    "time_end_s": 1e-06,
+    "time_samples": 4001,
+    "physical_check_tolerance": 1e-12
+  },
+  "versions": {
+    "python": "3.14.2",
+    "numpy": "2.5.3",
+    "matplotlib": "3.11.2"
+  },
+  "residual_definition": "numerical probability minus limiting analytical probability",
+  "rms_definition": "sqrt(mean(residual**2)) over the uniformly sampled inclusive time grid",
+  "plot_checks": [
+    {
+      "V_over_2pi_MHz": 0.0,
+      "max_probability_normalisation_error": 8.881784197001252e-16,
+      "max_exchange_symmetry_error": 0.0,
+      "minimum_probability": 0.0,
+      "maximum_probability": 1.0000000000000004
+    },
+    {
+      "V_over_2pi_MHz": 0.5,
+      "max_probability_normalisation_error": 1.1102230246251565e-15,
+      "max_exchange_symmetry_error": 2.7755575615628914e-16,
+      "minimum_probability": 7.293655366441054e-34,
+      "maximum_probability": 0.9999999999999993
+    },
+    {
+      "V_over_2pi_MHz": 1.0,
+      "max_probability_normalisation_error": 1.9984014443252818e-15,
+      "max_exchange_symmetry_error": 3.3306690738754696e-16,
+      "minimum_probability": 2.4272566093059095e-34,
+      "maximum_probability": 1.0000000000000013
+    },
+    {
+      "V_over_2pi_MHz": 5.0,
+      "max_probability_normalisation_error": 8.881784197001252e-16,
+      "max_exchange_symmetry_error": 5.551115123125783e-16,
+      "minimum_probability": 1.911981926806685e-36,
+      "maximum_probability": 0.9999999999999998
+    },
+    {
+      "V_over_2pi_MHz": 100.0,
+      "max_probability_normalisation_error": 8.881784197001252e-16,
+      "max_exchange_symmetry_error": 3.3306690738754696e-16,
+      "minimum_probability": 8.980654507061187e-38,
+      "maximum_probability": 1.0
+    }
+  ],
+  "validation": [
+    {
+      "limit": "noninteracting",
+      "V_over_2pi_MHz": 0.0,
+      "residuals": {
+        "P_00": {
+          "max_absolute": 9.992007221626409e-16,
+          "rms": 3.820603602282082e-16
+        },
+        "P_0r": {
+          "max_absolute": 2.498001805406602e-16,
+          "rms": 9.172720122007217e-17
+        },
+        "P_r0": {
+          "max_absolute": 2.498001805406602e-16,
+          "rms": 9.172720122007217e-17
+        },
+        "P_rr": {
+          "max_absolute": 6.661338147750939e-16,
+          "rms": 1.4755378773758998e-16
+        },
+        "P_Psi_plus": {
+          "max_absolute": 5.551115123125783e-16,
+          "rms": 1.8878436666217113e-16
+        }
+      },
+      "physical_checks": {
+        "max_probability_normalisation_error": 8.881784197001252e-16,
+        "max_exchange_symmetry_error": 0.0,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0000000000000004
+      },
+      "refined_grid_samples": 8001,
+      "refined_residuals": {
+        "P_00": {
+          "max_absolute": 9.992007221626409e-16,
+          "rms": 3.7875951103510493e-16
+        },
+        "P_0r": {
+          "max_absolute": 2.498001805406602e-16,
+          "rms": 9.197241939064872e-17
+        },
+        "P_r0": {
+          "max_absolute": 2.498001805406602e-16,
+          "rms": 9.197241939064872e-17
+        },
+        "P_rr": {
+          "max_absolute": 6.661338147750939e-16,
+          "rms": 1.4748362038603332e-16
+        },
+        "P_Psi_plus": {
+          "max_absolute": 5.551115123125783e-16,
+          "rms": 1.8834021789884258e-16
+        }
+      },
+      "refined_physical_checks": {
+        "max_probability_normalisation_error": 8.881784197001252e-16,
+        "max_exchange_symmetry_error": 0.0,
+        "minimum_probability": 0.0,
+        "maximum_probability": 1.0000000000000004
+      }
+    },
+    {
+      "limit": "noninteracting",
+      "V_over_2pi_MHz": 0.001,
+      "residuals": {
+        "P_00": {
+          "max_absolute": 1.0876057140452033e-06,
+          "rms": 5.096494454960546e-07
+        },
+        "P_0r": {
+          "max_absolute": 5.518745547772319e-07,
+          "rms": 2.4965033691508407e-07
+        },
+        "P_r0": {
+          "max_absolute": 5.518745547772319e-07,
+          "rms": 2.4965033691508407e-07
+        },
+        "P_rr": {
+          "max_absolute": 8.273817879711487e-07,
+          "rms": 4.4441276165336813e-07
+        },
+        "P_Psi_plus": {
+          "max_absolute": 1.1037491094989527e-06,
+          "rms": 4.993006738303811e-07
+        }
+      },
+      "physical_checks": {
+        "max_probability_normalisation_error": 1.4432899320127035e-15,
+        "max_exchange_symmetry_error": 0.0,
+        "minimum_probability": 2.0814284443889776e-34,
+        "maximum_probability": 0.9999999999999993
+      },
+      "refined_grid_samples": 8001,
+      "refined_residuals": {
+        "P_00": {
+          "max_absolute": 1.0876057140452033e-06,
+          "rms": 5.096579137127019e-07
+        },
+        "P_0r": {
+          "max_absolute": 5.518747261956669e-07,
+          "rms": 2.496659376235268e-07
+        },
+        "P_r0": {
+          "max_absolute": 5.518747261956669e-07,
+          "rms": 2.496659376235268e-07
+        },
+        "P_rr": {
+          "max_absolute": 8.273817879711487e-07,
+          "rms": 4.4441378134725545e-07
+        },
+        "P_Psi_plus": {
+          "max_absolute": 1.1037494523358227e-06,
+          "rms": 4.993318752465849e-07
+        }
+      },
+      "refined_physical_checks": {
+        "max_probability_normalisation_error": 1.4432899320127035e-15,
+        "max_exchange_symmetry_error": 0.0,
+        "minimum_probability": 2.0814284443889776e-34,
+        "maximum_probability": 0.9999999999999993
+      }
+    },
+    {
+      "limit": "noninteracting",
+      "V_over_2pi_MHz": 0.01,
+      "residuals": {
+        "P_00": {
+          "max_absolute": 0.00010875373869706495,
+          "rms": 5.096178415800707e-05
+        },
+        "P_0r": {
+          "max_absolute": 5.5181255018660336e-05,
+          "rms": 2.4962261051653685e-05
+        },
+        "P_r0": {
+          "max_absolute": 5.518125501877136e-05,
+          "rms": 2.4962261051681613e-05
+        },
+        "P_rr": {
+          "max_absolute": 8.273480384890508e-05,
+          "rms": 4.4437965239732253e-05
+        },
+        "P_Psi_plus": {
+          "max_absolute": 0.0001103625100374872,
+          "rms": 4.9924522103336955e-05
+        }
+      },
+      "physical_checks": {
+        "max_probability_normalisation_error": 1.1102230246251565e-15,
+        "max_exchange_symmetry_error": 1.6653345369377348e-16,
+        "minimum_probability": 9.54818049349045e-33,
+        "maximum_probability": 0.9999999999999996
+      },
+      "refined_grid_samples": 8001,
+      "refined_residuals": {
+        "P_00": {
+          "max_absolute": 0.00010875373869706495,
+          "rms": 5.096263063162367e-05
+        },
+        "P_0r": {
+          "max_absolute": 5.5181266937154305e-05,
+          "rms": 2.4963820948483236e-05
+        },
+        "P_r0": {
+          "max_absolute": 5.518126693723757e-05,
+          "rms": 2.4963820948511155e-05
+        },
+        "P_rr": {
+          "max_absolute": 8.273480384890508e-05,
+          "rms": 4.4438068136397976e-05
+        },
+        "P_Psi_plus": {
+          "max_absolute": 0.00011036253387419759,
+          "rms": 4.992764189699434e-05
+        }
+      },
+      "refined_physical_checks": {
+        "max_probability_normalisation_error": 1.1102230246251565e-15,
+        "max_exchange_symmetry_error": 1.6653345369377348e-16,
+        "minimum_probability": 9.54818049349045e-33,
+        "maximum_probability": 0.9999999999999996
+      }
+    },
+    {
+      "limit": "blockade",
+      "V_over_2pi_MHz": 10.0,
+      "residuals": {
+        "P_00": {
+          "max_absolute": 0.008059849672747421,
+          "rms": 0.0038312946797346083
+        },
+        "P_0r": {
+          "max_absolute": 0.005946095028420029,
+          "rms": 0.0028357508257830536
+        },
+        "P_r0": {
+          "max_absolute": 0.005946095028420029,
+          "rms": 0.0028357508257830797
+        },
+        "P_rr": {
+          "max_absolute": 0.005685481139137966,
+          "rms": 0.0029374447306897444
+        },
+        "P_Psi_plus": {
+          "max_absolute": 0.011892190056839946,
+          "rms": 0.00567150165156613
+        }
+      },
+      "physical_checks": {
+        "max_probability_normalisation_error": 1.1102230246251565e-15,
+        "max_exchange_symmetry_error": 3.3306690738754696e-16,
+        "minimum_probability": 1.6561856489250803e-34,
+        "maximum_probability": 1.0000000000000004
+      },
+      "refined_grid_samples": 8001,
+      "refined_residuals": {
+        "P_00": {
+          "max_absolute": 0.008059849672747421,
+          "rms": 0.0038312938609376124
+        },
+        "P_0r": {
+          "max_absolute": 0.005946095028420029,
+          "rms": 0.0028356305499263323
+        },
+        "P_r0": {
+          "max_absolute": 0.005946095028420029,
+          "rms": 0.002835630549926359
+        },
+        "P_rr": {
+          "max_absolute": 0.005685481139137966,
+          "rms": 0.002937366133549941
+        },
+        "P_Psi_plus": {
+          "max_absolute": 0.011892190056839946,
+          "rms": 0.005671261099852689
+        }
+      },
+      "refined_physical_checks": {
+        "max_probability_normalisation_error": 1.1102230246251565e-15,
+        "max_exchange_symmetry_error": 3.3306690738754696e-16,
+        "minimum_probability": 1.6561856489250803e-34,
+        "maximum_probability": 1.0000000000000004
+      }
+    },
+    {
+      "limit": "blockade",
+      "V_over_2pi_MHz": 30.0,
+      "residuals": {
+        "P_00": {
+          "max_absolute": 0.0009045773287073566,
+          "rms": 0.00042890553892881053
+        },
+        "P_0r": {
+          "max_absolute": 0.0006495431034750365,
+          "rms": 0.0003169051352776617
+        },
+        "P_r0": {
+          "max_absolute": 0.000649543103475203,
+          "rms": 0.00031690513527773745
+        },
+        "P_rr": {
+          "max_absolute": 0.0005817286883995379,
+          "rms": 0.00032417523868351827
+        },
+        "P_Psi_plus": {
+          "max_absolute": 0.001299086206950184,
+          "rms": 0.0006338102705553988
+        }
+      },
+      "physical_checks": {
+        "max_probability_normalisation_error": 1.1102230246251565e-15,
+        "max_exchange_symmetry_error": 4.996003610813204e-16,
+        "minimum_probability": 4.8090804433611784e-35,
+        "maximum_probability": 1.0
+      },
+      "refined_grid_samples": 8001,
+      "refined_residuals": {
+        "P_00": {
+          "max_absolute": 0.0009045773287073566,
+          "rms": 0.000428905793435919
+        },
+        "P_0r": {
+          "max_absolute": 0.0006495434044424542,
+          "rms": 0.00031689377993420484
+        },
+        "P_r0": {
+          "max_absolute": 0.0006495434044425652,
+          "rms": 0.0003168937799342804
+        },
+        "P_rr": {
+          "max_absolute": 0.000581729156311114,
+          "rms": 0.00032416936966998567
+        },
+        "P_Psi_plus": {
+          "max_absolute": 0.0012990868088849084,
+          "rms": 0.0006337875598684843
+        }
+      },
+      "refined_physical_checks": {
+        "max_probability_normalisation_error": 1.1102230246251565e-15,
+        "max_exchange_symmetry_error": 4.996003610813204e-16,
+        "minimum_probability": 4.8090804433611784e-35,
+        "maximum_probability": 1.0
+      }
+    },
+    {
+      "limit": "blockade",
+      "V_over_2pi_MHz": 100.0,
+      "residuals": {
+        "P_00": {
+          "max_absolute": 8.148744580938061e-05,
+          "rms": 3.863461827347384e-05
+        },
+        "P_0r": {
+          "max_absolute": 5.775695544130155e-05,
+          "rms": 2.854046618905894e-05
+        },
+        "P_r0": {
+          "max_absolute": 5.775695544141257e-05,
+          "rms": 2.8540466189159434e-05
+        },
+        "P_rr": {
+          "max_absolute": 5.069338044206212e-05,
+          "rms": 2.915443420408742e-05
+        },
+        "P_Psi_plus": {
+          "max_absolute": 0.0001155139108826031,
+          "rms": 5.708093237822102e-05
+        }
+      },
+      "physical_checks": {
+        "max_probability_normalisation_error": 8.881784197001252e-16,
+        "max_exchange_symmetry_error": 3.3306690738754696e-16,
+        "minimum_probability": 8.980654507061187e-38,
+        "maximum_probability": 1.0
+      },
+      "refined_grid_samples": 8001,
+      "refined_residuals": {
+        "P_00": {
+          "max_absolute": 8.148745575436989e-05,
+          "rms": 3.863464476658515e-05
+        },
+        "P_0r": {
+          "max_absolute": 5.775695544130155e-05,
+          "rms": 2.8539465467141785e-05
+        },
+        "P_r0": {
+          "max_absolute": 5.775695544141257e-05,
+          "rms": 2.853946546724251e-05
+        },
+        "P_rr": {
+          "max_absolute": 5.069338044206212e-05,
+          "rms": 2.9153936486599138e-05
+        },
+        "P_Psi_plus": {
+          "max_absolute": 0.0001155139108826031,
+          "rms": 5.707893093438421e-05
+        }
+      },
+      "refined_physical_checks": {
+        "max_probability_normalisation_error": 1.1102230246251565e-15,
+        "max_exchange_symmetry_error": 3.3306690738754696e-16,
+        "minimum_probability": 8.980654507061187e-38,
+        "maximum_probability": 1.0
+      }
+    },
+    {
+      "limit": "blockade",
+      "V_over_2pi_MHz": -100.0,
+      "residuals": {
+        "P_00": {
+          "max_absolute": 8.14874458088255e-05,
+          "rms": 3.8634618273202976e-05
+        },
+        "P_0r": {
+          "max_absolute": 5.7756955440635416e-05,
+          "rms": 2.8540466188740224e-05
+        },
+        "P_r0": {
+          "max_absolute": 5.775695544074644e-05,
+          "rms": 2.8540466188791436e-05
+        },
+        "P_rr": {
+          "max_absolute": 5.069338044206211e-05,
+          "rms": 2.9154434204087418e-05
+        },
+        "P_Psi_plus": {
+          "max_absolute": 0.00011551391088149288,
+          "rms": 5.7080932377530376e-05
+        }
+      },
+      "physical_checks": {
+        "max_probability_normalisation_error": 1.7763568394002505e-15,
+        "max_exchange_symmetry_error": 4.440892098500626e-16,
+        "minimum_probability": 8.408987334983015e-37,
+        "maximum_probability": 1.0000000000000009
+      },
+      "refined_grid_samples": 8001,
+      "refined_residuals": {
+        "P_00": {
+          "max_absolute": 8.148745575381477e-05,
+          "rms": 3.8634644766317536e-05
+        },
+        "P_0r": {
+          "max_absolute": 5.7756955440635416e-05,
+          "rms": 2.853946546682315e-05
+        },
+        "P_r0": {
+          "max_absolute": 5.775695544074644e-05,
+          "rms": 2.8539465466874465e-05
+        },
+        "P_rr": {
+          "max_absolute": 5.069338044206211e-05,
+          "rms": 2.915393648659913e-05
+        },
+        "P_Psi_plus": {
+          "max_absolute": 0.00011551391088149288,
+          "rms": 5.7078930933695967e-05
+        }
+      },
+      "refined_physical_checks": {
+        "max_probability_normalisation_error": 1.7763568394002505e-15,
+        "max_exchange_symmetry_error": 4.440892098500626e-16,
+        "minimum_probability": 8.408987334983015e-37,
+        "maximum_probability": 1.0000000000000009
+      }
+    }
+  ],
+  "overall_checks": {
+    "max_probability_normalisation_error": 1.9984014443252818e-15,
+    "max_exchange_symmetry_error": 5.551115123125783e-16,
+    "minimum_probability": 0.0,
+    "maximum_probability": 1.0000000000000013
+  }
+}
