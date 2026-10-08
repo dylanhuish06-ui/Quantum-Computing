@@ -138,6 +138,31 @@ states = evolve_static(KET_00, times, hbar)  # shape (81, 4)
 populations = np.abs(states) ** 2
 ```
 
+## Running the project
+
+After setup, activate the environment and start the interactive launcher:
+
+```bash
+source .venv/bin/activate
+python run_project.py
+```
+
+Or run a task directly:
+
+```bash
+python run_project.py tests
+python run_project.py fig51
+python run_project.py fig52
+python run_project.py milestone
+```
+
+The complete milestone runs tests first, stops on any failure, generates both
+figures, and lists the output files. Figure 5.2 uses the validated 131,072-interval
+production grid and may take some time; the menu asks for confirmation, while a
+direct command starts immediately. Use `python run_project.py results` to list
+existing outputs or `python run_project.py --help` for usage. The `zeno` and
+`symmetry` commands are placeholders for extensions that are not yet implemented.
+
 ## Time-dependent propagation
 
 `evolve_trotter(psi0, time_grid, hamiltonian_function)` implements Eq. (5.7) with
