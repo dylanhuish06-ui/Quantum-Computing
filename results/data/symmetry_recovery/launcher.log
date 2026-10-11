@@ -1,0 +1,129 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0 -- /workspaces/Quantum-Computing/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /workspaces/Quantum-Computing
+configfile: pyproject.toml
+collecting ... collected 34 items
+
+tests/test_launcher.py::test_known_command_dispatches_without_prompt[tests] PASSED [  2%]
+tests/test_launcher.py::test_known_command_dispatches_without_prompt[fig51] PASSED [  5%]
+tests/test_launcher.py::test_known_command_dispatches_without_prompt[fig52] PASSED [  8%]
+tests/test_launcher.py::test_known_command_dispatches_without_prompt[milestone] PASSED [ 11%]
+tests/test_launcher.py::test_known_command_dispatches_without_prompt[results] PASSED [ 14%]
+tests/test_launcher.py::test_known_command_dispatches_without_prompt[zeno] PASSED [ 17%]
+tests/test_launcher.py::test_known_command_dispatches_without_prompt[symmetry] PASSED [ 20%]
+tests/test_launcher.py::test_unknown_command_rejected PASSED             [ 23%]
+tests/test_launcher.py::test_help PASSED                                 [ 26%]
+tests/test_launcher.py::test_commands_use_active_interpreter_and_repository_cwd[tests-arguments0] PASSED [ 29%]
+tests/test_launcher.py::test_commands_use_active_interpreter_and_repository_cwd[fig51-arguments1] PASSED [ 32%]
+tests/test_launcher.py::test_commands_use_active_interpreter_and_repository_cwd[zeno-arguments2] PASSED [ 35%]
+tests/test_launcher.py::test_commands_use_active_interpreter_and_repository_cwd[fig52-arguments3] PASSED [ 38%]
+tests/test_launcher.py::test_milestone_sequence_stops_at_failure[codes0-steps0] PASSED [ 41%]
+tests/test_launcher.py::test_milestone_sequence_stops_at_failure[codes1-steps1] PASSED [ 44%]
+tests/test_launcher.py::test_milestone_sequence_stops_at_failure[codes2-steps2] PASSED [ 47%]
+tests/test_launcher.py::test_milestone_sequence_stops_at_failure[codes3-steps3] PASSED [ 50%]
+tests/test_launcher.py::test_results_discovery_and_listing PASSED        [ 52%]
+tests/test_launcher.py::test_extensions_do_not_run_subprocesses[symmetry] PASSED [ 55%]
+tests/test_launcher.py::test_expensive_menu_confirmation[y-3-fig52] PASSED [ 58%]
+tests/test_launcher.py::test_expensive_menu_confirmation[y-4-milestone] PASSED [ 61%]
+tests/test_launcher.py::test_expensive_menu_confirmation[n-3-fig52] PASSED [ 64%]
+tests/test_launcher.py::test_expensive_menu_confirmation[n-4-milestone] PASSED [ 67%]
+tests/test_launcher.py::test_menu_recovers_from_invalid_input[1-tests] PASSED [ 70%]
+tests/test_launcher.py::test_menu_recovers_from_invalid_input[2-fig51] PASSED [ 73%]
+tests/test_launcher.py::test_menu_recovers_from_invalid_input[5-results] PASSED [ 76%]
+tests/test_launcher.py::test_menu_recovers_from_invalid_input[6-zeno] PASSED [ 79%]
+tests/test_launcher.py::test_menu_recovers_from_invalid_input[7-symmetry] PASSED [ 82%]
+tests/test_launcher.py::test_menu_exits_on_subprocess_failure PASSED     [ 85%]
+tests/test_launcher.py::test_menu_closed_cleanly[error0-130] PASSED      [ 88%]
+tests/test_launcher.py::test_menu_closed_cleanly[error1-0] PASSED        [ 91%]
+tests/test_launcher.py::test_subprocess_errors_exit_cleanly[result0-130] PASSED [ 94%]
+tests/test_launcher.py::test_subprocess_errors_exit_cleanly[result1-1] PASSED [ 97%]
+tests/test_launcher.py::test_subprocess_errors_exit_cleanly[result2-130] PASSED [100%]
+
+==================================== PASSES ====================================
+__ test_commands_use_active_interpreter_and_repository_cwd[tests-arguments0] ___
+----------------------------- Captured stdout call -----------------------------
+Running: /workspaces/Quantum-Computing/.venv/bin/python -m pytest -q
+__ test_commands_use_active_interpreter_and_repository_cwd[fig51-arguments1] ___
+----------------------------- Captured stdout call -----------------------------
+Running: /workspaces/Quantum-Computing/.venv/bin/python /workspaces/Quantum-Computing/scripts/figure_5_1.py
+___ test_commands_use_active_interpreter_and_repository_cwd[zeno-arguments2] ___
+----------------------------- Captured stdout call -----------------------------
+Running: /workspaces/Quantum-Computing/.venv/bin/python /workspaces/Quantum-Computing/scripts/quantum_zeno.py
+__ test_commands_use_active_interpreter_and_repository_cwd[fig52-arguments3] ___
+----------------------------- Captured stdout call -----------------------------
+Running: /workspaces/Quantum-Computing/.venv/bin/python /workspaces/Quantum-Computing/scripts/figure_5_2.py --milestone --interaction-mhz 0 0.5 1 5 100 --phase 0
+___________ test_milestone_sequence_stops_at_failure[codes0-steps0] ____________
+----------------------------- Captured stdout call -----------------------------
+Running: /workspaces/Quantum-Computing/.venv/bin/python -m pytest -q
+----------------------------- Captured stderr call -----------------------------
+tests failed (return code 5).
+___________ test_milestone_sequence_stops_at_failure[codes1-steps1] ____________
+----------------------------- Captured stdout call -----------------------------
+Running: /workspaces/Quantum-Computing/.venv/bin/python -m pytest -q
+Running: /workspaces/Quantum-Computing/.venv/bin/python /workspaces/Quantum-Computing/scripts/figure_5_1.py
+----------------------------- Captured stderr call -----------------------------
+fig51 failed (return code 6).
+___________ test_milestone_sequence_stops_at_failure[codes2-steps2] ____________
+----------------------------- Captured stdout call -----------------------------
+Running: /workspaces/Quantum-Computing/.venv/bin/python -m pytest -q
+Running: /workspaces/Quantum-Computing/.venv/bin/python /workspaces/Quantum-Computing/scripts/figure_5_1.py
+Running: /workspaces/Quantum-Computing/.venv/bin/python /workspaces/Quantum-Computing/scripts/figure_5_2.py --milestone --interaction-mhz 0 0.5 1 5 100 --phase 0
+----------------------------- Captured stderr call -----------------------------
+fig52 failed (return code 7).
+___________ test_milestone_sequence_stops_at_failure[codes3-steps3] ____________
+----------------------------- Captured stdout call -----------------------------
+Running: /workspaces/Quantum-Computing/.venv/bin/python -m pytest -q
+Running: /workspaces/Quantum-Computing/.venv/bin/python /workspaces/Quantum-Computing/scripts/figure_5_1.py
+Running: /workspaces/Quantum-Computing/.venv/bin/python /workspaces/Quantum-Computing/scripts/figure_5_2.py --milestone --interaction-mhz 0 0.5 1 5 100 --phase 0
+Milestone complete. Generated outputs:
+_____________________ test_menu_closed_cleanly[error0-130] _____________________
+----------------------------- Captured stdout call -----------------------------
+
+PHYS3561 Chapter 5 — Quantum Dynamics Project
+
+1. Run test suite
+2. Generate Figure 5.1
+3. Generate Figure 5.2 milestone
+4. Run complete milestone
+5. Show generated result files
+6. Run Quantum Zeno simulation
+7. Symmetry-scaling extension
+0. Exit
+
+----------------------------- Captured stderr call -----------------------------
+
+Interrupted.
+______________________ test_menu_closed_cleanly[error1-0] ______________________
+----------------------------- Captured stdout call -----------------------------
+
+PHYS3561 Chapter 5 — Quantum Dynamics Project
+
+1. Run test suite
+2. Generate Figure 5.1
+3. Generate Figure 5.2 milestone
+4. Run complete milestone
+5. Show generated result files
+6. Run Quantum Zeno simulation
+7. Symmetry-scaling extension
+0. Exit
+
+
+Input closed. Exiting.
+_______________ test_subprocess_errors_exit_cleanly[result0-130] _______________
+----------------------------- Captured stdout call -----------------------------
+Running: /workspaces/Quantum-Computing/.venv/bin/python -m pytest -q
+----------------------------- Captured stderr call -----------------------------
+
+Interrupted.
+________________ test_subprocess_errors_exit_cleanly[result1-1] ________________
+----------------------------- Captured stdout call -----------------------------
+Running: /workspaces/Quantum-Computing/.venv/bin/python -m pytest -q
+----------------------------- Captured stderr call -----------------------------
+Launcher error: cannot start
+_______________ test_subprocess_errors_exit_cleanly[result2-130] _______________
+----------------------------- Captured stdout call -----------------------------
+Running: /workspaces/Quantum-Computing/.venv/bin/python -m pytest -q
+----------------------------- Captured stderr call -----------------------------
+tests failed (return code -2).
+============================== 34 passed in 0.29s ==============================

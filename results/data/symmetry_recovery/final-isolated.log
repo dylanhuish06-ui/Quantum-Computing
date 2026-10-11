@@ -1,0 +1,58 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0 -- /workspaces/Quantum-Computing/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /workspaces/Quantum-Computing/symmetry-scaling
+configfile: pyproject.toml
+collecting ... collected 44 items
+
+tests/test_symmetry.py::test_explicit_exchange_transformation PASSED     [  2%]
+tests/test_symmetry.py::test_n2_dark_state_exact_hamiltonian_and_dynamics[parameters0] PASSED [  4%]
+tests/test_symmetry.py::test_n2_dark_state_exact_hamiltonian_and_dynamics[parameters1] PASSED [  6%]
+tests/test_symmetry.py::test_n2_dark_state_exact_hamiltonian_and_dynamics[parameters2] PASSED [  9%]
+tests/test_symmetry.py::test_dimensions_normalisation_pair_count_and_projection[1] PASSED [ 11%]
+tests/test_symmetry.py::test_dimensions_normalisation_pair_count_and_projection[2] PASSED [ 13%]
+tests/test_symmetry.py::test_dimensions_normalisation_pair_count_and_projection[3] PASSED [ 15%]
+tests/test_symmetry.py::test_dimensions_normalisation_pair_count_and_projection[4] PASSED [ 18%]
+tests/test_symmetry.py::test_dimensions_normalisation_pair_count_and_projection[5] PASSED [ 20%]
+tests/test_symmetry.py::test_dimensions_normalisation_pair_count_and_projection[6] PASSED [ 22%]
+tests/test_symmetry.py::test_dimensions_normalisation_pair_count_and_projection[7] PASSED [ 25%]
+tests/test_symmetry.py::test_full_reduced_agreement[0-1] PASSED          [ 27%]
+tests/test_symmetry.py::test_full_reduced_agreement[0-2] PASSED          [ 29%]
+tests/test_symmetry.py::test_full_reduced_agreement[0-3] PASSED          [ 31%]
+tests/test_symmetry.py::test_full_reduced_agreement[0-4] PASSED          [ 34%]
+tests/test_symmetry.py::test_full_reduced_agreement[0-6] PASSED          [ 36%]
+tests/test_symmetry.py::test_full_reduced_agreement[0.2-1] PASSED        [ 38%]
+tests/test_symmetry.py::test_full_reduced_agreement[0.2-2] PASSED        [ 40%]
+tests/test_symmetry.py::test_full_reduced_agreement[0.2-3] PASSED        [ 43%]
+tests/test_symmetry.py::test_full_reduced_agreement[0.2-4] PASSED        [ 45%]
+tests/test_symmetry.py::test_full_reduced_agreement[0.2-6] PASSED        [ 47%]
+tests/test_symmetry.py::test_full_reduced_agreement[-2-1] PASSED         [ 50%]
+tests/test_symmetry.py::test_full_reduced_agreement[-2-2] PASSED         [ 52%]
+tests/test_symmetry.py::test_full_reduced_agreement[-2-3] PASSED         [ 54%]
+tests/test_symmetry.py::test_full_reduced_agreement[-2-4] PASSED         [ 56%]
+tests/test_symmetry.py::test_full_reduced_agreement[-2-6] PASSED         [ 59%]
+tests/test_symmetry.py::test_independent_dense_exponential_and_nonsymmetric_state PASSED [ 61%]
+tests/test_symmetry.py::test_spatial_symmetry_breaking_and_mean_pair_projection PASSED [ 63%]
+tests/test_symmetry.py::test_invalid_counts[0] PASSED                    [ 65%]
+tests/test_symmetry.py::test_invalid_counts[-1] PASSED                   [ 68%]
+tests/test_symmetry.py::test_invalid_counts[True] PASSED                 [ 70%]
+tests/test_symmetry.py::test_invalid_counts[2.5] PASSED                  [ 72%]
+tests/test_symmetry.py::test_invalid_pairs[V0] PASSED                    [ 75%]
+tests/test_symmetry.py::test_invalid_pairs[V1] PASSED                    [ 77%]
+tests/test_symmetry.py::test_invalid_pairs[V2] PASSED                    [ 79%]
+tests/test_symmetry.py::test_invalid_pairs[1j] PASSED                    [ 81%]
+tests/test_symmetry.py::test_memory_estimate_grows_and_benchmark_ci_guard PASSED [ 84%]
+tests/test_symmetry.py::test_benchmark_summary_medians_iqr_and_memory_are_from_raw_rows PASSED [ 86%]
+tests/test_symmetry.py::test_benchmark_memory_guard_skips_large_full_sizes PASSED [ 88%]
+tests/test_symmetry.py::test_recorded_figures_validate_existing_session PASSED [ 90%]
+tests/test_symmetry.py::test_recorded_figures_reject_mixed_or_stale_data[session] PASSED [ 93%]
+tests/test_symmetry.py::test_recorded_figures_reject_mixed_or_stale_data[summary] PASSED [ 95%]
+tests/test_symmetry.py::test_recorded_figures_reject_mixed_or_stale_data[repeat] PASSED [ 97%]
+tests/test_symmetry.py::test_recorded_figures_reject_mixed_or_stale_data[agreement] PASSED [100%]
+
+==================================== PASSES ====================================
+_______________ test_recorded_figures_validate_existing_session ________________
+------------------------------ Captured log setup ------------------------------
+WARNING  matplotlib:__init__.py:577 /home/codespace/.config/matplotlib is not a writable directory
+WARNING  matplotlib:__init__.py:596 Matplotlib created a temporary cache directory at /tmp/matplotlib-2ekad1xx because there was an issue with the default path (/home/codespace/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+============================== 44 passed in 4.99s ==============================

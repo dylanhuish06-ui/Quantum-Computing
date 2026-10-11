@@ -1,0 +1,30 @@
+{
+  "N2": {
+    "aligned_amplitude_error": 2.1138016631127878e-15,
+    "dark_probability": 2.9890432736889896e-31,
+    "expanded_norm_error": 5.551115123125783e-16,
+    "fidelity_error": 2.6645352591003757e-15,
+    "matrix_entry_error_rad_s": 3.60325190760751e-10,
+    "parameter_sets": 24,
+    "probability_error": 2.4424906541753444e-15,
+    "samples": 51,
+    "tensor_matrix_error_rad_s": 0.0,
+    "unitarity_error": 2.220446049250313e-16
+  },
+  "small_N": {
+    "N": [
+      2,
+      3,
+      4
+    ],
+    "aligned_amplitude_error": 9.929671126925273e-15,
+    "dicke_population_error": 6.8833827526759706e-15,
+    "excitation_error": 2.3092638912203256e-14,
+    "expanded_norm_error": 4.440892098500626e-15,
+    "fidelity_error": 8.881784197001252e-15,
+    "intertwining_error_over_scale": 4.743186923619966e-15,
+    "parameter_sets_per_N": 24,
+    "probability_error": 5.773159728050814e-15,
+    "samples": 31
+  }
+}

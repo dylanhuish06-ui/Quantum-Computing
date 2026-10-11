@@ -27,6 +27,7 @@ def build_command(command):
     """Build a subprocess command using this launcher's Python interpreter."""
     arguments = {
         "tests": ["-m", "pytest", "-q"],
+        "symmetry": [str(ROOT / "scripts/symmetry_demo.py")],
         "fig51": [str(ROOT / "scripts/figure_5_1.py")],
         "fig52": [str(ROOT / "scripts/figure_5_2.py"), "--milestone",
                   "--interaction-mhz", "0", "0.5", "1", "5", "100", "--phase", "0"],
@@ -75,9 +76,8 @@ def dispatch(command):
     if command == "results":
         show_results()
         return 0
-    if command in ("zeno", "symmetry"):
-        label = "Quantum Zeno" if command == "zeno" else "Symmetry-scaling"
-        print(f"{label} extension has not yet been implemented.")
+    if command == "zeno":
+        print("Quantum Zeno extension has not yet been implemented.")
         return 0
     return run_command(command)
 
@@ -112,7 +112,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(
         description="Run Chapter 5 project tasks; omit the command for a menu.",
         epilog="fig52 and milestone run without confirmation in command-line mode. "
-               "zeno and symmetry are reserved for future extensions.",
+               "symmetry runs a small validation demo; zeno is reserved for a future extension.",
     )
     parser.add_argument("command", nargs="?", choices=COMMANDS,
                         help="project task to run")

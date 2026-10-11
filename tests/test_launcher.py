@@ -37,6 +37,7 @@ def test_help(capsys):
 
 @pytest.mark.parametrize(("command", "arguments"), [
     ("tests", ["-m", "pytest", "-q"]),
+    ("symmetry", [str(launcher.ROOT / "scripts/symmetry_demo.py")]),
     ("fig51", [str(launcher.ROOT / "scripts/figure_5_1.py")]),
     ("fig52", [str(launcher.ROOT / "scripts/figure_5_2.py"), "--milestone",
                "--interaction-mhz", "0", "0.5", "1", "5", "100", "--phase", "0"]),
@@ -91,7 +92,7 @@ def test_results_discovery_and_listing(tmp_path, monkeypatch, capsys):
     assert "No files found (empty)" in capsys.readouterr().out
 
 
-@pytest.mark.parametrize("command", ["zeno", "symmetry"])
+@pytest.mark.parametrize("command", ["zeno"])
 def test_extensions_do_not_run_subprocesses(command, monkeypatch, capsys):
     run = Mock()
     monkeypatch.setattr(launcher.subprocess, "run", run)
