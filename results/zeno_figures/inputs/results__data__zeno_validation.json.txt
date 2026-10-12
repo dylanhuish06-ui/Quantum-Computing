@@ -1,0 +1,156 @@
+{
+  "parameters": {
+    "omega_rad_s": 6283185.307179586,
+    "delta_rad_s": 0,
+    "phase_rad": 0,
+    "total_time_s": 5e-07,
+    "V_over_omega": [
+      0.0,
+      1.0,
+      10.0,
+      100.0
+    ],
+    "measurement_counts": [
+      0,
+      1,
+      2,
+      5,
+      10,
+      20,
+      50,
+      100,
+      200,
+      500,
+      1000,
+      2000,
+      5000,
+      10000
+    ],
+    "trajectory_samples": 1001
+  },
+  "versions": {
+    "python": "3.14.2",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.2"
+  },
+  "schedule": "M=0: no measurements; M>0: at k*T/M, k=1,...,M; samples within four floating-point ULPs of an event are post-measurement",
+  "variance_rad2_s2": [
+    19739208802178.715,
+    19739208802178.715,
+    19739208802178.715,
+    19739208802178.715
+  ],
+  "zeno_time_s": [
+    2.2507907903927654e-07,
+    2.2507907903927654e-07,
+    2.2507907903927654e-07,
+    2.2507907903927654e-07
+  ],
+  "checks": {
+    "max_trace_error": 8.339995360984176e-13,
+    "max_hermiticity_error": 1.6542323066916492e-14,
+    "minimum_eigenvalue": -2.44249079451675e-15,
+    "minimum_probability": 0.0,
+    "maximum_probability": 1.0,
+    "max_pure_state_density_error": 1.1712852909795402e-14,
+    "max_A_B_density_difference": 0.0,
+    "max_symmetric_population_sum_error": 8.341105584008801e-13
+  },
+  "residual_definition": "nonselective P00 minus exp(-Var(Hbar)*T^2/M); M>0",
+  "quadratic_product_note": "NaN in NPZ/CSV means negative single-step quadratic estimate; invalid approximation",
+  "cases": [
+    {
+      "V_over_omega": 0.0,
+      "unmeasured_final": [
+        0.0,
+        3.944304526105058e-31,
+        1.0
+      ],
+      "unmeasured_max_P_rr": 1.0,
+      "M_10000_ground_final": [
+        0.9995067101636983,
+        0.00019311899083191797,
+        0.0003001708448602699
+      ],
+      "M_10000_double_final": [
+        0.36672832337756833,
+        0.6329715057768682,
+        0.0003001708448602677
+      ],
+      "M_10000_exponential_residual": 6.864241541837401e-08,
+      "M_10000_exact_all_yes": 0.9995066415180238,
+      "asymptotic_residual_slope_M_ge_1000": -1.9973029006531828,
+      "short_time_max_abs_residual_t_le_0_2_ns": 2.410294186461215e-13
+    },
+    {
+      "V_over_omega": 1.0,
+      "unmeasured_final": [
+        0.12571150345104426,
+        0.3721728652582605,
+        0.5021156312906949
+      ],
+      "unmeasured_max_P_rr": 0.563417176552297,
+      "M_10000_ground_final": [
+        0.999506723555929,
+        0.0003063024220491805,
+        0.0001869740213084718
+      ],
+      "M_10000_double_final": [
+        0.3667283233788089,
+        0.6329715057782109,
+        0.0003001708423922781
+      ],
+      "M_10000_exponential_residual": 8.203464607614563e-08,
+      "M_10000_exact_all_yes": 0.9995066415180238,
+      "asymptotic_residual_slope_M_ge_1000": -1.9974813151666557,
+      "short_time_max_abs_residual_t_le_0_2_ns": 2.410294186461215e-13
+    },
+    {
+      "V_over_omega": 10.0,
+      "unmeasured_final": [
+        0.3636222112871657,
+        0.6332648327838015,
+        0.0031129559290333114
+      ],
+      "unmeasured_max_P_rr": 0.00568548113913796,
+      "M_10000_ground_final": [
+        0.9995067620148148,
+        0.0004884486174295556,
+        4.789367123148003e-06
+      ],
+      "M_10000_double_final": [
+        0.36672832349632833,
+        0.6329715059055893,
+        0.00030017059806256474
+      ],
+      "M_10000_exponential_residual": 1.2049353192988832e-07,
+      "M_10000_exact_all_yes": 0.9995066415180238,
+      "asymptotic_residual_slope_M_ge_1000": -1.997671918354745,
+      "short_time_max_abs_residual_t_le_0_2_ns": 2.410294186461215e-13
+    },
+    {
+      "V_over_omega": 100.0,
+      "unmeasured_final": [
+        0.3668400916975901,
+        0.6331282571190722,
+        3.165118332257423e-05
+      ],
+      "unmeasured_max_P_rr": 5.069338044206213e-05,
+      "M_10000_ground_final": [
+        0.9995067631955262,
+        0.0004931874908375069,
+        4.931294222153871e-08
+      ],
+      "M_10000_double_final": [
+        0.366728335217887,
+        0.6329715186153988,
+        0.00030014616588012495
+      ],
+      "M_10000_exponential_residual": 1.2167424334741384e-07,
+      "M_10000_exact_all_yes": 0.9995066415180238,
+      "asymptotic_residual_slope_M_ge_1000": -1.997673233588357,
+      "short_time_max_abs_residual_t_le_0_2_ns": 2.410294186461215e-13
+    }
+  ]
+}

@@ -1,0 +1,427 @@
+# Zeno audit Z1 — Physical and numerical validation
+
+Audit date: 2026-10-10. Branch: `extension/quantum-zeno`. No commit or push was
+made. This audit checks the existing extension; it adds validation and repairs
+one event-sampling defect, without adding a measurement model or new Zeno feature.
+
+## 1. Research question
+
+Does repeated ideal measurement of the initial ground-state sector suppress
+excitation in the validated two-atom Rydberg model, and can that suppression
+be distinguished from blockade and from numerical error?
+
+The initial protection checks were `git status --short`,
+`git branch --show-current`, `git log --oneline -5`, and
+`git tag --points-at milestone-v1.0`. The annotated tag object is
+`571acfe17c3396ac61b6450e5f016e6987928b01`; its target commit remains
+**`cafa4850f313174685fa491cc3099ab308fe6c58`**, the validated milestone.
+Branch HEAD is `090f5dc` (the later launcher commit). Every milestone-tracked
+source module, original test, scientific script and `pyproject.toml` is
+byte-identical to the tag. All **254 original milestone tests passed before
+the Zeno audit proceeded**.
+
+The initial worktree was already dirty. Its modified milestone CSV retains
+every original numerical field and adds `validation_scope` and
+`halved_dt_maximum_plot_difference`. The validation JSON adds only
+`production_refinement_attempts`; all original fields are identical. Five
+modified milestone PDFs differ only in `/CreationDate`. These pre-existing
+changes were inspected and left untouched. They should be excluded from a
+future Zeno-only commit. The separate `symmetry-scaling/` worktree, `.vscode/`
+and the existing empty file named `,` are unrelated and were not altered.
+
+Existing implementation inventory:
+
+| File or group | Existing role |
+|---|---|
+| `src/quantum_project/density_matrix.py` | Pure-state conversion, density validation, static unitary evolution, projector validation, Lüders channel, probabilities and variance |
+| `src/quantum_project/quantum_zeno.py` | Three existing binary questions and repeated non-selective measurements |
+| `scripts/quantum_zeno.py` | Existing parameter study, complex-density archive, CSV/JSON exports and figures |
+| `run_project.py`, `tests/test_launcher.py` | CLI/menu dispatch to the Zeno generator; subprocess tests |
+| `tests/test_quantum_zeno.py` | Existing physical/numerical tests, extended by this audit |
+| `docs/quantum_zeno_extension.md`, `README.md` | Physical interpretation, reproduction instructions and launcher documentation |
+| `results/data/zeno_study.npz` | Complex baseline, trajectory and final density matrices; parameters and derived arrays |
+| `zeno_baseline.csv`, `zeno_trajectories.csv`, `zeno_survival.csv` | Exported populations, physical counts, rates and intervals |
+| `zeno_short_time.csv`, `zeno_residuals.csv`, `zeno_validation.json` | Predictions, selective comparison, residuals and original validation summaries |
+| `results/figures/Z1_*` through `Z5_*` | Six figure stems, each PNG and PDF, listed in section 11 |
+
+The audit adds `scripts/audit_quantum_zeno.py`, this report,
+`results/data/zeno_audit.json`, three `zeno_audit_*.csv` tables and
+`zeno_audit_examples.npz`. These are validation artifacts, not new physics.
+
+## 2. Mathematical formulation
+
+The fixed basis is
+\(|00\rangle,|0r\rangle,|r0\rangle,|rr\rangle\). With
+\(c=\Omega e^{-i\phi}/2\), the unchanged milestone convention is
+
+\[
+\bar H=H/\hbar=
+\begin{pmatrix}
+\Delta&c&c&0\\c^*&0&0&c\\c^*&0&0&c\\0&c^*&c^*&V-\Delta
+\end{pmatrix}.
+\]
+
+All frequencies are angular frequencies in rad/s, time is seconds, and
+\(U(t)=e^{-i\bar Ht}\). The study uses
+\(\Omega=2\pi\,10^6\), \(\Delta=\phi=0\),
+\(V/\Omega=0,1,10,100\), \(T=0.5\,\mu\mathrm{s}\), and initial
+\(\rho_0=|00\rangle\langle00|\). Thus the interaction values also equal
+\(V/(2\pi)\) in MHz. There is no varying Hamiltonian in this extension.
+
+## 3. Density-matrix implementation
+
+`density_from_state` implements `outer(psi, psi.conj())`; `evolve_density`
+implements \(U\rho U^\dagger\) using the full 4×4 matrix. Neither routine
+normalises, clips eigenvalues, resets populations or repairs an invalid state.
+Validation uses absolute tolerance \(10^{-10}\) for accumulated density
+roundoff; input pure states and projectors use \(10^{-12}\).
+
+The audit compares full complex matrices, not just plotted probabilities:
+
+| Check | Largest absolute discrepancy |
+|---|---:|
+| Saved unmeasured matrices vs milestone pure-state outer products | 1.18×10⁻¹⁴ |
+| Saved unmeasured matrices vs independent spectral propagation | 1.18×10⁻¹⁴ |
+| Saved unmeasured purity vs 1 | 4.87×10⁻¹⁴ |
+| Trace vs 1 over all 24,192 saved matrices | 8.34×10⁻¹³ |
+| Hermiticity over all saved matrices | 1.66×10⁻¹⁴ |
+| Minimum eigenvalue | −2.45×10⁻¹⁵ |
+| Saved trajectories vs independent 16×16 channel powers | 1.47×10⁻¹² |
+| Saved final matrices vs independent channel powers | 1.44×10⁻¹¹ |
+
+The independent audit constructs the Hamiltonian explicitly and diagonalises it
+with NumPy, whereas production uses SciPy's matrix exponential. Spectral
+unitarity roundoff can accumulate through 10,000 channel applications; the
+last comparison uses a stated absolute tolerance of 2×10⁻¹¹. Production trace
+drift is smaller. No discrepancy is concealed by normalisation.
+
+Tests additionally check pure and mixed initial states, purity preservation,
+negative times, nonzero phases/detunings, both interaction signs and invalid
+inputs. `zeno_audit_examples.npz` retains actual example matrices for inspection.
+
+## 4. Measurement model
+
+For ground-state survival,
+
+\[
+P=\operatorname{diag}(1,0,0,0),\quad
+Q=\operatorname{diag}(0,1,1,1),\quad
+\mathcal D(\rho)=P\rho P+Q\rho Q.
+\]
+
+For an arbitrary input matrix this channel produces
+
+\[
+\begin{pmatrix}
+\rho_{00}&0&0&0\\
+0&\rho_{11}&\rho_{12}&\rho_{13}\\
+0&\rho_{21}&\rho_{22}&\rho_{23}\\
+0&\rho_{31}&\rho_{32}&\rho_{33}
+\end{pmatrix}.
+\]
+
+This preserves the whole Q block, rather than measuring each computational
+basis state separately. The numerical example
+\(\psi=(1,i,2,3i)^T/\sqrt{15}\) retains
+\(|\rho_{0r,r0}|=2/15\), removes all P/Q coherences exactly, preserves trace
+within 2.23×10⁻¹⁶ and changes purity from 1 to 197/225 ≈ 0.875556. Its minimum
+eigenvalue is −1.49×10⁻¹⁷. This is mixing from discarded outcomes, not a reset.
+
+For M>0, measurements occur at \(kT/M\), k=1,…,M, including the endpoint.
+M=0 means no measurement. M=1 cannot change endpoint P00 because the only
+measurement occurs after the unitary evolution. Event samples are post-measurement.
+
+**Resolved defect:** `searchsorted` previously interpreted some nominal event
+times on the 1001-point display grid as one floating-point step before the
+event. At M=10 and M=100, saved event coherences reached 0.151955 and 0.015702,
+respectively. The lookup now recognises times within four ULPs of an event.
+Regression tests compare independently generated grids and also check that
+physically distinct samples before and after the event remain distinct.
+Regenerated event coherences are zero. Final density matrices are unchanged;
+trajectory populations changed by no more than 2.23×10⁻¹⁶.
+
+The production repeated-measurement calculation is **non-selective**: outcomes
+are discarded, and histories that leave P and later return contribute to final
+\(P_{00}=\operatorname{Tr}(P\rho)\). Separately, `exact_all_yes` stores the
+**joint probability of obtaining the P outcome at every measurement**. It is
+not the normalised conditional state's P00, which is trivially one immediately
+after a successful rank-one projection. A branch-enumeration test sums all
+unnormalised outcome branches and recovers the non-selective density matrix.
+
+## 5. Analytical Zeno prediction
+
+Let \(\mu_n=\langle00|\bar H^n|00\rangle\). Direct matrix multiplication gives
+
+\[
+\bar H|00\rangle=\Delta|00\rangle+
+\frac\Omega2e^{i\phi}(|0r\rangle+|r0\rangle),\quad
+\mu_1=\Delta,\quad \mu_2=\Delta^2+\Omega^2/2.
+\]
+
+Hence \(a=\sigma_{\bar H}^2=\mu_2-\mu_1^2=\Omega^2/2
+=1.9739208802178715\times10^{13}\,\mathrm{s}^{-2}\), independent of V,
+Δ and φ. The Zeno time is \(a^{-1/2}=0.225079079\,\mu\mathrm{s}\).
+The audit evaluates these moments without invoking any propagator. An
+unnecessary production call to `unitary_operator(Hbar, 0)` in variance
+validation was replaced by a direct Hermiticity check; a test forbids
+propagator calls during this analytical calculation.
+
+Expanding the survival amplitude,
+\(A(\tau)=1-i\mu_1\tau-\mu_2\tau^2/2+\cdots\), yields
+
+\[
+p(\tau)=|A(\tau)|^2=1-a\tau^2+O(\tau^4).
+\]
+
+There is no cubic term because \(A(-\tau)=A(\tau)^*\). A useful independent
+zero-interaction check is \(p(\tau)=\cos^4(\Omega\tau/2)\), whose expansion
+is \(1-\Omega^2\tau^2/2+5\Omega^4\tau^4/48+O(\tau^6)\).
+
+For selective all-P records, the rank-one projection restores the same
+conditional state after every success, so, exactly,
+
+\[
+S_{\rm all\ yes}=p(T/M)^M.
+\]
+
+Taking logarithms and using fixed T and finite Hamiltonian gives
+
+\[
+\log S_{\rm all\ yes}=-aT^2/M+O(M^{-3}),\qquad
+S_{\rm quad}=[1-a(T/M)^2]^M\simeq e^{-aT^2/M}.
+\]
+
+Here \(aT^2=\pi^2/2=4.934802200545\). The quadratic base is negative at
+M=1,2, so those approximation entries are explicitly NaN, not probabilities.
+The exponential is an asymptotic comparison, not an exact finite-M law.
+
+For the non-selective channel, each step loses \(a\tau^2\) from an occupied
+P sector. Its accumulated Q population is O(Mτ²). Returning Q→P adds a further
+O(τ²) per step times that population; summed return contributions are
+O(M²τ⁴)=O(M⁻²). Thus
+
+\[
+P_{00}^{\rm ns}(T;M)=1-aT^2/M+O(M^{-2}),\qquad
+P_{00}^{\rm ns}-e^{-aT^2/M}=O(M^{-2}).
+\]
+
+The selective product and non-selective final occupation therefore have the
+same leading loss but different finite-rate values. The report does not equate them.
+
+## 6. Numerical validation
+
+The independent audit checks every saved final matrix, every saved trajectory
+matrix, all 4,004 unmeasured matrices and all CSV rows. The five CSVs contain
+4,004 baseline, 20,020 trajectory, 168 survival, 484 short-time and 52 residual
+rows. Their probabilities reconstruct from matrix elements within 3.34×10⁻¹⁶.
+Physical count/rate/spacing columns and all analytical arrays are also checked.
+
+For the saved logarithmic short-time grid, the maximum across interaction cases
+of each residual summary is:
+
+| Included τ range | Samples per V | Maximum absolute residual | RMS residual |
+|---|---:|---:|---:|
+| 0.01–0.8 ns | 70 | 6.351×10⁻¹¹ | 1.204×10⁻¹¹ |
+| 0.01–0.4 ns | 59 | 3.913×10⁻¹² | 8.079×10⁻¹³ |
+| 0.01–0.2 ns | 48 | 2.411×10⁻¹³ | 5.518×10⁻¹⁴ |
+| 0.01–0.1 ns | 37 | 1.477×10⁻¹⁴ | 3.874×10⁻¹⁵ |
+
+The residual is numerical p minus \(1-a\tau^2\). On the additional exact
+halving sequence τ=0.8,0.4,0.2,0.1 ns, V=0 residuals are
+6.650×10⁻¹¹, 4.156×10⁻¹², 2.598×10⁻¹³, 1.621×10⁻¹⁴.
+All fitted adjacent orders across V=0,1,10,100 are 3.998–4.003, confirming the
+fourth-order remainder before cancellation near machine precision dominates.
+For V=100, τ‖Hbar‖ is approximately 0.126 at 0.2 ns and 0.063 at 0.1 ns.
+The complete 0.01–20 ns plot is not all in this conservative short-time regime.
+
+For non-selective minus exponential at M=1000,2000,5000,10000:
+
+| V/Ω | Maximum absolute residual | RMS residual | Log-log slope |
+|---:|---:|---:|---:|
+| 0 | 6.821×10⁻⁶ | 3.519×10⁻⁶ | −1.99730 |
+| 1 | 8.155×10⁻⁶ | 4.207×10⁻⁶ | −1.99748 |
+| 10 | 1.199×10⁻⁵ | 6.183×10⁻⁶ | −1.99767 |
+| 100 | 1.211×10⁻⁵ | 6.243×10⁻⁶ | −1.99767 |
+
+At M=10000 the largest exponential residual is 1.217×10⁻⁷, clearly above
+roundoff. The separately recomputed spectral all-yes values agree with saved
+values within 1.61×10⁻¹¹; this error is much smaller than the resolved return
+contributions, approximately 6.86×10⁻⁸ to 1.22×10⁻⁷.
+
+## 7. Zeno-limit result
+
+The full scan is M=0,1,2,5,10,20,50,100,200,500,1000,2000,5000,10000.
+Representative non-selective P00 values are:
+
+| M | V/Ω=0 | V/Ω=1 | V/Ω=10 | V/Ω=100 |
+|---:|---:|---:|---:|---:|
+| 0 | 0.000000000 | 0.125711503 | 0.363622211 | 0.366840092 |
+| 1 | 0.000000000 | 0.125711503 | 0.363622211 | 0.366840092 |
+| 2 | 0.125000000 | 0.323275903 | 0.680132297 | 0.683403934 |
+| 5 | 0.450524802 | 0.480822643 | 0.550514811 | 0.549832893 |
+| 10 | 0.645958446 | 0.655435966 | 0.680345988 | 0.680082032 |
+| 100 | 0.952490173 | 0.952618731 | 0.952984956 | 0.952995595 |
+| 1000 | 0.995084175 | 0.995085509 | 0.995089337 | 0.995089455 |
+| 10000 | 0.999506710 | 0.999506724 | 0.999506762 | 0.999506763 |
+
+At M=10000, M(1−P00) ranges from 4.93237 to 4.93290, within 0.05% of
+the predicted limit 4.9348022. This is quantitative convergence, not merely a
+flatter-looking curve. The high-rate sequence is monotonic for all tested V;
+the complete sequence need not be. Selective all-yes survival also tends to
+one and is about 0.99950664152 at the largest count. The raw count-by-count
+values and scaled losses are in `zeno_audit_limit.csv`.
+
+## 8. Measurement-operator dependence
+
+All existing projectors were checked explicitly for Hermiticity, idempotence,
+completeness and orthogonality:
+
+| Question | Yes projector | No projector | Physical meaning |
+|---|---|---|---|
+| A: ground | diag(1,0,0,0) | diag(0,1,1,1) | No excitation versus at least one excitation |
+| B: any excitation | diag(0,1,1,1) | diag(1,0,0,0) | Same two subspaces, reversed outcome labels |
+| C: double | diag(0,0,0,1) | diag(1,1,1,0) | Double excitation versus zero or one |
+
+A and B have exactly the same non-selective channel, including for a general
+mixed state. They do not resolve which atom is excited. B is an instantaneous
+question; “ever excited” would require a measurement record and is not modeled.
+
+C leaves a multidimensional subspace with coherent |00⟩↔|Ψ+⟩ motion. Its
+projected Hamiltonian retains coupling Ω/√2, so at Δ=0 its large-M limit is
+P00=cos²(ΩT/√2)=0.366872329 and Prr=0. At V=0, M=10000 gives
+P00=0.366728323, PΨ+=0.632971506 and Prr=0.000300171. This differs markedly
+from A's P00≈0.999507. Confinement to a subspace can preserve internal
+motion, as described in the [Facchi–Pascazio review](https://arxiv.org/abs/0903.3297).
+
+## 9. Interaction with Rydberg blockade
+
+Blockade is already present in the unmeasured unitary model; it detunes |rr⟩
+and inhibits double excitation. Repeated A measurements instead inhibit
+departure from |00⟩. Comparison at the same T separates the two effects:
+
+| V/Ω | Unmeasured final Prr | Unmeasured maximum Prr | A, M=10000: final Prr | Measurement gain in final P00 |
+|---:|---:|---:|---:|---:|
+| 0 | 1 | 1 | 3.00171×10⁻⁴ | 0.999506710 |
+| 1 | 0.502115631 | 0.563417177 | 1.86974×10⁻⁴ | 0.873795220 |
+| 10 | 0.003112956 | 0.005685481 | 4.78937×10⁻⁶ | 0.635884551 |
+| 100 | 3.16512×10⁻⁵ | 5.06934×10⁻⁵ | 4.93129×10⁻⁸ | 0.632666671 |
+
+The gain is measured P00 minus the unmeasured P00 at the same V, not a
+comparison between different interactions. At V=100, blockade still leaves
+PΨ+=0.633128257 at T without measurement. Thus small Prr alone is not
+ground-state freezing and is not evidence of a Zeno effect.
+
+## 10. Numerical convergence
+
+The physical interval is τ=T/M. Production uses one static matrix exponential
+for that whole interval; there is no numerical integration timestep. SciPy
+uses a scaling-and-squaring/Padé matrix-exponential algorithm, not an ODE
+time grid. [SciPy `expm` documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.expm.html)
+describes that algorithm. The 1001-point plotting grid has spacing **0.5 ns**
+and does not subdivide propagation or trigger extra measurements.
+
+At fixed M=5 and M=100, the audit replaces U(τ) by
+\([U_{\rm spectral}(\tau/L)]^L\), L=1,2,4,8, while retaining exactly the same
+measurement schedule. Across all four V values, the largest final-matrix
+difference is **8.04×10⁻¹³**. There is no truncation-error convergence trend
+to fit: these are mathematically equivalent constant-H propagators differing
+at roundoff. Separate tests prove display-grid independence and event semantics.
+Changing M therefore changes the physical experiment, not an ODE tolerance.
+
+There is no H(t) path to validate here. This audit does not certify a
+time-dependent Zeno extension; such a calculation would require an independent
+integration-step convergence check.
+
+## 11. Figure inventory
+
+All six PNGs were inspected. Each has a PDF counterpart. Every figure uses
+initial |00⟩, Ω/(2π)=1 MHz, Δ=0, φ=0 and T=0.5 μs, except that the left
+half of Z3 shows single intervals τ=0.01–20 ns. The interaction column below
+is both V/Ω and V/(2π) in MHz for this Ω. `S` denotes the full count scan
+in section 7; `S+` excludes zero. Rates are M/T=2×10⁶M s⁻¹. “Direct” means
+a full static exponential, with no numerical timestep. All data files below
+are in `results/data/`; matrices come from `zeno_study.npz`.
+
+| Figure stem | Plotted quantities and V | Measurement/counts | Convention and timing | Source arrays; CSV |
+|---|---|---|---|---|
+| `Z1_unmeasured_baseline` | P00, PΨ+, Prr versus time; V=0,100 | None, M=0 | Unitary; direct; 0.5 ns output spacing | `baseline_density`; `zeno_baseline.csv` |
+| `Z1_population_dynamics` | P00(t); V=0,100 | A; M=0,2,10,100,1000 | Non-selective; τ=T/M; direct; 0.5 ns output spacing | `trajectory_density`; `zeno_trajectories.csv` |
+| `Z2_survival` | P00(T) versus M and τ; V=0; exponential overlay and unmeasured reference | A; S on left, S+ on right | Non-selective; exponential valid asymptotically at high M; direct | `final_density`, `exponential_prediction`; `zeno_survival.csv`, `zeno_residuals.csv` |
+| `Z3_analytical_residuals` | Left: single-interval loss and absolute quadratic residual, V=0,100. Right: endpoint survival and exponential residual, V=0,100; separate all-yes curve V=0 | Left: no intermediate measurement. Right: A, S+ | Left: unitary survival, 121 log-spaced τ samples. Right: non-selective plus explicitly labeled selective all-yes; direct | `short_survival`, moment prediction, `final_density`, `exact_all_yes`; `zeno_short_time.csv`, `zeno_residuals.csv` |
+| `Z4_interactions` | P00(T), Prr(T); V=0,1,10,100 | A; S | Non-selective; direct; M=0 gives each unmeasured baseline | `final_density`; `zeno_survival.csv` |
+| `Z5_measurement_projectors` | P00(T), Prr(T), analytic C-limit line; V=0 | A, B, C; S count scan | Non-selective throughout; direct; A/B coincide | `final_density`; `zeno_survival.csv` |
+
+The Z1, Z4 and Z5 titles now state “non-selective”; Z2's comparison is labeled
+“Asymptotic prediction (high M)”. Z3 already labels the separate all-yes curve.
+Its M⁻² guide has arbitrary vertical scale and is not a fitted theoretical
+coefficient. Exact-zero residuals are omitted on logarithmic axes. All labels
+and legends agree with the generator's indexed data. The final observable
+curves are unchanged by the event-boundary fix, and were regenerated together
+with the corrected complex archive.
+
+The short-interval complex matrices themselves were not in the original
+archive; that curve was instead audited with independently constructed spectral
+unitaries. All other plotted numerical populations were reconstructed directly
+from the saved complex density matrices. No saved probability column was used
+as its own validation reference.
+
+## 12. Limitations
+
+These are ideal instantaneous projectors with no detector dynamics, finite
+measurement duration, inefficiency, spontaneous emission, motion or laser noise.
+The maximum rate is 2×10¹⁰ s⁻¹, τ=0.05 ns; this is a mathematical limit
+study and not an experimental feasibility claim. Only one T and nonnegative V
+are plotted, though tests cover additional signs, phases and detunings.
+
+Four high-rate points support the fitted residual order; they are not a proof
+of an infinite-rate limit. Short-time residuals eventually reach floating-point
+cancellation. The display grid does not resolve every intermeasurement arc at
+large M. The event snapping tolerance resolves only floating-point ambiguity,
+not finite detector timing uncertainty. No anti-Zeno claim is supported or made.
+
+## 13. Overall readiness
+
+The audit repaired one genuine event-sampling defect, removed an unnecessary
+propagator dependency from variance validation, made figure conventions explicit,
+and corrected the extension document's test inventory. It did not modify
+milestone physics, add a Zeno feature, commit, merge or push.
+
+The complete suite comprises **364 passing tests**: 254 original milestone,
+34 launcher and 76 Zeno tests. Coverage includes conversion, full matrices,
+Hermiticity, trace, purity, positivity, valid projectors, the full Lüders map,
+retained Q coherence, selective branch accounting, short-time predictions,
+high-rate convergence, operator dependence and saved-artifact consistency.
+
+Final commands, using the repository virtual environment:
+
+```bash
+python -m pytest -rP
+python -m compileall -q src scripts tests run_project.py
+python -m pip check
+git diff --check
+git status --short --untracked-files=all
+```
+
+Pytest passes; compilation and whitespace checks pass; pip reports no broken
+requirements. Git remains dirty and uncommitted: the Zeno sources, study/audit
+documents, tests and artifacts are untracked; launcher integration and README
+are modified; the pre-existing unrelated items listed in section 1 remain.
+
+Reproduce the scientific audit after generating the corrected Zeno data:
+
+```bash
+python scripts/quantum_zeno.py
+python scripts/audit_quantum_zeno.py
+```
+
+The second command writes machine-readable matrix comparisons, short-time
+maximum/RMS residuals, high-rate losses, subdivision checks, source/data hashes
+and milestone protection results to `zeno_audit.json` and its companion files.
+In the shared workspace, use `PYTHONPATH=src .venv/bin/python` if necessary to
+select this checkout explicitly. No milestone outputs are generated by either
+command.
+
+Remaining blockers: **none for user review**. Review does not imply permission
+to commit the extension or the unrelated dirty files.
+
+**ZENO EXTENSION READY FOR USER REVIEW**

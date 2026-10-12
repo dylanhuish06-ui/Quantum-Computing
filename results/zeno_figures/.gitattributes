@@ -1,0 +1,3 @@
+# Matplotlib's canonical SVG path formatting contains trailing spaces.
+# Preserve deterministic generated exports and keep their diffs collapsed.
+svg/*.svg -whitespace linguist-generated=true

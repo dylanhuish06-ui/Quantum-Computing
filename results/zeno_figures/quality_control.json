@@ -1,0 +1,173 @@
+{
+  "pdf_checks": [
+    {
+      "file": "pdf/fig01_measurement_protocol.pdf",
+      "sha256": "8af3674dc75de3e1d9e074570d14e8b21470e4430a9352f34c63c7cb3da34952",
+      "pages": 1,
+      "embedded_raster_images": 0,
+      "font_resources": 5,
+      "page_size_points": [
+        604.7999877929688,
+        381.6000061035156
+      ]
+    },
+    {
+      "file": "pdf/fig02_population_evolution.pdf",
+      "sha256": "8049aac9a4962f15552ce6d004b096d2d53019628012ca6b0ae6504f8ec51074",
+      "pages": 1,
+      "embedded_raster_images": 0,
+      "font_resources": 4,
+      "page_size_points": [
+        604.7999877929688,
+        453.6000061035156
+      ]
+    },
+    {
+      "file": "pdf/fig03_zeno_survival_vs_measurements.pdf",
+      "sha256": "43240289769264ced9f59fe1e3a9557a167782198f79b2ba176003861b282ae9",
+      "pages": 1,
+      "embedded_raster_images": 0,
+      "font_resources": 4,
+      "page_size_points": [
+        604.7999877929688,
+        345.6000061035156
+      ]
+    },
+    {
+      "file": "pdf/fig03_zeno_survival_vs_measurements_single.pdf",
+      "sha256": "6218ae0311a707ff1149b8b8fccef29305850b81188242fc22f4505ce74f745b",
+      "pages": 1,
+      "embedded_raster_images": 0,
+      "font_resources": 4,
+      "page_size_points": [
+        302.3999938964844,
+        331.20001220703125
+      ]
+    },
+    {
+      "file": "pdf/fig04_short_time_quadratic_law.pdf",
+      "sha256": "b4de15eefe45c7e843b73a3c6e6f4cb495894e5f10066757e3ff80b01134f222",
+      "pages": 1,
+      "embedded_raster_images": 0,
+      "font_resources": 4,
+      "page_size_points": [
+        604.7999877929688,
+        345.6000061035156
+      ]
+    },
+    {
+      "file": "pdf/fig05_zeno_regime_heatmap.pdf",
+      "sha256": "015c27e78f4c9a72dc67ad1962e12b808b863ce54989e3cf37b38eb2fddae02c",
+      "pages": 1,
+      "embedded_raster_images": 0,
+      "font_resources": 4,
+      "page_size_points": [
+        604.7999877929688,
+        381.6000061035156
+      ]
+    },
+    {
+      "file": "pdf/fig06_interaction_dependence.pdf",
+      "sha256": "095289a56f445cf57626db1b64ccbe00751c89322f3e5ed7d726895b07cc444d",
+      "pages": 1,
+      "embedded_raster_images": 0,
+      "font_resources": 4,
+      "page_size_points": [
+        604.7999877929688,
+        345.6000061035156
+      ]
+    },
+    {
+      "file": "pdf/fig07_density_matrix_coherence.pdf",
+      "sha256": "96bdf480c53c05d1e1568d3994bb3ad3cbfc2e53da9f1c4968f4cd62454a1baf",
+      "pages": 1,
+      "embedded_raster_images": 0,
+      "font_resources": 5,
+      "page_size_points": [
+        604.7999877929688,
+        352.79998779296875
+      ]
+    },
+    {
+      "file": "pdf/fig08_numerical_convergence.pdf",
+      "sha256": "5cb7aae0f60fbb461493dee24022f10f3da25b6a1aaf7604598fbb056a09829a",
+      "pages": 1,
+      "embedded_raster_images": 0,
+      "font_resources": 6,
+      "page_size_points": [
+        604.7999877929688,
+        345.6000061035156
+      ]
+    },
+    {
+      "file": "pdf/fig09_measurement_subspace_comparison.pdf",
+      "sha256": "6ac0211b5a1b117ef34ea6411e674f2a341c1f1b70dbf131d770a758a1801821",
+      "pages": 1,
+      "embedded_raster_images": 0,
+      "font_resources": 4,
+      "page_size_points": [
+        604.7999877929688,
+        352.79998779296875
+      ]
+    }
+  ],
+  "visual_review": {
+    "method": "Rendered all ten exported PDFs using PyMuPDF 1.28.2 at 130 DPI and opened the resulting images; inspected the final contact PDF at 100 DPI. Reviewed revised figures 01,05,07,08 after corrections.",
+    "figures_inspected": [
+      "pdf/fig01_measurement_protocol.pdf",
+      "pdf/fig02_population_evolution.pdf",
+      "pdf/fig03_zeno_survival_vs_measurements.pdf",
+      "pdf/fig03_zeno_survival_vs_measurements_single.pdf",
+      "pdf/fig04_short_time_quadratic_law.pdf",
+      "pdf/fig05_zeno_regime_heatmap.pdf",
+      "pdf/fig06_interaction_dependence.pdf",
+      "pdf/fig07_density_matrix_coherence.pdf",
+      "pdf/fig08_numerical_convergence.pdf",
+      "pdf/fig09_measurement_subspace_comparison.pdf"
+    ],
+    "contact_sheet_inspected": true,
+    "remaining_visual_defects_observed": []
+  },
+  "reproduction": {
+    "same_environment_files_compared": 47,
+    "byte_identical": true,
+    "mismatches": [],
+    "clean_copy": "HEAD archive plus figure-suite additions; untracked originals absent"
+  },
+  "tests": {
+    "working_tree": {
+      "tests": "381",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "15.451"
+    },
+    "clean_tracked_copy": {
+      "tests": "305",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "11.937"
+    }
+  },
+  "preservation": {
+    "original_files_fingerprinted": 90,
+    "original_files_changed": 0,
+    "preexisting_staged_files": 0,
+    "unrelated_work_staged": false
+  },
+  "workflow": {
+    "file": ".github/workflows/zeno-figures.yml",
+    "trigger": "workflow_dispatch",
+    "remote_execution": "Not run; commit remains local and no push was requested."
+  },
+  "resolved_issues": [
+    "Initial math-text escape error corrected.",
+    "Missing non-math ket glyph replaced with mathematical typesetting.",
+    "Default raster colour bars replaced with vector colour bars.",
+    "Heatmap label clipping, narrow-variant heading spacing and protocol box clipping corrected.",
+    "Vector mesh seams covered with matching face strokes.",
+    "Contact-sheet thumbnails downsampled before composition to reduce memory.",
+    "Interrupted background verification processes rerun successfully in sequence."
+  ]
+}

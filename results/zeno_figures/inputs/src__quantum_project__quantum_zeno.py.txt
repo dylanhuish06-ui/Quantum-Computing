@@ -1,0 +1,90 @@
+"""Uniform instantaneous measurements separated by exact static propagation."""
+
+from numbers import Integral
+
+import numpy as np
+
+from .density_matrix import (
+    density_from_state, evolve_density, unitary_operator,
+    validate_density_matrix, validate_projectors,
+)
+from .states import KET_00, KET_RR
+from .validation import _real_scalar
+
+
+def measurement_projectors(question="ground"):
+    """A=ground, B=any_excitation (A with outcomes reversed), C=double.
+
+    'any_excitation' is a binary coarse measurement; it does not resolve
+    which atom is excited or distinguish one excitation from two.
+    """
+    ground = density_from_state(KET_00)
+    if question == "ground":
+        return np.array([ground, np.eye(4) - ground])
+    if question == "any_excitation":
+        return np.array([np.eye(4) - ground, ground])
+    if question == "double":
+        double = density_from_state(KET_RR)
+        return np.array([double, np.eye(4) - double])
+    raise ValueError("unknown measurement question")
+
+
+def repeated_measurements(rho0, Hbar, total_time, measurements, times=None,
+                          projectors=None):
+    """Return rho(t) at requested times in [0, T], including measurement effects.
+
+    For M>0 measure at k*T/M, k=1,...,M, including T. M=0 is unmeasured.
+    Samples at event times are post-measurement. Times within four floating-point
+    ULPs of an event are treated as that event, allowing equivalent grids to
+    round differently. By default return only rho(T)
+    as shape (1,4,4). Samples never subdivide a propagation interval: each is
+    evolved from its preceding event, independently of the output grid.
+    """
+    rho0 = validate_density_matrix(rho0)
+    total_time = _real_scalar(total_time, "total_time")
+    if total_time < 0:
+        raise ValueError("total_time must be nonnegative")
+    if (isinstance(measurements, (bool, np.bool_))
+            or not isinstance(measurements, Integral) or measurements < 0):
+        raise ValueError("measurements must be a nonnegative integer")
+    samples = np.asarray([total_time] if times is None else times)
+    if (samples.ndim != 1 or samples.dtype.kind not in "iuf"
+            or not np.all(np.isfinite(samples))
+            or np.any(samples < 0) or np.any(samples > total_time)):
+        raise ValueError("times must be finite real samples in [0, total_time]")
+    projectors = validate_projectors(
+        measurement_projectors() if projectors is None else projectors)
+    if measurements == 0 or total_time == 0:
+        result = evolve_density(rho0, samples, Hbar)
+        if measurements and total_time == 0:
+            # All M>=1 events coincide at zero; a projective channel is idempotent.
+            result = np.array([sum(p @ rho @ p for p in projectors) for rho in result],
+                              dtype=complex).reshape(-1, 4, 4)
+        return result
+    spacing = total_time / measurements
+    unitary = unitary_operator(Hbar, spacing)
+    events = np.linspace(0, total_time, measurements + 1)
+    states = np.empty((measurements + 1, 4, 4), dtype=complex)
+    states[0] = rho0
+    for index in range(1, measurements + 1):
+        evolved = unitary @ states[index - 1] @ unitary.conj().T
+        states[index] = sum(p @ evolved @ p for p in projectors)
+        validate_density_matrix(states[index])
+    result = np.empty((len(samples), 4, 4), dtype=complex)
+    for index, time in enumerate(samples):
+        nearest = int(np.rint(time / spacing))
+        event = events[nearest]
+        tolerance = 4 * max(abs(np.spacing(float(time))), abs(np.spacing(event)))
+        if abs(time - event) <= tolerance:
+            result[index] = states[nearest]
+            continue
+        previous = np.searchsorted(events, time, side="right") - 1
+        # Use an exact copy at an event; no measurement on observation alone.
+        remainder = time - events[previous]
+        if remainder == 0:
+            result[index] = states[previous]
+        else:
+            partial = unitary_operator(Hbar, float(remainder))
+            result[index] = partial @ states[previous] @ partial.conj().T
+        validate_density_matrix(result[index])
+    return result

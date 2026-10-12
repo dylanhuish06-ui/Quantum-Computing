@@ -1,0 +1,439 @@
+{
+  "schema_version": 1,
+  "datasets": {
+    "archive": {
+      "path": "inputs/zeno_study.npz",
+      "sha256": "1bdab973fb30d6774afa3cf4874064a9f1e0c31bc7170e09eee6a77dd17076e1"
+    },
+    "derived": {
+      "path": "derived_data.npz",
+      "sha256": "a62890ffd8a0bfe6ec0162460a8eeb32621541ae79084d201ce00cc25d97fbb2"
+    }
+  },
+  "figures": [
+    {
+      "number": 1,
+      "title": "Measurement protocol",
+      "stem": "fig01_measurement_protocol",
+      "variant": "wide",
+      "files": {
+        "pdf": "pdf/fig01_measurement_protocol.pdf",
+        "svg": "svg/fig01_measurement_protocol.svg",
+        "png": "png/fig01_measurement_protocol.png"
+      },
+      "source_script": "scripts/generate_zeno_figures.py",
+      "dataset_keys": [],
+      "physical_meaning": "Coherent intervals followed by the complete binary L\u00fcders channel.",
+      "main_finding": "Increasing M shortens each coherent interval without altering the initial state.",
+      "axes": "Schematic time increases left to right; event spacings are uniform.",
+      "limitations": "Ideal mathematical projections, no apparatus, ancilla, finite pulse width or detection inefficiency.",
+      "suggested_poster_use": "Introduce the measurement model; pair with Figure 03.",
+      "parameters": "Illustrative M=0,4,12; tau=T/M; general T.",
+      "export_checks": {
+        "pdf": {
+          "bytes": 28562,
+          "sha256": "8af3674dc75de3e1d9e074570d14e8b21470e4430a9352f34c63c7cb3da34952"
+        },
+        "svg": {
+          "bytes": 32051,
+          "sha256": "a5d2951d58d03163a96caef8f8db98efded37f85eb29e5f7b10b80430fa2ce6d"
+        },
+        "pixels": [
+          3360,
+          2120
+        ],
+        "png": {
+          "bytes": 220558,
+          "sha256": "4da226d88cfc50c1d4a280f81b9752bbe014b85f4f3bc21c80d63240c1708b9c"
+        }
+      }
+    },
+    {
+      "number": 2,
+      "title": "Population evolution",
+      "stem": "fig02_population_evolution",
+      "variant": "wide",
+      "files": {
+        "pdf": "pdf/fig02_population_evolution.pdf",
+        "svg": "svg/fig02_population_evolution.svg",
+        "png": "png/fig02_population_evolution.png"
+      },
+      "source_script": "scripts/generate_zeno_figures.py",
+      "dataset_keys": [
+        "archive:times_s",
+        "archive:trajectory_probabilities[0,0:4]"
+      ],
+      "physical_meaning": "Resolved populations in the symmetric three-state sector.",
+      "main_finding": "Measurements of the ground-state sector inhibit excitation even at V=0, where blockade is absent.",
+      "axes": "Time in microseconds; populations dimensionless, common scales in all panels.",
+      "limitations": "The Bell population is a coherent projector expectation, not one atom\u2019s excitation probability.",
+      "suggested_poster_use": "Main dynamics panel.",
+      "parameters": "Common defaults; V=0; M=0,2,10,100; 1001 time samples.",
+      "export_checks": {
+        "pdf": {
+          "bytes": 32227,
+          "sha256": "8049aac9a4962f15552ce6d004b096d2d53019628012ca6b0ae6504f8ec51074"
+        },
+        "svg": {
+          "bytes": 57592,
+          "sha256": "d21b8693d32ba7fdd1c9a77031d2740649a2613e0a8f55ef0396f78ac2295e6c"
+        },
+        "pixels": [
+          3360,
+          2520
+        ],
+        "png": {
+          "bytes": 400019,
+          "sha256": "93b4d57484c3c64229d8bbe67e22f1628aaae63749bb8cb5b69bd2e70272feb2"
+        }
+      }
+    },
+    {
+      "number": 3,
+      "title": "Zeno survival curve",
+      "stem": "fig03_zeno_survival_vs_measurements",
+      "variant": "wide",
+      "files": {
+        "pdf": "pdf/fig03_zeno_survival_vs_measurements.pdf",
+        "svg": "svg/fig03_zeno_survival_vs_measurements.svg",
+        "png": "png/fig03_zeno_survival_vs_measurements.png"
+      },
+      "source_script": "scripts/generate_zeno_figures.py",
+      "dataset_keys": [
+        "archive:measurement_counts",
+        "archive:final_probabilities[0,0]",
+        "archive:exact_all_yes[0]"
+      ],
+      "physical_meaning": "Final ground population and the joint probability of every ground outcome.",
+      "main_finding": "Both losses approach (T/tau_Z)^2/M; return histories make non-selective population larger at finite M.",
+      "axes": "Logarithmic measurement count; right panel shows logarithmic loss to resolve near-unity probabilities.",
+      "limitations": "Exponential shown only at M>=20; asymptotic, not an exact formula for either finite-M curve. M=0 stated separately.",
+      "suggested_poster_use": "Flagship result; single-column version for narrow spaces.",
+      "parameters": "Common defaults; V=0; counts 1 to 10000.",
+      "export_checks": {
+        "pdf": {
+          "bytes": 33707,
+          "sha256": "43240289769264ced9f59fe1e3a9557a167782198f79b2ba176003861b282ae9"
+        },
+        "svg": {
+          "bytes": 83050,
+          "sha256": "12a43429422da5c0838e7c7230f285a8dc4743848df3f64dfbfef6e0fdf39b18"
+        },
+        "pixels": [
+          3360,
+          1920
+        ],
+        "png": {
+          "bytes": 381680,
+          "sha256": "44c131f971b2f6300573455a527b4185c57f7f59c220f38becaa76f7f03e5be8"
+        }
+      }
+    },
+    {
+      "number": 3,
+      "title": "Zeno survival curve",
+      "stem": "fig03_zeno_survival_vs_measurements_single",
+      "variant": "single",
+      "files": {
+        "pdf": "pdf/fig03_zeno_survival_vs_measurements_single.pdf",
+        "svg": "svg/fig03_zeno_survival_vs_measurements_single.svg",
+        "png": "png/fig03_zeno_survival_vs_measurements_single.png"
+      },
+      "source_script": "scripts/generate_zeno_figures.py",
+      "dataset_keys": [
+        "archive:measurement_counts",
+        "archive:final_probabilities[0,0]",
+        "archive:exact_all_yes[0]"
+      ],
+      "physical_meaning": "Final ground population and the joint probability of every ground outcome.",
+      "main_finding": "Both losses approach (T/tau_Z)^2/M; return histories make non-selective population larger at finite M.",
+      "axes": "Logarithmic measurement count; right panel shows logarithmic loss to resolve near-unity probabilities.",
+      "limitations": "Exponential shown only at M>=20; asymptotic, not an exact formula for either finite-M curve. M=0 stated separately.",
+      "suggested_poster_use": "Flagship result; single-column version for narrow spaces.",
+      "parameters": "Common defaults; V=0; counts 1 to 10000.",
+      "export_checks": {
+        "pdf": {
+          "bytes": 28570,
+          "sha256": "6218ae0311a707ff1149b8b8fccef29305850b81188242fc22f4505ce74f745b"
+        },
+        "svg": {
+          "bytes": 41962,
+          "sha256": "058769ba4f45c5465fc05580716da27bc880b2f81eca78a899526677524489d6"
+        },
+        "pixels": [
+          1680,
+          1840
+        ],
+        "png": {
+          "bytes": 199813,
+          "sha256": "4961054f6ef106f39fc72f20a2dffcb3088ec92b90846cd0202d94ffad378167"
+        }
+      }
+    },
+    {
+      "number": 4,
+      "title": "Short-time quadratic law",
+      "stem": "fig04_short_time_quadratic_law",
+      "variant": "wide",
+      "files": {
+        "pdf": "pdf/fig04_short_time_quadratic_law.pdf",
+        "svg": "svg/fig04_short_time_quadratic_law.svg",
+        "png": "png/fig04_short_time_quadratic_law.png"
+      },
+      "source_script": "scripts/generate_zeno_figures.py",
+      "dataset_keys": [
+        "derived:short_times_s",
+        "derived:short_loss",
+        "archive:variance_rad2_s2"
+      ],
+      "physical_meaning": "Survival loss of the initial pure state during a single unmeasured interval.",
+      "main_finding": "The same leading coefficient holds at V/Omega=0 and 100; finite-time corrections need not be the same.",
+      "axes": "Nanoseconds on a logarithmic x axis; log-log loss at left, loss divided by the leading quadratic term at right.",
+      "limitations": "Static finite-dimensional Hermitian H makes P(t) even: next correction is O(t^4). tau_Z alone does not fix the useful expansion window.",
+      "suggested_poster_use": "Explain the mechanism beneath the main survival curve.",
+      "parameters": "Omega/(2pi)=1 MHz; Delta=phi=0; V/Omega=0,100; t=0.01 to 100 ns; initial |00>.",
+      "export_checks": {
+        "pdf": {
+          "bytes": 34121,
+          "sha256": "b4de15eefe45c7e843b73a3c6e6f4cb495894e5f10066757e3ff80b01134f222"
+        },
+        "svg": {
+          "bytes": 86020,
+          "sha256": "5047c9dd6573e64aaf130c3cdd7149476207d226f039d4390c776c2d3a50b905"
+        },
+        "pixels": [
+          3360,
+          1920
+        ],
+        "png": {
+          "bytes": 355683,
+          "sha256": "9b33507318c8191133d5610ee522a84072288372af4e174f27da46101400a904"
+        }
+      }
+    },
+    {
+      "number": 5,
+      "title": "Zeno regime heatmap",
+      "stem": "fig05_zeno_regime_heatmap",
+      "variant": "wide",
+      "files": {
+        "pdf": "pdf/fig05_zeno_regime_heatmap.pdf",
+        "svg": "svg/fig05_zeno_regime_heatmap.svg",
+        "png": "png/fig05_zeno_regime_heatmap.png"
+      },
+      "source_script": "scripts/generate_zeno_figures.py",
+      "dataset_keys": [
+        "derived:heat_times_s",
+        "derived:heat_counts",
+        "derived:heat_P00",
+        "derived:heat_unmeasured_P00"
+      ],
+      "physical_meaning": "Non-selective ground-state population over total time and measurement count.",
+      "main_finding": "Sustained protection across the time window requires more measurements as T increases.",
+      "axes": "Microseconds horizontally, logarithmic M vertically, colour gives final ground population. Amber contour marks 0.95.",
+      "limitations": "M is a count, not a rate: rate=M/T. Low-M revivals can also yield large final populations; see the matched M=0 panel.",
+      "suggested_poster_use": "Show the range of useful parameters.",
+      "parameters": "Omega/(2pi)=1 MHz; Delta=phi=V=0; T=0.01 to 1 us; integer M=1 to 1000; initial |00>.",
+      "export_checks": {
+        "pdf": {
+          "bytes": 129202,
+          "sha256": "015c27e78f4c9a72dc67ad1962e12b808b863ce54989e3cf37b38eb2fddae02c"
+        },
+        "svg": {
+          "bytes": 1221693,
+          "sha256": "d581d26aa968ce60641d1d3fe9fe0a9cec78b9f3727d7269478fa671cbec79ba"
+        },
+        "pixels": [
+          3360,
+          2120
+        ],
+        "png": {
+          "bytes": 275400,
+          "sha256": "98d1415003f0c79f884170beac4f7cda4dbc9b0258572d017e552af8503fc05c"
+        }
+      }
+    },
+    {
+      "number": 6,
+      "title": "Interaction dependence",
+      "stem": "fig06_interaction_dependence",
+      "variant": "wide",
+      "files": {
+        "pdf": "pdf/fig06_interaction_dependence.pdf",
+        "svg": "svg/fig06_interaction_dependence.svg",
+        "png": "png/fig06_interaction_dependence.png"
+      },
+      "source_script": "scripts/generate_zeno_figures.py",
+      "dataset_keys": [
+        "derived:interaction_ratios",
+        "derived:interaction_counts",
+        "derived:interaction_populations"
+      ],
+      "physical_meaning": "Matched measured and unmeasured endpoints as interaction strength changes.",
+      "main_finding": "Blockade suppresses |rr> while allowing collective single excitation; ground-sector measurements inhibit excitation even at V=0.",
+      "axes": "V/Omega dimensionless with a linear segment from 0 to 0.01 then logarithmic; populations at fixed T.",
+      "limitations": "Endpoint oscillations with V are coherent dynamics, not error bars or a monotonic blockade threshold.",
+      "suggested_poster_use": "Distinguish the two suppression mechanisms.",
+      "parameters": "Common defaults; V/Omega=0 and 0.01 to 100; M=0,10,1000.",
+      "export_checks": {
+        "pdf": {
+          "bytes": 34297,
+          "sha256": "095289a56f445cf57626db1b64ccbe00751c89322f3e5ed7d726895b07cc444d"
+        },
+        "svg": {
+          "bytes": 61878,
+          "sha256": "def5bcba9fb79878da580bf9c9fa1fe238a2785d2c62a0e8e71d006db69fbf2a"
+        },
+        "pixels": [
+          3360,
+          1920
+        ],
+        "png": {
+          "bytes": 312953,
+          "sha256": "04982326f0ef6f0ea189a164c266429a77c45aa1a153109fabbbef789a2eeb05"
+        }
+      }
+    },
+    {
+      "number": 7,
+      "title": "Density-matrix coherence",
+      "stem": "fig07_density_matrix_coherence",
+      "variant": "wide",
+      "files": {
+        "pdf": "pdf/fig07_density_matrix_coherence.pdf",
+        "svg": "svg/fig07_density_matrix_coherence.svg",
+        "png": "png/fig07_density_matrix_coherence.png"
+      },
+      "source_script": "scripts/generate_zeno_figures.py",
+      "dataset_keys": [
+        "derived:coherence_before",
+        "derived:coherence_after"
+      ],
+      "physical_meaning": "Magnitudes of a physical evolved density matrix before/after the binary L\u00fcders measurement, and magnitudes of removed entries.",
+      "main_finding": "Ground-to-excited coherences vanish, while all populations and within-Q coherences survive.",
+      "axes": "Row/column labels are basis indices |00>, |0r>, |r0>, |rr>; all three matrices use one colour scale.",
+      "limitations": "Magnitude plots do not show phases; complete complex matrices are saved. Not a measurement resolving all four basis states.",
+      "suggested_poster_use": "Explain the measurement superoperator.",
+      "parameters": "Omega/(2pi)=1 MHz; Delta=phi=V=0; pure |00> evolved for 0.15 us, then one binary measurement.",
+      "export_checks": {
+        "pdf": {
+          "bytes": 43978,
+          "sha256": "96bdf480c53c05d1e1568d3994bb3ad3cbfc2e53da9f1c4968f4cd62454a1baf"
+        },
+        "svg": {
+          "bytes": 114816,
+          "sha256": "43745d9e8c155ea75d1b96790ef0b1da16736d8d7be3ef4eed94a86b5e369356"
+        },
+        "pixels": [
+          3360,
+          1960
+        ],
+        "png": {
+          "bytes": 316890,
+          "sha256": "b451617caa2e6d600278ee372b766e8985fd5daaf6be7693c29e0719773eee74"
+        }
+      }
+    },
+    {
+      "number": 8,
+      "title": "Numerical convergence",
+      "stem": "fig08_numerical_convergence",
+      "variant": "wide",
+      "files": {
+        "pdf": "pdf/fig08_numerical_convergence.pdf",
+        "svg": "svg/fig08_numerical_convergence.svg",
+        "png": "png/fig08_numerical_convergence.png"
+      },
+      "source_script": "scripts/generate_zeno_figures.py",
+      "dataset_keys": [
+        "derived:convergence_steps",
+        "derived:convergence_rk4_error",
+        "derived:convergence_expm_error"
+      ],
+      "physical_meaning": "Actual full-density Frobenius errors relative to an independently diagonalised reference.",
+      "main_finding": "RK4 approaches fourth order; subdividing the exact exponential only changes accumulated floating-point roundoff.",
+      "axes": "Substeps per coherent interval; dimensionless Frobenius error. Left log-log, right log x and linear error divided by 1e-14.",
+      "limitations": "RK4 is an additional diagnostic, not the solver used to generate the production figures. Curves are numerical errors, not statistical uncertainties.",
+      "suggested_poster_use": "Validation inset or methods panel.",
+      "parameters": "Common defaults; V/Omega=1; M=8; n=1,2,4,8,16,32,64; spectral reference.",
+      "export_checks": {
+        "pdf": {
+          "bytes": 40952,
+          "sha256": "5cb7aae0f60fbb461493dee24022f10f3da25b6a1aaf7604598fbb056a09829a"
+        },
+        "svg": {
+          "bytes": 59192,
+          "sha256": "9badd99f399d63c8007af751f3e0784621e94e2c991674c8fb51f85e61b8809f"
+        },
+        "pixels": [
+          3360,
+          1920
+        ],
+        "png": {
+          "bytes": 330023,
+          "sha256": "03305839d4582c2d0357f772eba4a283c6c983577e510bc74b1a2f420d424304"
+        }
+      }
+    },
+    {
+      "number": 9,
+      "title": "Measurement-subspace comparison",
+      "stem": "fig09_measurement_subspace_comparison",
+      "variant": "wide",
+      "files": {
+        "pdf": "pdf/fig09_measurement_subspace_comparison.pdf",
+        "svg": "svg/fig09_measurement_subspace_comparison.svg",
+        "png": "png/fig09_measurement_subspace_comparison.png"
+      },
+      "source_script": "scripts/generate_zeno_figures.py",
+      "dataset_keys": [
+        "archive:measurement_counts",
+        "archive:final_probabilities[0,0]",
+        "archive:final_probabilities[0,2]"
+      ],
+      "physical_meaning": "Two genuine binary projector choices, with a common ground observable and the population of the sector containing the initial state.",
+      "main_finding": "Protecting a multidimensional sector permits motion inside it. Avoiding |rr> does not freeze the initial ground state.",
+      "axes": "Log M; left ground population for both channels, right rank-one P00 or rank-three I-Prr sector population.",
+      "limitations": "The original any_excitation question only reverses the ground question\u2019s outcomes; it is not an independent dynamics. Rank-three occupancy is not all-success probability.",
+      "suggested_poster_use": "Explain Zeno dynamics beyond rank-one freezing.",
+      "parameters": "Common defaults; V=0; ground vs double-excitation binary projectors; M=1 to 10000.",
+      "export_checks": {
+        "pdf": {
+          "bytes": 32193,
+          "sha256": "6ac0211b5a1b117ef34ea6411e674f2a341c1f1b70dbf131d770a758a1801821"
+        },
+        "svg": {
+          "bytes": 75569,
+          "sha256": "58c34bef77c11dffa06455b05e91698aa98a0d58ed0042259eccfe8e0cbb66b5"
+        },
+        "pixels": [
+          3360,
+          1960
+        ],
+        "png": {
+          "bytes": 377552,
+          "sha256": "e8a476a141b54431dd4d63ff252852755cc819b82ee79c6dd5a7f3e614a2e278"
+        }
+      }
+    }
+  ],
+  "contact_sheet": {
+    "files": [
+      "contact_sheet.pdf",
+      "contact_sheet.png"
+    ],
+    "contents": [
+      "fig01_measurement_protocol",
+      "fig02_population_evolution",
+      "fig03_zeno_survival_vs_measurements",
+      "fig03_zeno_survival_vs_measurements_single",
+      "fig04_short_time_quadratic_law",
+      "fig05_zeno_regime_heatmap",
+      "fig06_interaction_dependence",
+      "fig07_density_matrix_coherence",
+      "fig08_numerical_convergence",
+      "fig09_measurement_subspace_comparison"
+    ]
+  },
+  "source_script_sha256": "27b98f1c0ba95b5cd1c5581c02ed6c3d19b7b7c434f29608ed0b6d8d4312eb89"
+}

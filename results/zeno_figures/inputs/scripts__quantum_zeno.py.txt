@@ -1,0 +1,258 @@
+"""Reproduce extension Z1 data, checks and figures; run from the repo root.
+
+    .venv/bin/python scripts/quantum_zeno.py
+
+Only files prefixed zeno_ or Z1..Z5 are written; milestone artifacts are untouched.
+"""
+
+import argparse
+import csv
+import json
+from pathlib import Path
+import platform
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy
+
+from quantum_project import KET_00, KET_RR, PSI_PLUS, evolve_static, rydberg_hamiltonian
+from quantum_project.density_matrix import angular_frequency_variance, density_from_state, evolve_density
+from quantum_project.quantum_zeno import measurement_projectors, repeated_measurements
+from quantum_project.units import mhz_to_angular_frequency
+
+OMEGA = mhz_to_angular_frequency(1)
+TOTAL_TIME = 0.5e-6
+INTERACTIONS = np.array([0., 1., 10., 100.])  # V/Omega = V/(2pi) in MHz here
+COUNTS = np.array([0, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000])
+TRACE_COUNTS = np.array([0, 2, 10, 100, 1000])
+QUESTIONS = ("ground", "any_excitation", "double")
+TARGETS = np.array([KET_00, PSI_PLUS, KET_RR])
+LABELS = ("P_00", "P_Psi_plus", "P_rr")
+
+
+def probabilities(densities):
+    return np.einsum("ai,...ij,aj->...a", TARGETS.conj(), densities, TARGETS).real
+
+
+def save_csv(path, header, rows):
+    with path.open("w", newline="") as stream:
+        writer = csv.writer(stream)
+        writer.writerow(header)
+        writer.writerows(rows)
+
+
+def save_figure(fig, directory, name):
+    for suffix in ("png", "pdf"):
+        fig.savefig(directory / f"{name}.{suffix}", dpi=180, bbox_inches="tight")
+    plt.close(fig)
+
+
+def decorate(ax):
+    ax.grid(alpha=0.25)
+    ax.set_ylim(-0.025, 1.025)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output-dir", type=Path, default=Path(__file__).resolve().parents[1] / "results")
+    args = parser.parse_args()
+    data, figures = args.output_dir / "data", args.output_dir / "figures"
+    data.mkdir(parents=True, exist_ok=True)
+    figures.mkdir(parents=True, exist_ok=True)
+    times = np.linspace(0, TOTAL_TIME, 1001)
+    short_times = np.geomspace(1e-11, 2e-8, 121)
+    rho0 = density_from_state(KET_00)
+    baseline, traces, finals, short, variances, selective = [], [], [], [], [], []
+    pure_errors = []
+    for ratio in INTERACTIONS:
+        hbar = rydberg_hamiltonian(OMEGA, 0, 0, ratio * OMEGA)
+        base = evolve_density(rho0, times, hbar)
+        pure = evolve_static(KET_00, times, hbar)
+        pure_errors.append(float(np.max(abs(base - np.einsum("ti,tj->tij", pure, pure.conj())))))
+        baseline.append(base)
+        traces.append([repeated_measurements(rho0, hbar, TOTAL_TIME, int(m), times)
+                       for m in TRACE_COUNTS])
+        finals.append([[repeated_measurements(rho0, hbar, TOTAL_TIME, int(m),
+                        projectors=measurement_projectors(q))[0] for m in COUNTS] for q in QUESTIONS])
+        variance = angular_frequency_variance(KET_00, hbar)
+        variances.append(variance)
+        short.append(evolve_density(rho0, short_times, hbar)[:, 0, 0].real)
+        single = evolve_density(rho0, TOTAL_TIME / COUNTS[1:], hbar)[:, 0, 0].real
+        selective.append(single**COUNTS[1:])
+        print(f"Finished V/Omega={ratio:g}", flush=True)
+    baseline, traces, finals = map(np.asarray, (baseline, traces, finals))
+    short, variances, selective = map(np.asarray, (short, variances, selective))
+    baseline_p, trace_p, final_p = map(probabilities, (baseline, traces, finals))
+    short_prediction = 1 - variances[:, None] * short_times**2
+    exponent_prediction = np.exp(-variances[:, None] * TOTAL_TIME**2 / COUNTS[1:])
+    single_quadratic = 1 - variances[:, None] * (TOTAL_TIME / COUNTS[1:])**2
+    # Outside [0,1], the truncated quadratic cannot be a probability.
+    quadratic_product = np.where(single_quadratic >= 0, np.maximum(single_quadratic, 0)**COUNTS[1:], np.nan)
+    residual = final_p[:, 0, 1:, 0] - exponent_prediction
+    short_residual = short - short_prediction
+    all_states = np.concatenate([a.reshape(-1, 4, 4) for a in (baseline, traces, finals)])
+    checks = {
+        "max_trace_error": float(np.max(abs(np.trace(all_states, axis1=1, axis2=2) - 1))),
+        "max_hermiticity_error": float(np.max(abs(all_states - all_states.conj().transpose(0, 2, 1)))),
+        "minimum_eigenvalue": float(np.linalg.eigvalsh(all_states).min()),
+        "minimum_probability": float(probabilities(all_states).min()),
+        "maximum_probability": float(probabilities(all_states).max()),
+        "max_pure_state_density_error": max(pure_errors),
+        "max_A_B_density_difference": float(np.max(abs(finals[:, 0] - finals[:, 1]))),
+        "max_symmetric_population_sum_error": float(np.max(abs(probabilities(all_states).sum(axis=-1) - 1))),
+    }
+    assert checks["max_trace_error"] < 1e-10
+    assert checks["max_hermiticity_error"] < 1e-10
+    assert checks["minimum_eigenvalue"] > -1e-10
+    assert checks["minimum_probability"] >= -1e-10 and checks["maximum_probability"] <= 1 + 1e-10
+    assert checks["max_pure_state_density_error"] < 1e-11
+    assert checks["max_A_B_density_difference"] < 1e-13
+    assert np.all(final_p[:, 0, -1, 0] > 0.999)
+    assert np.max(abs(residual[:, -1])) < 2e-7
+    report = {
+        "parameters": {"omega_rad_s": OMEGA, "delta_rad_s": 0, "phase_rad": 0,
+                       "total_time_s": TOTAL_TIME, "V_over_omega": INTERACTIONS.tolist(),
+                       "measurement_counts": COUNTS.tolist(), "trajectory_samples": len(times)},
+        "versions": {"python": platform.python_version(), "numpy": np.__version__,
+                     "scipy": scipy.__version__, "matplotlib": matplotlib.__version__},
+        "schedule": "M=0: no measurements; M>0: at k*T/M, k=1,...,M; samples within four floating-point ULPs of an event are post-measurement",
+        "variance_rad2_s2": variances.tolist(), "zeno_time_s": (1 / np.sqrt(variances)).tolist(),
+        "checks": checks,
+        "residual_definition": "nonselective P00 minus exp(-Var(Hbar)*T^2/M); M>0",
+        "quadratic_product_note": "NaN in NPZ/CSV means negative single-step quadratic estimate; invalid approximation",
+        "cases": [{"V_over_omega": float(v), "unmeasured_final": baseline_p[i, -1].tolist(),
+                   "unmeasured_max_P_rr": float(baseline_p[i, :, 2].max()),
+                   "M_10000_ground_final": final_p[i, 0, -1].tolist(),
+                   "M_10000_double_final": final_p[i, 2, -1].tolist(),
+                   "M_10000_exponential_residual": float(residual[i, -1]),
+                   "M_10000_exact_all_yes": float(selective[i, -1]),
+                   "asymptotic_residual_slope_M_ge_1000": float(np.polyfit(np.log(COUNTS[-4:]), np.log(abs(residual[i, -4:])), 1)[0]),
+                   "short_time_max_abs_residual_t_le_0_2_ns": float(np.max(abs(short_residual[i, short_times <= 0.2e-9])))}
+                  for i, v in enumerate(INTERACTIONS)],
+    }
+    np.savez_compressed(data / "zeno_study.npz", omega_rad_s=OMEGA, total_time_s=TOTAL_TIME,
+                        delta_rad_s=0., phase_rad=0., V_over_omega=INTERACTIONS,
+                        times_s=times, trace_counts=TRACE_COUNTS, measurement_counts=COUNTS,
+                        questions=QUESTIONS, observable_labels=LABELS,
+                        baseline_density=baseline, trajectory_density=traces, final_density=finals,
+                        baseline_probabilities=baseline_p, trajectory_probabilities=trace_p,
+                        final_probabilities=final_p, variance_rad2_s2=variances,
+                        short_times_s=short_times, short_survival=short,
+                        short_prediction=short_prediction, short_residual=short_residual,
+                        exponential_prediction=exponent_prediction, quadratic_product=quadratic_product,
+                        exact_all_yes=selective, exponential_residual=residual)
+    save_csv(data / "zeno_baseline.csv", ["V_over_omega", "time_s", *LABELS],
+             ([v, t, *baseline_p[i, j]] for i, v in enumerate(INTERACTIONS) for j, t in enumerate(times)))
+    save_csv(data / "zeno_trajectories.csv", ["V_over_omega", "M", "time_s", *LABELS],
+             ([v, int(m), t, *trace_p[i, k, j]] for i, v in enumerate(INTERACTIONS)
+              for k, m in enumerate(TRACE_COUNTS) for j, t in enumerate(times)))
+    save_csv(data / "zeno_survival.csv", ["V_over_omega", "question", "M", "rate_per_s", "spacing_s", *LABELS],
+             ([v, q, int(m), m / TOTAL_TIME, "" if m == 0 else TOTAL_TIME / m, *final_p[i, j, k]]
+              for i, v in enumerate(INTERACTIONS) for j, q in enumerate(QUESTIONS) for k, m in enumerate(COUNTS)))
+    save_csv(data / "zeno_residuals.csv", ["V_over_omega", "M", "nonselective_survival", "exponential_prediction",
+             "quadratic_product", "exact_all_yes", "nonselective_minus_exponential", "nonselective_minus_all_yes"],
+             ([v, int(m), final_p[i, 0, k + 1, 0], exponent_prediction[i, k], quadratic_product[i, k],
+               selective[i, k], residual[i, k], final_p[i, 0, k + 1, 0] - selective[i, k]]
+              for i, v in enumerate(INTERACTIONS) for k, m in enumerate(COUNTS[1:])))
+    save_csv(data / "zeno_short_time.csv", ["V_over_omega", "time_s", "survival", "quadratic_prediction", "residual"],
+             ([v, t, short[i, j], short_prediction[i, j], short_residual[i, j]]
+              for i, v in enumerate(INTERACTIONS) for j, t in enumerate(short_times)))
+    (data / "zeno_validation.json").write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
+
+    plt.rcParams.update({"font.size": 10, "axes.spines.top": False, "axes.spines.right": False})
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4), layout="constrained")
+    for ax, i in zip(axes, (0, 3)):
+        for k, count in enumerate(TRACE_COUNTS):
+            ax.plot(times * 1e6, trace_p[i, k, :, 0], label=f"M={count}")
+        ax.set(xlabel="Time (μs)", ylabel=r"$P_{00}(t)$", title=f"V/Ω = {INTERACTIONS[i]:g}")
+        decorate(ax)
+    axes[0].legend(fontsize=9)
+    fig.suptitle("Z1 · Non-selective ground-state measurements, T = 0.5 μs")
+    save_figure(fig, figures, "Z1_population_dynamics")
+
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4), layout="constrained")
+    axes[0].plot(COUNTS, final_p[0, 0, :, 0], "o-", label="Non-selective, V=0")
+    axes[0].plot(COUNTS[1:], exponent_prediction[0], "--", label="Asymptotic prediction (high M)")
+    axes[0].set_xscale("symlog", linthresh=1)
+    axes[0].set_xlim(0, COUNTS[-1])
+    axes[0].set(xlabel="Number of measurements M", ylabel=r"$P_{00}(T)$")
+    axes[1].semilogx(TOTAL_TIME / COUNTS[1:] * 1e9, final_p[0, 0, 1:, 0], "o-")
+    axes[1].axhline(final_p[0, 0, 0, 0], color="0.4", linestyle=":", label="Unmeasured")
+    axes[1].set(xlabel="Measurement spacing τ (ns)", ylabel=r"$P_{00}(T)$")
+    for ax in axes:
+        decorate(ax)
+        ax.legend(fontsize=9)
+    fig.suptitle("Z2 · Survival versus measurement number and spacing")
+    save_figure(fig, figures, "Z2_survival")
+
+    fig, axes = plt.subplots(2, 2, figsize=(11, 7), layout="constrained")
+    for i, color in ((0, "C0"), (3, "C3")):
+        axes[0, 0].semilogx(short_times * 1e9, 1 - short[i], color=color, label=f"V/Ω={INTERACTIONS[i]:g}")
+        visible_residual = np.where(short_residual[i] != 0, abs(short_residual[i]), np.nan)
+        axes[1, 0].loglog(short_times * 1e9, visible_residual, color=color)
+        axes[0, 1].semilogx(COUNTS[1:], final_p[i, 0, 1:, 0], "o-", color=color, label=f"Non-selective V/Ω={INTERACTIONS[i]:g}")
+        axes[1, 1].loglog(COUNTS[1:], abs(residual[i]), "o-", color=color)
+    axes[0, 0].semilogx(short_times * 1e9, 1 - short_prediction[0], "k--", label=r"$\sigma^2 t^2$")
+    axes[0, 1].semilogx(COUNTS[1:], exponent_prediction[0], "k--", label=r"$\exp(-\sigma^2 T^2/M)$")
+    axes[0, 1].semilogx(COUNTS[1:], selective[0], ":", color="C2", label="Exact all-yes, V=0")
+    axes[1, 1].loglog(COUNTS[-5:], 5 / COUNTS[-5:]**2, "k:", label=r"Guide $\propto M^{-2}$")
+    axes[0, 0].set(ylabel="Single-interval loss 1 − P(t)")
+    axes[1, 0].set(xlabel="Short evolution time (ns)", ylabel="|Numerical − quadratic| (probability)")
+    axes[0, 1].set(ylabel=r"Final survival $P_{00}(T)$")
+    axes[1, 1].set(xlabel="Number of measurements M", ylabel="|Non-selective − exponential|")
+    for ax in axes.flat:
+        ax.grid(alpha=0.25)
+    for ax in (axes[0, 0], axes[0, 1], axes[1, 1]):
+        ax.legend(fontsize=8)
+    fig.suptitle("Z3 · Angular-frequency variance prediction and residuals")
+    save_figure(fig, figures, "Z3_analytical_residuals")
+
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4), layout="constrained")
+    for i, v in enumerate(INTERACTIONS):
+        axes[0].plot(COUNTS, final_p[i, 0, :, 0], "o-", label=f"V/Ω={v:g}")
+        axes[1].plot(COUNTS, final_p[i, 0, :, 2], "o-", label=f"V/Ω={v:g}")
+    for ax in axes:
+        ax.set_xscale("symlog", linthresh=1)
+        ax.set_xlim(0, COUNTS[-1])
+        ax.set_xlabel("Number of measurements M (rate = M / 0.5 μs)")
+        decorate(ax)
+    axes[0].set_ylabel(r"$P_{00}(T)$")
+    axes[1].set_ylabel(r"$P_{rr}(T)$")
+    axes[0].legend(fontsize=9)
+    fig.suptitle("Z4 · Non-selective measurement suppression and Rydberg blockade")
+    save_figure(fig, figures, "Z4_interactions")
+
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4), layout="constrained")
+    for j, (question, style) in enumerate(zip(QUESTIONS, ("-", "--", ":"))):
+        label = {"ground": "A: in |00>?", "any_excitation": "B: any excitation?", "double": "C: in |rr>?"}[question]
+        for ax, observable in zip(axes, (0, 2)):
+            ax.plot(COUNTS, final_p[0, j, :, observable], style, linewidth=2, label=label)
+    axes[0].axhline(np.cos(OMEGA * TOTAL_TIME / np.sqrt(2))**2, color="0.5", linestyle="-.", label="C: projected-H limit")
+    for ax in axes:
+        ax.set_xscale("symlog", linthresh=1)
+        ax.set_xlim(0, COUNTS[-1])
+        ax.set_xlabel("Number of measurements M")
+        decorate(ax)
+    axes[0].set_ylabel(r"$P_{00}(T)$")
+    axes[1].set_ylabel(r"$P_{rr}(T)$")
+    axes[0].legend(fontsize=9)
+    fig.suptitle("Z5 · Non-selective measurements at V = 0 (A and B coincide)")
+    save_figure(fig, figures, "Z5_measurement_projectors")
+
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4), layout="constrained")
+    for ax, i in zip(axes, (0, 3)):
+        for j, label in enumerate(LABELS):
+            ax.plot(times * 1e6, baseline_p[i, :, j], label=label)
+        ax.set(xlabel="Time (μs)", ylabel="Probability", title=f"V/Ω={INTERACTIONS[i]:g}")
+        decorate(ax)
+    axes[0].legend()
+    fig.suptitle("Unmeasured baseline · Ω/(2π) = 1 MHz, Δ = φ = 0")
+    save_figure(fig, figures, "Z1_unmeasured_baseline")
+    print(json.dumps(checks, indent=2))
+    print(f"Wrote Z1–Z5, unmeasured baseline and zeno_* data to {args.output_dir}")
+
+
+if __name__ == "__main__":
+    main()
