@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0 -- /workspaces/Quantum-Computing/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /workspaces/Quantum-Computing/symmetry-scaling
+configfile: pyproject.toml
+collecting ... collected 5 items
+
+tests/test_symmetry_recovery.py::test_imports_use_this_worktree PASSED   [ 20%]
+tests/test_symmetry_recovery.py::test_independent_n2_audit PASSED        [ 40%]
+tests/test_symmetry_recovery.py::test_independent_small_n_audit PASSED   [ 60%]
+tests/test_symmetry_recovery.py::test_tensor_site_order_is_most_significant_first PASSED [ 80%]
+tests/test_symmetry_recovery.py::test_global_phase_and_explicit_n2_expansion PASSED [100%]
+
+==================================== PASSES ====================================
+__________________________ test_independent_n2_audit ___________________________
+----------------------------- Captured stdout call -----------------------------
+N2 recovery audit: {"aligned_amplitude_error": 2.1138016631127878e-15, "dark_probability": 2.9890432736889896e-31, "expanded_norm_error": 5.551115123125783e-16, "fidelity_error": 2.6645352591003757e-15, "matrix_entry_error_rad_s": 3.60325190760751e-10, "parameter_sets": 24, "probability_error": 2.4424906541753444e-15, "samples": 51, "tensor_matrix_error_rad_s": 0.0, "unitarity_error": 2.220446049250313e-16}
+________________________ test_independent_small_n_audit ________________________
+----------------------------- Captured stdout call -----------------------------
+Small-N recovery audit: {"N": [2, 3, 4], "aligned_amplitude_error": 9.929671126925273e-15, "dicke_population_error": 6.8833827526759706e-15, "excitation_error": 2.3092638912203256e-14, "expanded_norm_error": 4.440892098500626e-15, "fidelity_error": 8.881784197001252e-15, "intertwining_error_over_scale": 4.743186923619966e-15, "parameter_sets_per_N": 24, "probability_error": 5.773159728050814e-15, "samples": 31}
+============================== 5 passed in 5.28s ===============================

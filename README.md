@@ -17,6 +17,16 @@ a common constant laser phase in this symmetric model.
 Read the [milestone report](docs/milestone_report.md) and
 [interview checklist](MILESTONE_CHECKLIST.md) before user review.
 
+## Symmetry scaling extension
+
+Branch `extension/symmetry-scaling` adds independent full tensor-product and
+Dicke-basis models without changing milestone solvers. The
+[extension report](docs/symmetry_scaling_extension.md) derives the reduction,
+reports numerical agreement and spatial symmetry breaking, and links figures
+S1–S6 and recorded data. Runtime measurements are explicitly provisional;
+the report includes commands for the final controlled session on one local
+physical computer. GitHub Actions must not produce scientific runtime data.
+
 ## Physics conventions
 
 Every vector and matrix uses the fixed ordered basis
@@ -137,6 +147,40 @@ times = np.linspace(0, microseconds_to_seconds(4), 81)
 states = evolve_static(KET_00, times, hbar)  # shape (81, 4)
 populations = np.abs(states) ** 2
 ```
+
+## Running the project
+
+After setup, activate the environment and start the interactive launcher:
+
+```bash
+source .venv/bin/activate
+python run_project.py
+```
+
+Or run a task directly:
+
+```bash
+python run_project.py tests
+python run_project.py fig51
+python run_project.py fig52
+python run_project.py milestone
+python run_project.py symmetry
+```
+
+The complete milestone runs tests first, stops on any failure, generates both
+figures, and lists the output files. Figure 5.2 uses the validated 131,072-interval
+production grid and may take some time; the menu asks for confirmation, while a
+direct command starts immediately. Use `python run_project.py results` to list
+existing outputs or `python run_project.py --help` for usage. The `symmetry`
+command (menu option 7) validates the N=2 milestone reduction and full-versus-Dicke
+dynamics for N=2–5, without collecting timings or writing result files. The `zeno`
+command remains a placeholder in this worktree.
+
+In the isolated `symmetry-scaling` worktree, the shared environment can run the
+demo with `/workspaces/Quantum-Computing/.venv/bin/python run_project.py symmetry`.
+The symmetry scripts select this checkout's source automatically. See the
+[extension report](docs/symmetry_scaling_extension.md) for the separate study,
+plotting and local physical-computer benchmark commands.
 
 ## Time-dependent propagation
 
