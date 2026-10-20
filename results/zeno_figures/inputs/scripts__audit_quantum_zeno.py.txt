@@ -1,0 +1,283 @@
+"""Audit saved Zeno matrices with spectral unitaries and channel powers.
+
+Writes only zeno_audit* files. Run after scripts/quantum_zeno.py. The analytical
+predictions use Hamiltonian moments, never a numerical propagation routine.
+"""
+
+import argparse
+import csv
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+
+import numpy as np
+
+from quantum_project import KET_00, evolve_static, rydberg_hamiltonian
+from quantum_project.density_matrix import density_from_state, evolve_density, projective_measurement
+from quantum_project.quantum_zeno import measurement_projectors, repeated_measurements
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def reference_hamiltonian(omega, delta, phase, interaction):
+    c = omega * np.exp(-1j * phase) / 2
+    return np.array([[delta, c, c, 0], [c.conjugate(), 0, 0, c],
+                     [c.conjugate(), 0, 0, c],
+                     [0, c.conjugate(), c.conjugate(), interaction-delta]], dtype=complex)
+
+
+def spectral_unitary(h, time):
+    energies, vectors = np.linalg.eigh(h)
+    return (vectors * np.exp(-1j * energies * time)) @ vectors.conj().T
+
+
+def reference_channel(h, total, count, p):
+    u = spectral_unitary(h, total/count)
+    kraus = [p @ u, (np.eye(4)-p) @ u]
+    return sum(np.kron(k.conj(), k) for k in kraus)
+
+
+def reference_trajectory(h, total, count, times, p):
+    """Independent channel matrix powers, with rational event-grid recognition."""
+    rho0 = np.diag([1., 0, 0, 0]).astype(complex)
+    channel = reference_channel(h, total, count, p) if count else None
+    cache = {0: rho0}
+    states = []
+    for t in times:
+        event = 0
+        if count:
+            scaled = float(t) / total * count
+            nearest = round(scaled)
+            event = nearest if abs(scaled-nearest) < 8*np.finfo(float).eps*count else int(np.floor(scaled))
+            if event not in cache:
+                cache[event] = (np.linalg.matrix_power(channel, event) @ rho0.ravel(order="F")).reshape(4,4,order="F")
+        remainder = float(t)-event*total/count if count else float(t)
+        u = spectral_unitary(h, remainder)
+        states.append(u @ cache[event] @ u.conj().T)
+    return np.array(states)
+
+
+def observables(rhos):
+    # Explicit matrix elements, independent of the generator's target einsum.
+    return np.stack([rhos[...,0,0].real,
+                     (rhos[...,1,1]+rhos[...,2,2]+rhos[...,1,2]+rhos[...,2,1]).real/2,
+                     rhos[...,3,3].real], axis=-1)
+
+
+def residual_stats(values):
+    return {"max_abs": float(np.max(abs(values))), "rms": float(np.sqrt(np.mean(abs(values)**2)))}
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--data-dir", type=Path, default=ROOT / "results/data")
+    args = parser.parse_args()
+    milestone = subprocess.check_output(['git','rev-parse','milestone-v1.0^{commit}'],cwd=ROOT,text=True).strip()
+    assert milestone == 'cafa4850f313174685fa491cc3099ab308fe6c58'
+    protected = subprocess.check_output(['git','ls-tree','-r','--name-only','milestone-v1.0',
+        'src','tests','scripts','pyproject.toml'],cwd=ROOT,text=True).splitlines()
+    for name in protected:
+        original = subprocess.check_output(['git','show',f'milestone-v1.0:{name}'],cwd=ROOT)
+        assert (ROOT/name).read_bytes() == original, f'Milestone file changed: {name}'
+    with np.load(args.data_dir / "zeno_study.npz", allow_pickle=False) as saved:
+        z = {key: saved[key] for key in saved.files}
+    omega, total = float(z['omega_rad_s']), float(z['total_time_s'])
+    counts, times = z['measurement_counts'], z['times_s']
+    ratios = z['V_over_omega']
+    rho0 = np.diag([1.,0,0,0]).astype(complex)
+    p = rho0.copy()
+    result = {"parameters": {"omega_rad_s": omega, "delta_rad_s": float(z['delta_rad_s']),
+                            "phase_rad": float(z['phase_rad']), "total_time_s": total,
+                            "measurement_counts": counts.tolist(), "V_over_omega": ratios.tolist()},
+              "method": "Independent explicit Hamiltonian, spectral unitary, 16x16 channel powers; full complex matrix comparisons",
+              "milestone": {"commit":milestone,"protected_files_identical":protected,
+                  "branch":subprocess.check_output(['git','branch','--show-current'],cwd=ROOT,text=True).strip()},
+              "cases": [], "checks": {}}
+    checks = result['checks']
+
+    def close(name, actual, expected, tolerance=2e-11):
+        error = float(np.max(abs(np.asarray(actual)-np.asarray(expected))))
+        checks[name] = max(checks.get(name, 0.), error)
+        if error > tolerance or not np.isfinite(error):
+            raise AssertionError(f"{name}: {error} > {tolerance}")
+
+    psi = np.array([1,1j,2,3j])/np.sqrt(15)
+    pure_rho = density_from_state(psi)
+    close('outer_product_error',pure_rho,psi[:,None]*psi.conj()[None,:],0)
+    close('initial_purity_error',np.trace(pure_rho@pure_rho),1,1e-14)
+    demo_h = reference_hamiltonian(omega,-.2*omega,.37,100*omega)
+    evolved = evolve_density(pure_rho,[total],demo_h)[0]
+    demo_u = spectral_unitary(demo_h,total)
+    close('unitary_example_matrix_error',evolved,demo_u@pure_rho@demo_u.conj().T)
+    close('unitary_example_purity_error',np.trace(evolved@evolved),1)
+    measured = projective_measurement(pure_rho,[p,np.eye(4)-p])
+    close('measurement_trace_error',np.trace(measured),1,1e-14)
+    close('measurement_PQ_coherence',measured[0,1:],0,0)
+    close('measurement_Q_coherence_change',measured[1:,1:],pure_rho[1:,1:],0)
+    result['measurement_example'] = {'purity_before':float(np.trace(pure_rho@pure_rho).real),
+        'purity_after':float(np.trace(measured@measured).real),
+        'retained_abs_rho_0r_r0':float(abs(measured[1,2])),
+        'minimum_eigenvalue':float(np.linalg.eigvalsh(measured).min())}
+    np.savez_compressed(args.data_dir/'zeno_audit_examples.npz',psi=psi,rho=pure_rho,
+                        evolved_density=evolved,reference_unitary=demo_u,measured_density=measured,
+                        P=p,Q=np.eye(4)-p,Hbar=demo_h)
+
+    matrices = np.concatenate([z[k].reshape(-1,4,4) for k in ('baseline_density','trajectory_density','final_density')])
+    close('trace_error', np.trace(matrices,axis1=1,axis2=2), 1)
+    close('hermiticity_error', matrices, matrices.conj().transpose(0,2,1))
+    checks['minimum_eigenvalue'] = float(np.linalg.eigvalsh(matrices).min())
+    assert checks['minimum_eigenvalue'] > -2e-11
+    for prefix in ('baseline', 'trajectory', 'final'):
+        close(f'{prefix}_saved_probability_error', z[prefix+'_probabilities'], observables(z[prefix+'_density']), 1e-14)
+    final_p = observables(z['final_density'])
+    base_p = observables(z['baseline_density'])
+    close('baseline_purity_error', np.einsum('...ij,...ji->...',z['baseline_density'],z['baseline_density']), 1)
+    close('A_B_matrix_difference', z['final_density'][:,0], z['final_density'][:,1], 1e-14)
+
+    short_rows, limit_rows, split_rows = [], [], []
+    for i, ratio in enumerate(ratios):
+        h = reference_hamiltonian(omega, float(z['delta_rad_s']), float(z['phase_rad']), ratio*omega)
+        close('hamiltonian_error', rydberg_hamiltonian(omega,float(z['delta_rad_s']),float(z['phase_rad']),ratio*omega), h, 0)
+        # Direct first and second moments; no expm or density propagator involved.
+        variance = float((h@h)[0,0].real-h[0,0].real**2)
+        close('relative_variance_error', z['variance_rad2_s2'][i]/variance, 1, 3e-15)
+        pure = evolve_static(KET_00, times, h)
+        close('baseline_milestone_matrix_error', z['baseline_density'][i], pure[:,:,None]*pure[:,None,:].conj())
+        close('baseline_reference_matrix_error', z['baseline_density'][i], reference_trajectory(h,total,0,times,p))
+        for j, question in enumerate(z['questions']):
+            diagonal = [0,0,0,1] if question == 'double' else ([0,1,1,1] if question == 'any_excitation' else [1,0,0,0])
+            projector = np.diag(diagonal)
+            close('projector_matrix_error', measurement_projectors(str(question)), [projector,np.eye(4)-projector], 0)
+            for k, count in enumerate(counts):
+                reference = reference_trajectory(h,total,int(count),[total],projector)[0]
+                close('final_channel_power_matrix_error', z['final_density'][i,j,k], reference)
+        for j, count in enumerate(z['trace_counts']):
+            close('trajectory_channel_power_matrix_error', z['trajectory_density'][i,j], reference_trajectory(h,total,int(count),times,p))
+            if count and 1000 % count == 0:
+                ids = np.arange(1,int(count)+1)*(1000//int(count))
+                close('post_event_coherence', z['trajectory_density'][i,j,ids,0,1:], 0, 1e-14)
+        short_ref = np.array([abs(spectral_unitary(h,t)[0,0])**2 for t in z['short_times_s']])
+        close('short_survival_reference_error', z['short_survival'][i], short_ref)
+        prediction = 1-variance*z['short_times_s']**2
+        close('short_prediction_error', z['short_prediction'][i], prediction, 1e-14)
+        residual = z['short_survival'][i]-prediction
+        close('short_saved_residual_error', z['short_residual'][i], residual, 1e-14)
+        exponent = np.exp(-variance*total**2/counts[1:])
+        close('exponential_prediction_error', z['exponential_prediction'][i], exponent, 1e-14)
+        repeated_residual = final_p[i,0,1:,0]-exponent
+        close('exponential_saved_residual_error', z['exponential_residual'][i], repeated_residual, 1e-14)
+        all_yes = np.array([abs(spectral_unitary(h,total/int(m))[0,0])**(2*int(m)) for m in counts[1:]])
+        close('selective_spectral_error', z['exact_all_yes'][i], all_yes)
+        single_quadratic = 1-variance*(total/counts[1:])**2
+        valid = single_quadratic >= 0
+        assert np.array_equal(np.isnan(z['quadratic_product'][i]), ~valid)
+        close('quadratic_product_error', z['quadratic_product'][i,valid], single_quadratic[valid]**counts[1:][valid], 1e-14)
+        assert np.min(final_p[i,0,1:,0]-all_yes) > -2e-11
+        short_summary = []
+        for cutoff in (.8e-9,.4e-9,.2e-9,.1e-9):
+            mask = z['short_times_s'] <= cutoff
+            row = {'V_over_omega': float(ratio), 'maximum_tau_s':cutoff, 'samples':int(mask.sum()), **residual_stats(residual[mask])}
+            short_rows.append(row)
+            short_summary.append(row)
+        # Equal-factor tau sequence measures the order above cancellation noise.
+        tau = np.array([.8,.4,.2,.1])*1e-9
+        numeric = evolve_density(rho0,tau,h)[:,0,0].real
+        short_errors = numeric-(1-variance*tau**2)
+        orders = np.log2(abs(short_errors[:-1]/short_errors[1:]))
+        assert np.all((orders > 3.7) & (orders < 4.3))
+        asymptotic = counts[1:] >= 1000
+        high_rate = counts >= 1000
+        assert np.all(np.diff(final_p[i,0,high_rate,0]) > 0)
+        assert final_p[i,0,-1,0] > .999
+        for k, m in enumerate(counts):
+            limit_rows.append({'V_over_omega':float(ratio),'M':int(m),'tau_s':float(total/m) if m else '',
+                              'nonselective_P00':float(final_p[i,0,k,0]),
+                              'selective_all_yes':float(all_yes[k-1]) if m else '',
+                              'scaled_loss_M':float(m*(1-final_p[i,0,k,0])) if m else ''})
+        result['cases'].append({'V_over_omega':float(ratio),'variance_s_minus_2':variance,
+            'short_tau_s':tau.tolist(),'short_residual':short_errors.tolist(),'short_halving_orders':orders.tolist(),
+            'short_time_windows':short_summary,
+            'repeated_residual_M_ge_1000':residual_stats(repeated_residual[asymptotic]),
+            'repeated_residual_slope_M_ge_1000':float(np.polyfit(np.log(counts[1:][asymptotic]), np.log(abs(repeated_residual[asymptotic])),1)[0]),
+            'M_10000_P00':float(final_p[i,0,-1,0]), 'M_10000_selective':float(all_yes[-1]),
+            'M_10000_return_contribution':float(final_p[i,0,-1,0]-all_yes[-1]),
+            'M_10000_scaled_loss':float(counts[-1]*(1-final_p[i,0,-1,0])),
+            'unmeasured_final':base_p[i,-1].tolist(),
+            'unmeasured_max_Prr':float(base_p[i,:,2].max()),
+            'measurement_P00_gain':float(final_p[i,0,-1,0]-base_p[i,-1,0]),
+            'measurement_Prr_reduction':float(base_p[i,-1,2]-final_p[i,0,-1,2]),
+            'ground_final':final_p[i,0,-1].tolist(), 'double_final':final_p[i,2,-1].tolist()})
+        for count in (5,100):
+            target = repeated_measurements(rho0,h,total,count)[0]
+            for subdivisions in (1,2,4,8):
+                step = np.linalg.matrix_power(spectral_unitary(h,total/count/subdivisions),subdivisions)
+                state = rho0.copy()
+                for _ in range(count):
+                    state = step@state@step.conj().T
+                    state = p@state@p+(np.eye(4)-p)@state@(np.eye(4)-p)
+                error = float(np.max(abs(state-target)))
+                assert error < 2e-12
+                split_rows.append({'V_over_omega':float(ratio),'M':count,'subdivisions':subdivisions,'matrix_error':error})
+        print(f'Audited V/Omega={ratio:g}', flush=True)
+
+    # CSVs must reproduce the NPZ, including labels, physical rates and spacings.
+    csv_errors = {}
+    for name in ('baseline','trajectories','survival','short_time','residuals'):
+        with (args.data_dir/f'zeno_{name}.csv').open() as stream:
+            rows = list(csv.DictReader(stream))
+        expected_count = {'baseline':len(ratios)*len(times),'trajectories':len(ratios)*len(z['trace_counts'])*len(times),
+                          'survival':len(ratios)*len(z['questions'])*len(counts),'short_time':len(ratios)*len(z['short_times_s']),
+                          'residuals':len(ratios)*(len(counts)-1)}[name]
+        assert len(rows) == expected_count
+        largest = 0.
+        for row in rows:
+            i = int(np.flatnonzero(ratios == float(row['V_over_omega']))[0])
+            if name in ('baseline','trajectories'):
+                t = int(np.flatnonzero(times == float(row['time_s']))[0])
+                if name == 'baseline': expected = base_p[i,t]
+                else:
+                    m = int(np.flatnonzero(z['trace_counts'] == int(row['M']))[0])
+                    expected = observables(z['trajectory_density'][i,m,t])
+                pairs = zip(('P_00','P_Psi_plus','P_rr'), expected)
+            elif name == 'survival':
+                m = int(np.flatnonzero(counts == int(row['M']))[0])
+                j = int(np.flatnonzero(z['questions'] == row['question'])[0])
+                pairs = list(zip(('P_00','P_Psi_plus','P_rr'), final_p[i,j,m]))
+                pairs.append(('rate_per_s',counts[m]/total))
+                if counts[m]: pairs.append(('spacing_s',total/counts[m]))
+                else: assert row['spacing_s'] == ''
+            elif name == 'short_time':
+                t = int(np.flatnonzero(z['short_times_s'] == float(row['time_s']))[0])
+                pairs = [('survival',z['short_survival'][i,t]),('quadratic_prediction',z['short_prediction'][i,t]),('residual',z['short_residual'][i,t])]
+            else:
+                k = int(np.flatnonzero(counts[1:] == int(row['M']))[0])
+                pairs = [('nonselective_survival',final_p[i,0,k+1,0]),('exponential_prediction',z['exponential_prediction'][i,k]),
+                         ('exact_all_yes',z['exact_all_yes'][i,k]),('nonselective_minus_exponential',z['exponential_residual'][i,k]),
+                         ('quadratic_product',z['quadratic_product'][i,k]),
+                         ('nonselective_minus_all_yes',final_p[i,0,k+1,0]-z['exact_all_yes'][i,k])]
+            for key, value in pairs:
+                actual = float(row[key])
+                if np.isnan(value): assert np.isnan(actual)
+                else: largest = max(largest,abs(actual-value))
+        assert largest < 1e-14
+        csv_errors[name] = {'rows':len(rows),'maximum_error':largest}
+    result['csv_checks'] = csv_errors
+    result['propagation_subdivision_checks'] = split_rows
+    result['expected_scaled_loss'] = omega**2/2*total**2
+    result['double_projector_limit_P00'] = float(np.cos(omega*total/np.sqrt(2))**2)
+    inputs = [args.data_dir/'zeno_study.npz', ROOT/'scripts/quantum_zeno.py', Path(__file__),
+              ROOT/'src/quantum_project/density_matrix.py', ROOT/'src/quantum_project/quantum_zeno.py']
+    result['sha256'] = {str(p.relative_to(ROOT)) if p.is_relative_to(ROOT) else str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs}
+    result['status'] = 'passed'
+    for name, rows in [('short_time',short_rows),('limit',limit_rows),('subdivision',split_rows)]:
+        with (args.data_dir/f'zeno_audit_{name}.csv').open('w',newline='') as stream:
+            writer = csv.DictWriter(stream,fieldnames=rows[0])
+            writer.writeheader()
+            writer.writerows(rows)
+    (args.data_dir/'zeno_audit.json').write_text(json.dumps(result,indent=2,allow_nan=False)+'\n')
+    print(json.dumps(checks,indent=2))
+
+
+if __name__ == '__main__':
+    main()

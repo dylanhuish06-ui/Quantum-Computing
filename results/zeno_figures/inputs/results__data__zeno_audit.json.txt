@@ -1,0 +1,637 @@
+{
+  "parameters": {
+    "omega_rad_s": 6283185.307179586,
+    "delta_rad_s": 0.0,
+    "phase_rad": 0.0,
+    "total_time_s": 5e-07,
+    "measurement_counts": [
+      0,
+      1,
+      2,
+      5,
+      10,
+      20,
+      50,
+      100,
+      200,
+      500,
+      1000,
+      2000,
+      5000,
+      10000
+    ],
+    "V_over_omega": [
+      0.0,
+      1.0,
+      10.0,
+      100.0
+    ]
+  },
+  "method": "Independent explicit Hamiltonian, spectral unitary, 16x16 channel powers; full complex matrix comparisons",
+  "milestone": {
+    "commit": "cafa4850f313174685fa491cc3099ab308fe6c58",
+    "protected_files_identical": [
+      "pyproject.toml",
+      "scripts/figure_5_1.py",
+      "scripts/figure_5_2.py",
+      "src/quantum_project/__init__.py",
+      "src/quantum_project/convergence.py",
+      "src/quantum_project/hamiltonian.py",
+      "src/quantum_project/observables.py",
+      "src/quantum_project/states.py",
+      "src/quantum_project/static_limits.py",
+      "src/quantum_project/static_solver.py",
+      "src/quantum_project/sweeps.py",
+      "src/quantum_project/trotter.py",
+      "src/quantum_project/units.py",
+      "src/quantum_project/validation.py",
+      "tests/test_hamiltonian.py",
+      "tests/test_phase_invariance.py",
+      "tests/test_states_and_observables.py",
+      "tests/test_static_limits.py",
+      "tests/test_static_solver.py",
+      "tests/test_sweeps_and_convergence.py",
+      "tests/test_trotter.py",
+      "tests/test_validation_and_units.py"
+    ],
+    "branch": "extension/quantum-zeno"
+  },
+  "cases": [
+    {
+      "V_over_omega": 0.0,
+      "variance_s_minus_2": 19739208802178.715,
+      "short_tau_s": [
+        8.000000000000001e-10,
+        4.0000000000000007e-10,
+        2.0000000000000003e-10,
+        1.0000000000000002e-10
+      ],
+      "short_residual": [
+        6.649780726064591e-11,
+        4.1561198926842735e-12,
+        2.5979218776228663e-13,
+        1.6209256159527285e-14
+      ],
+      "short_halving_orders": [
+        3.999997591331232,
+        3.999807319526807,
+        4.00246825559075
+      ],
+      "short_time_windows": [
+        {
+          "V_over_omega": 0.0,
+          "maximum_tau_s": 8e-10,
+          "samples": 70,
+          "max_abs": 6.350620029849097e-11,
+          "rms": 1.2038696153400345e-11
+        },
+        {
+          "V_over_omega": 0.0,
+          "maximum_tau_s": 4e-10,
+          "samples": 59,
+          "max_abs": 3.912314916476589e-12,
+          "rms": 8.078269870116697e-13
+        },
+        {
+          "V_over_omega": 0.0,
+          "maximum_tau_s": 2e-10,
+          "samples": 48,
+          "max_abs": 2.410294186461215e-13,
+          "rms": 5.517151269296875e-14
+        },
+        {
+          "V_over_omega": 0.0,
+          "maximum_tau_s": 1e-10,
+          "samples": 37,
+          "max_abs": 1.4765966227514582e-14,
+          "rms": 3.873157551468793e-15
+        }
+      ],
+      "repeated_residual_M_ge_1000": {
+        "max_abs": 6.820789634542912e-06,
+        "rms": 3.5189301087675366e-06
+      },
+      "repeated_residual_slope_M_ge_1000": -1.9973029006531828,
+      "M_10000_P00": 0.9995067101636983,
+      "M_10000_selective": 0.9995066415229993,
+      "M_10000_return_contribution": 6.864069901357794e-08,
+      "M_10000_scaled_loss": 4.932898363017024,
+      "unmeasured_final": [
+        0.0,
+        3.944304526105059e-31,
+        1.0
+      ],
+      "unmeasured_max_Prr": 1.0,
+      "measurement_P00_gain": 0.9995067101636983,
+      "measurement_Prr_reduction": 0.9996998291551398,
+      "ground_final": [
+        0.9995067101636983,
+        0.00019311899083191802,
+        0.0003001708448602699
+      ],
+      "double_final": [
+        0.36672832337756833,
+        0.6329715057768683,
+        0.0003001708448602677
+      ]
+    },
+    {
+      "V_over_omega": 1.0,
+      "variance_s_minus_2": 19739208802178.715,
+      "short_tau_s": [
+        8.000000000000001e-10,
+        4.0000000000000007e-10,
+        2.0000000000000003e-10,
+        1.0000000000000002e-10
+      ],
+      "short_residual": [
+        6.649780726064591e-11,
+        4.1561198926842735e-12,
+        2.5979218776228663e-13,
+        1.6209256159527285e-14
+      ],
+      "short_halving_orders": [
+        3.999997591331232,
+        3.999807319526807,
+        4.00246825559075
+      ],
+      "short_time_windows": [
+        {
+          "V_over_omega": 1.0,
+          "maximum_tau_s": 8e-10,
+          "samples": 70,
+          "max_abs": 6.350620029849097e-11,
+          "rms": 1.2038696153400345e-11
+        },
+        {
+          "V_over_omega": 1.0,
+          "maximum_tau_s": 4e-10,
+          "samples": 59,
+          "max_abs": 3.912314916476589e-12,
+          "rms": 8.078269870116697e-13
+        },
+        {
+          "V_over_omega": 1.0,
+          "maximum_tau_s": 2e-10,
+          "samples": 48,
+          "max_abs": 2.410294186461215e-13,
+          "rms": 5.517151269296875e-14
+        },
+        {
+          "V_over_omega": 1.0,
+          "maximum_tau_s": 1e-10,
+          "samples": 37,
+          "max_abs": 1.4765966227514582e-14,
+          "rms": 3.873157551468793e-15
+        }
+      ],
+      "repeated_residual_M_ge_1000": {
+        "max_abs": 8.154961389172932e-06,
+        "rms": 4.207185196726046e-06
+      },
+      "repeated_residual_slope_M_ge_1000": -1.9974813151666557,
+      "M_10000_P00": 0.999506723555929,
+      "M_10000_selective": 0.999506641534096,
+      "M_10000_return_contribution": 8.202183299221844e-08,
+      "M_10000_scaled_loss": 4.9327644407104465,
+      "unmeasured_final": [
+        0.12571150345104426,
+        0.37217286525826054,
+        0.5021156312906949
+      ],
+      "unmeasured_max_Prr": 0.563417176552297,
+      "measurement_P00_gain": 0.8737952201048846,
+      "measurement_Prr_reduction": 0.5019286572693864,
+      "ground_final": [
+        0.999506723555929,
+        0.0003063024220491806,
+        0.0001869740213084718
+      ],
+      "double_final": [
+        0.3667283233788089,
+        0.6329715057782112,
+        0.0003001708423922781
+      ]
+    },
+    {
+      "V_over_omega": 10.0,
+      "variance_s_minus_2": 19739208802178.715,
+      "short_tau_s": [
+        8.000000000000001e-10,
+        4.0000000000000007e-10,
+        2.0000000000000003e-10,
+        1.0000000000000002e-10
+      ],
+      "short_residual": [
+        6.649669703762129e-11,
+        4.1561198926842735e-12,
+        2.5979218776228663e-13,
+        1.6209256159527285e-14
+      ],
+      "short_halving_orders": [
+        3.999973504422372,
+        3.999807319526807,
+        4.00246825559075
+      ],
+      "short_time_windows": [
+        {
+          "V_over_omega": 10.0,
+          "maximum_tau_s": 8e-10,
+          "samples": 70,
+          "max_abs": 6.350509007546634e-11,
+          "rms": 1.2038508138520587e-11
+        },
+        {
+          "V_over_omega": 10.0,
+          "maximum_tau_s": 4e-10,
+          "samples": 59,
+          "max_abs": 3.912314916476589e-12,
+          "rms": 8.078269870116697e-13
+        },
+        {
+          "V_over_omega": 10.0,
+          "maximum_tau_s": 2e-10,
+          "samples": 48,
+          "max_abs": 2.410294186461215e-13,
+          "rms": 5.517151269296875e-14
+        },
+        {
+          "V_over_omega": 10.0,
+          "maximum_tau_s": 1e-10,
+          "samples": 37,
+          "max_abs": 1.4765966227514582e-14,
+          "rms": 3.873157551468793e-15
+        }
+      ],
+      "repeated_residual_M_ge_1000": {
+        "max_abs": 1.1983485165623087e-05,
+        "rms": 6.182243825000064e-06
+      },
+      "repeated_residual_slope_M_ge_1000": -1.997671918354745,
+      "M_10000_P00": 0.9995067620148148,
+      "M_10000_selective": 0.9995066415252186,
+      "M_10000_return_contribution": 1.2048959618926602e-07,
+      "M_10000_scaled_loss": 4.932379851851909,
+      "unmeasured_final": [
+        0.3636222112871657,
+        0.6332648327838015,
+        0.0031129559290333114
+      ],
+      "unmeasured_max_Prr": 0.00568548113913796,
+      "measurement_P00_gain": 0.6358845507276492,
+      "measurement_Prr_reduction": 0.0031081665619101632,
+      "ground_final": [
+        0.9995067620148148,
+        0.0004884486174295557,
+        4.789367123148003e-06
+      ],
+      "double_final": [
+        0.36672832349632833,
+        0.6329715059055894,
+        0.00030017059806256474
+      ]
+    },
+    {
+      "V_over_omega": 100.0,
+      "variance_s_minus_2": 19739208802178.715,
+      "short_tau_s": [
+        8.000000000000001e-10,
+        4.0000000000000007e-10,
+        2.0000000000000003e-10,
+        1.0000000000000002e-10
+      ],
+      "short_residual": [
+        6.638634086897355e-11,
+        4.154343535844873e-12,
+        2.5979218776228663e-13,
+        1.6209256159527285e-14
+      ],
+      "short_halving_orders": [
+        3.998194007270683,
+        3.9991905690256773,
+        4.00246825559075
+      ],
+      "short_time_windows": [
+        {
+          "V_over_omega": 100.0,
+          "maximum_tau_s": 8e-10,
+          "samples": 70,
+          "max_abs": 6.340206137878113e-11,
+          "rms": 1.2021969988925854e-11
+        },
+        {
+          "V_over_omega": 100.0,
+          "maximum_tau_s": 4e-10,
+          "samples": 59,
+          "max_abs": 3.910760604242114e-12,
+          "rms": 8.075603152227978e-13
+        },
+        {
+          "V_over_omega": 100.0,
+          "maximum_tau_s": 2e-10,
+          "samples": 48,
+          "max_abs": 2.410294186461215e-13,
+          "rms": 5.517151269296875e-14
+        },
+        {
+          "V_over_omega": 100.0,
+          "maximum_tau_s": 1e-10,
+          "samples": 37,
+          "max_abs": 1.4765966227514582e-14,
+          "rms": 3.873157551468793e-15
+        }
+      ],
+      "repeated_residual_M_ge_1000": {
+        "max_abs": 1.210094897063918e-05,
+        "rms": 6.2428425044560305e-06
+      },
+      "repeated_residual_slope_M_ge_1000": -1.997673233588357,
+      "M_10000_P00": 0.9995067631955262,
+      "M_10000_selective": 0.9995066415163412,
+      "M_10000_return_contribution": 1.2167918506111874e-07,
+      "M_10000_scaled_loss": 4.932368044737734,
+      "unmeasured_final": [
+        0.3668400916975901,
+        0.6331282571190723,
+        3.165118332257423e-05
+      ],
+      "unmeasured_max_Prr": 5.069338044206213e-05,
+      "measurement_P00_gain": 0.6326666714979361,
+      "measurement_Prr_reduction": 3.160187038035269e-05,
+      "ground_final": [
+        0.9995067631955262,
+        0.000493187490837507,
+        4.931294222153871e-08
+      ],
+      "double_final": [
+        0.366728335217887,
+        0.6329715186153988,
+        0.00030014616588012495
+      ]
+    }
+  ],
+  "checks": {
+    "outer_product_error": 0.0,
+    "initial_purity_error": 4.440892098500626e-16,
+    "unitary_example_matrix_error": 1.0017609778896427e-14,
+    "unitary_example_purity_error": 1.8651772950700975e-14,
+    "measurement_trace_error": 2.220446049250313e-16,
+    "measurement_PQ_coherence": 0.0,
+    "measurement_Q_coherence_change": 0.0,
+    "trace_error": 8.339995360984176e-13,
+    "hermiticity_error": 1.6542323066916492e-14,
+    "minimum_eigenvalue": -2.44249079451675e-15,
+    "baseline_saved_probability_error": 3.3306690738754696e-16,
+    "trajectory_saved_probability_error": 3.3306690738754696e-16,
+    "final_saved_probability_error": 2.220446049250313e-16,
+    "baseline_purity_error": 4.8627768478581856e-14,
+    "A_B_matrix_difference": 0.0,
+    "hamiltonian_error": 0.0,
+    "relative_variance_error": 0.0,
+    "baseline_milestone_matrix_error": 1.1712852910150581e-14,
+    "baseline_reference_matrix_error": 1.1712852909795402e-14,
+    "projector_matrix_error": 0.0,
+    "final_channel_power_matrix_error": 1.430866536367148e-11,
+    "trajectory_channel_power_matrix_error": 1.4694911953938572e-12,
+    "post_event_coherence": 0.0,
+    "short_survival_reference_error": 1.6653345369377348e-15,
+    "short_prediction_error": 0.0,
+    "short_saved_residual_error": 0.0,
+    "exponential_prediction_error": 0.0,
+    "exponential_saved_residual_error": 0.0,
+    "selective_spectral_error": 1.607214361598608e-11,
+    "quadratic_product_error": 0.0
+  },
+  "measurement_example": {
+    "purity_before": 0.9999999999999996,
+    "purity_after": 0.8755555555555552,
+    "retained_abs_rho_0r_r0": 0.1333333333333333,
+    "minimum_eigenvalue": -1.4835979218054374e-17
+  },
+  "csv_checks": {
+    "baseline": {
+      "rows": 4004,
+      "maximum_error": 3.3306690738754696e-16
+    },
+    "trajectories": {
+      "rows": 20020,
+      "maximum_error": 3.3306690738754696e-16
+    },
+    "survival": {
+      "rows": 168,
+      "maximum_error": 2.220446049250313e-16
+    },
+    "short_time": {
+      "rows": 484,
+      "maximum_error": 0.0
+    },
+    "residuals": {
+      "rows": 52,
+      "maximum_error": 0.0
+    }
+  },
+  "propagation_subdivision_checks": [
+    {
+      "V_over_omega": 0.0,
+      "M": 5,
+      "subdivisions": 1,
+      "matrix_error": 8.326672684688674e-16
+    },
+    {
+      "V_over_omega": 0.0,
+      "M": 5,
+      "subdivisions": 2,
+      "matrix_error": 1.8318679906315083e-15
+    },
+    {
+      "V_over_omega": 0.0,
+      "M": 5,
+      "subdivisions": 4,
+      "matrix_error": 4.052314039881821e-15
+    },
+    {
+      "V_over_omega": 0.0,
+      "M": 5,
+      "subdivisions": 8,
+      "matrix_error": 9.769962616701378e-15
+    },
+    {
+      "V_over_omega": 0.0,
+      "M": 100,
+      "subdivisions": 1,
+      "matrix_error": 6.339373470609644e-14
+    },
+    {
+      "V_over_omega": 0.0,
+      "M": 100,
+      "subdivisions": 2,
+      "matrix_error": 1.2723155862204294e-13
+    },
+    {
+      "V_over_omega": 0.0,
+      "M": 100,
+      "subdivisions": 4,
+      "matrix_error": 2.531308496145357e-13
+    },
+    {
+      "V_over_omega": 0.0,
+      "M": 100,
+      "subdivisions": 8,
+      "matrix_error": 4.227729277772596e-13
+    },
+    {
+      "V_over_omega": 1.0,
+      "M": 5,
+      "subdivisions": 1,
+      "matrix_error": 2.997610197604368e-15
+    },
+    {
+      "V_over_omega": 1.0,
+      "M": 5,
+      "subdivisions": 2,
+      "matrix_error": 7.494005616997983e-15
+    },
+    {
+      "V_over_omega": 1.0,
+      "M": 5,
+      "subdivisions": 4,
+      "matrix_error": 1.3211654704831734e-14
+    },
+    {
+      "V_over_omega": 1.0,
+      "M": 5,
+      "subdivisions": 8,
+      "matrix_error": 2.237099409752785e-14
+    },
+    {
+      "V_over_omega": 1.0,
+      "M": 100,
+      "subdivisions": 1,
+      "matrix_error": 1.27231558622047e-13
+    },
+    {
+      "V_over_omega": 1.0,
+      "M": 100,
+      "subdivisions": 2,
+      "matrix_error": 2.544631172440887e-13
+    },
+    {
+      "V_over_omega": 1.0,
+      "M": 100,
+      "subdivisions": 4,
+      "matrix_error": 5.496714194919151e-13
+    },
+    {
+      "V_over_omega": 1.0,
+      "M": 100,
+      "subdivisions": 8,
+      "matrix_error": 8.036904475261515e-13
+    },
+    {
+      "V_over_omega": 10.0,
+      "M": 5,
+      "subdivisions": 1,
+      "matrix_error": 1.776356892339809e-15
+    },
+    {
+      "V_over_omega": 10.0,
+      "M": 5,
+      "subdivisions": 2,
+      "matrix_error": 2.55351295663786e-15
+    },
+    {
+      "V_over_omega": 10.0,
+      "M": 5,
+      "subdivisions": 4,
+      "matrix_error": 1.9984015502043974e-15
+    },
+    {
+      "V_over_omega": 10.0,
+      "M": 5,
+      "subdivisions": 8,
+      "matrix_error": 4.884981385353683e-15
+    },
+    {
+      "V_over_omega": 10.0,
+      "M": 100,
+      "subdivisions": 1,
+      "matrix_error": 2.1649348980190568e-14
+    },
+    {
+      "V_over_omega": 10.0,
+      "M": 100,
+      "subdivisions": 2,
+      "matrix_error": 4.3076653355456074e-14
+    },
+    {
+      "V_over_omega": 10.0,
+      "M": 100,
+      "subdivisions": 4,
+      "matrix_error": 1.2656542480726785e-13
+    },
+    {
+      "V_over_omega": 10.0,
+      "M": 100,
+      "subdivisions": 8,
+      "matrix_error": 1.2656542480726785e-13
+    },
+    {
+      "V_over_omega": 100.0,
+      "M": 5,
+      "subdivisions": 1,
+      "matrix_error": 1.1324274851987557e-14
+    },
+    {
+      "V_over_omega": 100.0,
+      "M": 5,
+      "subdivisions": 2,
+      "matrix_error": 1.1213252549008918e-14
+    },
+    {
+      "V_over_omega": 100.0,
+      "M": 5,
+      "subdivisions": 4,
+      "matrix_error": 9.769962617641356e-15
+    },
+    {
+      "V_over_omega": 100.0,
+      "M": 5,
+      "subdivisions": 8,
+      "matrix_error": 1.1102230247078746e-14
+    },
+    {
+      "V_over_omega": 100.0,
+      "M": 100,
+      "subdivisions": 1,
+      "matrix_error": 2.142730437526552e-14
+    },
+    {
+      "V_over_omega": 100.0,
+      "M": 100,
+      "subdivisions": 2,
+      "matrix_error": 4.296563105299356e-14
+    },
+    {
+      "V_over_omega": 100.0,
+      "M": 100,
+      "subdivisions": 4,
+      "matrix_error": 8.459899447643693e-14
+    },
+    {
+      "V_over_omega": 100.0,
+      "M": 100,
+      "subdivisions": 8,
+      "matrix_error": 8.448797217397441e-14
+    }
+  ],
+  "expected_scaled_loss": 4.934802200544679,
+  "double_projector_limit_P00": 0.36687232897929184,
+  "sha256": {
+    "results/data/zeno_study.npz": "1bdab973fb30d6774afa3cf4874064a9f1e0c31bc7170e09eee6a77dd17076e1",
+    "scripts/quantum_zeno.py": "1c98ee1bf5db401b7021b286b860adeb83fad98fa0d49cf88aaf5a47a09ccd2e",
+    "scripts/audit_quantum_zeno.py": "0cfd974575cb3cc5c0149d8b11b0cf45053af12695db0c4f92e98fba13c7368d",
+    "src/quantum_project/density_matrix.py": "819e7f8396faba548c322d1cf3b2014284b22594917e762c9ecb3cbfe4cd657f",
+    "src/quantum_project/quantum_zeno.py": "74010f4e367489de824f4b651abe8d4bc7c9f0baa5d2fd3723d6aee42ee07acf"
+  },
+  "status": "passed"
+}

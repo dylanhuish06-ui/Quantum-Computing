@@ -1,0 +1,32 @@
+name: Regenerate quantum Zeno figures
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  figures:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      MPLBACKEND: Agg
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
+      - name: Install scientific dependencies
+        run: python -m pip install -r results/zeno_figures/requirements.txt -e '.[test]'
+      - name: Run repository tests
+        run: python -m pytest -q
+      - name: Validate and regenerate figures
+        run: python scripts/generate_zeno_figures.py --all --output-dir "$RUNNER_TEMP/zeno_figures"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: quantum-zeno-figures
+          path: ${{ runner.temp }}/zeno_figures
+          if-no-files-found: error
+          retention-days: 30

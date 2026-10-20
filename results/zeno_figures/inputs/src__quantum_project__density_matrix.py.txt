@@ -1,0 +1,119 @@
+"""Density operators and non-selective projective measurements in the fixed basis.
+
+No state is renormalised, symmetrised, clipped, or projected onto the PSD cone.
+The looser density tolerance allows roundoff from long measurement sequences.
+"""
+
+import numpy as np
+from scipy.linalg import expm
+
+from .validation import ATOL, _real_scalar, _state_vector, is_hermitian, is_normalised
+
+DENSITY_ATOL = 1e-10
+
+
+def validate_density_matrix(rho, atol=DENSITY_ATOL):
+    """Return a finite (4, 4) density matrix or raise ValueError.
+
+    Trace, Hermiticity and minimum eigenvalue use absolute tolerance only.
+    Eigenvalues are checked only after checking Hermiticity.
+    """
+    atol = _real_scalar(atol, "atol")
+    if atol < 0:
+        raise ValueError("atol must be nonnegative")
+    matrix = np.asarray(rho, dtype=complex)
+    if matrix.shape != (4, 4) or not np.all(np.isfinite(matrix)):
+        raise ValueError("rho must be a finite matrix of shape (4, 4)")
+    if abs(np.trace(matrix) - 1) > atol:
+        raise ValueError("rho must have trace one")
+    if not np.allclose(matrix, matrix.conj().T, atol=atol, rtol=0):
+        raise ValueError("rho must be Hermitian")
+    if np.linalg.eigvalsh(matrix).min() < -atol:
+        raise ValueError("rho must be positive semidefinite")
+    return matrix
+
+
+def density_from_state(psi):
+    """Construct |psi><psi| from an already normalised milestone state."""
+    state = _state_vector(psi)
+    if not is_normalised(state):
+        raise ValueError("psi must be normalised")
+    return np.outer(state, state.conj())
+
+
+def unitary_operator(Hbar, dt):
+    """Return exp(-i Hbar dt), with Hbar in rad/s and dt in seconds."""
+    matrix = np.asarray(Hbar, dtype=complex)
+    if not is_hermitian(matrix):
+        raise ValueError("Hbar must be Hermitian")
+    dt = _real_scalar(dt, "dt")
+    return expm(-1j * matrix * dt)
+
+
+def evolve_density(rho, times, Hbar):
+    """Exact static evolution U rho U† at real times relative to t=0.
+
+    Like evolve_static, accepts negative, unsorted, repeated and empty times.
+    """
+    matrix = validate_density_matrix(rho)
+    time_array = np.asarray(times)
+    if (time_array.ndim != 1 or time_array.dtype.kind not in "iuf"
+            or not np.all(np.isfinite(time_array))):
+        raise ValueError("times must be a finite real one-dimensional array")
+    unitary_operator(Hbar, 0)  # Validate even when times is empty.
+    result = np.empty((len(time_array), 4, 4), dtype=complex)
+    for index, time in enumerate(time_array):
+        unitary = unitary_operator(Hbar, float(time))
+        result[index] = unitary @ matrix @ unitary.conj().T
+        validate_density_matrix(result[index])
+    return result
+
+
+def validate_projectors(projectors):
+    """Require a complete, orthogonal set of Hermitian idempotent projectors."""
+    matrices = np.asarray(projectors, dtype=complex)
+    if (matrices.ndim != 3 or matrices.shape[1:] != (4, 4)
+            or len(matrices) == 0 or not np.all(np.isfinite(matrices))):
+        raise ValueError("projectors must have shape (n, 4, 4), n >= 1, and be finite")
+    for index, projector in enumerate(matrices):
+        if (not np.allclose(projector, projector.conj().T, atol=ATOL, rtol=0)
+                or not np.allclose(projector @ projector, projector, atol=ATOL, rtol=0)):
+            raise ValueError("projectors must be Hermitian and idempotent")
+        for other in matrices[:index]:
+            if not np.allclose(projector @ other, 0, atol=ATOL, rtol=0):
+                raise ValueError("projectors must be mutually orthogonal")
+    if not np.allclose(matrices.sum(axis=0), np.eye(4), atol=ATOL, rtol=0):
+        raise ValueError("projectors must sum to the identity")
+    return matrices
+
+
+def projective_measurement(rho, projectors):
+    """Discard outcomes using the Lüders channel sum_a P_a rho P_a."""
+    matrix = validate_density_matrix(rho)
+    projectors = validate_projectors(projectors)
+    result = sum(projector @ matrix @ projector for projector in projectors)
+    return validate_density_matrix(result)
+
+
+def density_probability(rho, target):
+    """Return <target|rho|target> without hiding numerical errors by clipping."""
+    matrix = validate_density_matrix(rho)
+    state = _state_vector(target)
+    if not is_normalised(state):
+        raise ValueError("target must be normalised")
+    return float(np.vdot(state, matrix @ state).real)
+
+
+def angular_frequency_variance(psi, Hbar):
+    """Return Var(H/ħ) in s^-2 from the actual Hamiltonian and pure state.
+
+    Evaluating ||(Hbar - <Hbar>) psi||² avoids subtractive cancellation.
+    """
+    state = _state_vector(psi)
+    if not is_normalised(state):
+        raise ValueError("psi must be normalised")
+    if not is_hermitian(Hbar):
+        raise ValueError("Hbar must be Hermitian")
+    action = np.asarray(Hbar) @ state
+    centered = action - np.vdot(state, action).real * state
+    return float(np.vdot(centered, centered).real)

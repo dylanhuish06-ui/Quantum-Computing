@@ -1,0 +1,56 @@
+[
+  {
+    "original_path": "results/data/zeno_study.npz",
+    "snapshot_path": "inputs/zeno_study.npz",
+    "sha256": "1bdab973fb30d6774afa3cf4874064a9f1e0c31bc7170e09eee6a77dd17076e1",
+    "original_git_state": "untracked"
+  },
+  {
+    "original_path": "scripts/quantum_zeno.py",
+    "snapshot_path": "inputs/scripts__quantum_zeno.py.txt",
+    "sha256": "1c98ee1bf5db401b7021b286b860adeb83fad98fa0d49cf88aaf5a47a09ccd2e",
+    "original_git_state": "untracked"
+  },
+  {
+    "original_path": "scripts/audit_quantum_zeno.py",
+    "snapshot_path": "inputs/scripts__audit_quantum_zeno.py.txt",
+    "sha256": "0cfd974575cb3cc5c0149d8b11b0cf45053af12695db0c4f92e98fba13c7368d",
+    "original_git_state": "untracked"
+  },
+  {
+    "original_path": "src/quantum_project/density_matrix.py",
+    "snapshot_path": "inputs/src__quantum_project__density_matrix.py.txt",
+    "sha256": "819e7f8396faba548c322d1cf3b2014284b22594917e762c9ecb3cbfe4cd657f",
+    "original_git_state": "untracked"
+  },
+  {
+    "original_path": "src/quantum_project/quantum_zeno.py",
+    "snapshot_path": "inputs/src__quantum_project__quantum_zeno.py.txt",
+    "sha256": "74010f4e367489de824f4b651abe8d4bc7c9f0baa5d2fd3723d6aee42ee07acf",
+    "original_git_state": "untracked"
+  },
+  {
+    "original_path": "tests/test_quantum_zeno.py",
+    "snapshot_path": "inputs/tests__test_quantum_zeno.py.txt",
+    "sha256": "589210dd6f26f4d9c66dfb424e31466da8fb31bb4479ec22ca0fed48a6811b39",
+    "original_git_state": "untracked"
+  },
+  {
+    "original_path": "docs/quantum_zeno_audit.md",
+    "snapshot_path": "inputs/docs__quantum_zeno_audit.md.txt",
+    "sha256": "362ac15b283ce6e0d0ea42b873d664994d86075679f41d6d64d24de7d9b8c4ab",
+    "original_git_state": "untracked"
+  },
+  {
+    "original_path": "results/data/zeno_audit.json",
+    "snapshot_path": "inputs/results__data__zeno_audit.json.txt",
+    "sha256": "68d2801b0a84cdce919b7b1c4e450bcb9c652f332861ea95652b2e2aa6da35ca",
+    "original_git_state": "untracked"
+  },
+  {
+    "original_path": "results/data/zeno_validation.json",
+    "snapshot_path": "inputs/results__data__zeno_validation.json.txt",
+    "sha256": "21cab095e1e247e6c6a44dbaefe5e73b2e832e2a13d67544e1826fb91cd124e4",
+    "original_git_state": "untracked"
+  }
+]
