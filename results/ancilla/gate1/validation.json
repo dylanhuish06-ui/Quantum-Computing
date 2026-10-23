@@ -1,0 +1,133 @@
+{
+  "schema": 1,
+  "gate": 1,
+  "passed": true,
+  "utc": "2026-10-23T10:00:26.681540+00:00",
+  "git_head": "353b96baf84c8f0b00d0fde4419dbcfc573ce6f1",
+  "git_status": "?? results/ancilla/\n?? scripts/ancilla/\n?? src/quantum_project/ancilla/\n?? tests/ancilla/\n",
+  "source_sha256": {
+    "src/quantum_project/ancilla/__init__.py": "dba2d25e7f65f71c99420adaa976ce92e8737da716188568235ff5209ab5c607",
+    "src/quantum_project/ancilla/models.py": "5c27547772035b2a0c3fd57de10212ff83d4a0d3fc7b6e87a5b38cb92bbc1c8e",
+    "src/quantum_project/ancilla/propagation.py": "66d7d26a3136237b9470d0a8984e58b3ab587ed7f8d0060b1630c31aace84589",
+    "src/quantum_project/ancilla/protection.py": "de3834d2339c3b9fade7e5ad65931f49558c88253625a72484d0a1ab9d8caf03",
+    "src/quantum_project/ancilla/syndrome.py": "7bfb5c6ffc4a7bffffbc3391b438e965a3aa7b56ab5bc180f02a205426a3964f",
+    "scripts/ancilla/validate_gates.py": "9d0a47963ec682d3fd412b5796d13d801442efc98ec350069e707f3e68a98255"
+  },
+  "artifact_sha256": {
+    "residuals.csv": "baf67b048736020ba8c4daac118537ded0a8be7f4664f69ac65a0d193026faa2",
+    "trajectories.npz": "c406d156a6cc477b0753fedc38b8c252f37e98985da2625b7b6bcd6b453251b1"
+  },
+  "parameters": {
+    "N": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "T_tau": 1.2,
+    "profile": "broken_profile",
+    "midpoint_dt": [
+      0.04,
+      0.02,
+      0.01
+    ]
+  },
+  "solver": {
+    "dt": 0.04,
+    "rtol": 2e-12,
+    "atol": 2e-14
+  },
+  "units": {
+    "Omega_ref_rad_per_s": 6283185.307179586,
+    "tau": "Omega_ref*t_seconds",
+    "h": "Hbar/Omega_ref",
+    "state_errors": "dimensionless L2, no phase alignment or renormalisation",
+    "QHP_spectral_norm": "in units of Omega_ref"
+  },
+  "environment": {
+    "python": "3.14.2",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "platform": "Linux-6.8.0-1064-azure-x86_64-with-glibc2.39",
+    "threads": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    }
+  },
+  "limits": {
+    "max_seconds": 240,
+    "full_N_max": 12,
+    "dense_expm_dimension_max": 256
+  },
+  "provisional_codespaces_elapsed_seconds": 4.056568971000161,
+  "rows": [
+    {
+      "N": 2,
+      "ode_refinement_l2": 5.447805103250969e-16,
+      "mid_coarse_l2": 5.464479724495926e-05,
+      "mid_medium_l2": 1.9670838570980118e-05,
+      "mid_fine_l2": 4.917573784603039e-06,
+      "midpoint_order": 2.0000398568824527,
+      "dense_sparse_l2": 2.7434529743856224e-15,
+      "constant_dense_l2": 3.3625009263594733e-16,
+      "norm_drift": 9.992007221626409e-16,
+      "projector_idempotence_max": 1.1102230246251565e-16,
+      "QHP_spectral_norm": 0.6500000000000001
+    },
+    {
+      "N": 3,
+      "ode_refinement_l2": 2.704780487719725e-15,
+      "mid_coarse_l2": 7.831281496989341e-05,
+      "mid_medium_l2": 2.8190838418605646e-05,
+      "mid_fine_l2": 7.047522441949854e-06,
+      "midpoint_order": 2.000038313480828,
+      "dense_sparse_l2": 2.1353875256214806e-15,
+      "constant_dense_l2": 4.0744958118297253e-16,
+      "norm_drift": 2.6645352591003757e-15,
+      "projector_idempotence_max": 1.1102230246251565e-16,
+      "QHP_spectral_norm": 0.5307227776030221
+    },
+    {
+      "N": 4,
+      "ode_refinement_l2": 1.5372029575530925e-14,
+      "mid_coarse_l2": 0.00010086789168536576,
+      "mid_medium_l2": 3.631011881167344e-05,
+      "mid_fine_l2": 9.077284838328259e-06,
+      "midpoint_order": 2.0000389169417345,
+      "dense_sparse_l2": 1.3687584516619168e-15,
+      "constant_dense_l2": 6.890587178188922e-16,
+      "norm_drift": 1.2656542480726785e-14,
+      "projector_idempotence_max": 5.551115123125783e-17,
+      "QHP_spectral_norm": 0.5594309277855157
+    },
+    {
+      "N": 5,
+      "ode_refinement_l2": 5.3724491106833757e-14,
+      "mid_coarse_l2": 0.00012272075840115342,
+      "mid_medium_l2": 4.4176564702200154e-05,
+      "mid_fine_l2": 1.1043834507509533e-05,
+      "midpoint_order": 2.0000400605712008,
+      "dense_sparse_l2": 2.9453132124920285e-15,
+      "constant_dense_l2": 2.1569729162028313e-15,
+      "norm_drift": 3.808064974464287e-14,
+      "projector_idempotence_max": 2.7755575615628914e-17,
+      "QHP_spectral_norm": 0.5629165124598853
+    },
+    {
+      "N": 6,
+      "ode_refinement_l2": 1.4456034169177066e-13,
+      "mid_coarse_l2": 0.00014394951699674995,
+      "mid_medium_l2": 5.181829713207115e-05,
+      "mid_fine_l2": 1.2954202170205946e-05,
+      "midpoint_order": 2.000041441193435,
+      "dense_sparse_l2": 4.861358985701234e-15,
+      "constant_dense_l2": 7.556490960430185e-15,
+      "norm_drift": 8.903988657493755e-14,
+      "projector_idempotence_max": 5.551115123125783e-17,
+      "QHP_spectral_norm": 0.5957348403442592
+    }
+  ],
+  "postprocessing": "CSV line endings normalized to LF; numeric values unchanged. Artifact checksum updated."
+}
