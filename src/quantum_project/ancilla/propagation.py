@@ -44,7 +44,7 @@ def evolve(hamiltonian: Callable, initial: ArrayLike, times: ArrayLike, *,
            method: str = "dop853", dt: float = 0.01,
            rtol: float = 2e-12, atol: float = 2e-14,
            require_normalised: bool = True, max_evaluations: int = 200_000,
-           max_seconds: float = 120.) -> np.ndarray:
+           max_seconds: float = 120., action_atol: float = 1e-12) -> np.ndarray:
     """Bounded propagation; dt is a maximum integration step, not an output grid.
 
     Runtime is checked between evaluations/actions, not an interrupt of a SciPy
@@ -61,8 +61,10 @@ def evolve(hamiltonian: Callable, initial: ArrayLike, times: ArrayLike, *,
         raise ValueError("initial must be a finite state vector")
     if require_normalised and abs(np.vdot(state, state)-1) > 1e-10:
         raise ValueError("initial must have unit norm")
-    if method not in ("dop853", "midpoint", "dense_midpoint"):
+    if method not in ("dop853", "midpoint", "dense_midpoint", "controlled_midpoint"):
         raise ValueError("unknown propagation method")
+    if not np.isfinite(action_atol) or action_atol <= 0:
+        raise ValueError("action_atol must be positive and finite")
     if not np.isfinite(dt) or dt <= 0 or not (0 < rtol < 1 and 0 < atol < 1):
         raise ValueError("dt and solver tolerances must be positive and finite")
     d = len(state)
@@ -98,8 +100,13 @@ def evolve(hamiltonian: Callable, initial: ArrayLike, times: ArrayLike, *,
             raise RuntimeError("propagation resource budget exceeded")
         step = (right-left)/steps
         for j in range(steps):
-            A = -1j*step*H(left+(j+0.5)*step)
-            if method == "midpoint":
+            matrix = H(left+(j+0.5)*step)
+            A = -1j*step*matrix
+            if method == "controlled_midpoint":
+                from .action import controlled_action
+                state, _ = controlled_action(matrix, state, step,
+                    atol=action_atol*step/(times[-1]-times[0]))
+            elif method == "midpoint":
                 state = expm_multiply(A, state, traceA=A.diagonal().sum())
             else:
                 state = expm(A.toarray()) @ state
@@ -112,3 +119,4 @@ def evolve(hamiltonian: Callable, initial: ArrayLike, times: ArrayLike, *,
 def evolve_hybrid(profile, initial, times, **kwargs):
     """profile(t) returns HybridParameters; its bulk symmetry is structural."""
     return evolve(lambda t: hybrid_hamiltonian(profile(t)), initial, times, **kwargs)
+
