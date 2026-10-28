@@ -19,7 +19,7 @@ No main changes or merges.
 | 3 — Gap/dynamical | passed | 15 tests; 20 gap comparisons and finite-cycle scan |
 | 4 — Exact hybrid | passed | 41 hybrid tests; 27 N/m numerical comparisons |
 | 5 — Large-N/adaptive | passed | N=64/256/1024 sparse sweep refinements; bounded static adaptive reference and failure example |
-| 6 — Figures/CLI | not_started | — |
+| 6 — Figures/CLI | passed | Four PDF/PNG figure sets, hashed resumable CLI, same-session comparisons; 447 tests and end-to-end resume passed |
 | 7 — Review | not_started | — |
 
 ## Baseline and environment
@@ -64,7 +64,7 @@ full-space allocations allowed.
 
 ## Immediate next action
 
-Begin Gate 6: publication figures and a parameter-hashed resumable experiment CLI using the validated Gate 1–5 outputs.
+Begin Gate 7: final scientific/code audit, artifact/link checks and hand-off review. Do not merge to main without explicit approval.
 
 ## Session log
 
@@ -131,10 +131,57 @@ Python 3.12.14, NumPy 2.3.5, SciPy 1.17.0, pytest 9.2.0. Timing is
 provisional. Artifact and implementation source SHA256 checks passed, as did
 the tracked-file whitespace check. Gates 6–7 remain not_started.
 
-Publication: blocked by automatic approval review at GitHub create_tree.
-The stated reason was that uploading generated files to this private repository
-requires explicit destination/publication authorization. No remote tree,
-commit or branch update succeeded. Tested changes are retained in a local
-commit and a reviewable patch; explicit user approval is needed before retrying
-publication. Scientific implementation is complete through Gate 5.
+Publication: user explicitly authorized the push on 2026-10-28. Gate 5 is
+published as `c4352023c5bcb5c1dd51550f458802c0cd1047e3`, directly parented on
+`c6b1cac624ba995966df1249467c7e1367d83b05`. The branch update succeeded.
+The earlier automatic review block is resolved.
+
+## Gate 6 checkpoint — 2026-10-28 UTC
+
+Upstream starting HEAD: `c4352023c5bcb5c1dd51550f458802c0cd1047e3`.
+The commit containing this checkpoint is the Gate 6 hand-off; resolve its remote
+SHA from branch history. Local reconstructed source history differs from remote
+history, as described in [RUNNING_EXPERIMENTS.md](RUNNING_EXPERIMENTS.md).
+Unrelated retrieved scripts/data and cache files were preserved locally. Gate 6
+implementation, tests and documentation are prepared for publication. The
+selected numerical artifacts and figures remain local pending separate upload
+authorization: automatic approval review rejected the Gate 2 trajectory NPZ
+upload as a distinct numerical payload. No complete Gate 6 data tree was
+published. The source-only checkpoint can reproduce all results through the CLI.
+
+Added `python -m quantum_project.ancilla.run --resume` (use `PYTHONPATH=src`
+from an uninstalled checkout). Each experiment is a bounded foreground task;
+matching parameter/recipe, numerical-source and environment hashes plus artifact
+checksums are required before skipping. Damaged results are preserved before
+recomputation, pending results are never treated as passed, and a Unix advisory
+lock prevents overlapping runs without stale-lock files blocking recovery.
+
+Gate 1–5 experiments recomputed in the current Python 3.12.14 / NumPy 2.3.5 /
+SciPy 1.17.0 environment with single-threaded BLAS. The final command was:
+`OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONPATH=src python -m quantum_project.ancilla.run --resume`.
+Selected completed directories are recorded in `results/ancilla/runs/latest.json`.
+New Gate 1–4 NPZ complex trajectories and Gate 5 raw observables/adaptive CSVs
+are retained with their validation JSON, residuals, execution logs and manifests.
+
+Four publication figure sets were generated in PDF and PNG and visually checked:
+`results/ancilla/runs/figures-ac66ceca6fdce52e/{accuracy,protection,large_n,adaptive}`.
+The same directory contains `report.md`, `errors.csv`, `comparison.json`,
+`figure_data.npz` and checksum manifest. Exact symmetry, exact hybrid asymmetry,
+postselection and approximate dynamics have separate interpretations; coherent
+gap protection is also labelled. No timing speedup or statistical-error claim.
+
+End-to-end second invocation: all five experiments and figures skipped after
+checksum validation; every artifact SHA256 and modification time remained
+unchanged. Cache-corruption, changed-input, interrupted-task and lock behavior
+are additionally unit tested. Final suite command:
+`OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONPATH=src python -m pytest -q`.
+Outcome: **447 passed in 33.24 s** (eight Gate 6 tests, no failures).
+Local verification logs and machine-readable summary: `results/ancilla/gate6/`.
+The artifact paths above describe the verified local checkpoint; they are not
+files included in the source-only remote commit.
+
+No new physical claim beyond Gate 5: structured N=1024 evolution is exact only
+under bulk invariance; the strict generic-disorder example reaches full space.
+Ideal oracle compilation costs remain unresolved. Stage 7 is not_started and
+the programme is not yet ready_for_review. Immediate next action: Gate 7 audit.
 
