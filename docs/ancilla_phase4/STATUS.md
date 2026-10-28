@@ -20,7 +20,7 @@ No main changes or merges.
 | 4 — Exact hybrid | passed | 41 hybrid tests; 27 N/m numerical comparisons |
 | 5 — Large-N/adaptive | passed | N=64/256/1024 sparse sweep refinements; bounded static adaptive reference and failure example |
 | 6 — Figures/CLI | passed | Four PDF/PNG figure sets, hashed resumable CLI, same-session comparisons; 447 tests and end-to-end resume passed |
-| 7 — Review | not_started | — |
+| 7 — Review | passed | 447 tests; smoke, checksum, trajectory, figure and documentation audit; ready_for_review |
 
 ## Baseline and environment
 
@@ -64,7 +64,7 @@ full-space allocations allowed.
 
 ## Immediate next action
 
-Begin Gate 7: final scientific/code audit, artifact/link checks and hand-off review. Do not merge to main without explicit approval.
+Human review of the completed research branch; see [FINAL_REVIEW.md](FINAL_REVIEW.md). Status: ready_for_review.
 
 ## Session log
 
@@ -185,3 +185,21 @@ under bulk invariance; the strict generic-disorder example reaches full space.
 Ideal oracle compilation costs remain unresolved. Stage 7 is not_started and
 the programme is not yet ready_for_review. Immediate next action: Gate 7 audit.
 
+
+## Gate 7 final checkpoint
+
+Gate 6 complete artifacts pushed as `136677adb3a0f076e568cab3b322bbb434dc2e15`;
+the earlier artifact-upload approval block is resolved by explicit user instruction.
+All 44 published artifact blobs were compared with local Git hashes and matched.
+Gate 7: **passed**, overall status **ready_for_review**. Full suite: 447 passed
+in 30.49 s; all five experiments and figures passed resume verification.
+Read-only audit: 310 finite trajectory arrays, four figure pairs, source and
+artifact checksums, cross-manifest provenance and relative documentation links.
+Python compilation passed; no lint/type checker is configured.
+Commands and scientific assessment: [FINAL_REVIEW.md](FINAL_REVIEW.md).
+Evidence: `results/ancilla/gate7/{tests.log,smoke.log,audit.json}`.
+No numerical implementation changed during this audit. Existing source-byte
+normalisation and retrieved files in the reconstructed local checkout were
+preserved; the remote commit includes only the explicit Gate 7 hand-off files.
+The commit containing this checkpoint is the final Gate 7 revision. Next action:
+human review. No merge to main is performed.

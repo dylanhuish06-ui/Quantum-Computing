@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "verified_gates": [
+    "gate1-f8513f54feb40901",
+    "gate2-c958fac79183775b",
+    "gate3-8b96c8738e01538f",
+    "gate4-2ea2c40950d89264",
+    "gate5-a12e795014558d52"
+  ],
+  "finite_trajectory_arrays": 310,
+  "figure_pairs": 4,
+  "documentation_links": [
+    "docs/ancilla_phase4/STATUS.md",
+    "docs/ancilla_phase4/MASTER_PLAN.md",
+    "docs/ancilla_phase4/FINAL_REVIEW.md",
+    "docs/ancilla_phase4/VALIDATION_REPORT.md",
+    "docs/ancilla_phase4/GATE5_REPORT.md",
+    "docs/ancilla_phase4/RUNNING_EXPERIMENTS.md",
+    "docs/ancilla_phase4/FINAL_REVIEW.md",
+    "docs/ancilla_phase4/RUNNING_EXPERIMENTS.md",
+    "docs/ancilla_phase4/GATE5_REPORT.md"
+  ],
+  "checks": [
+    "scientific source/environment signatures",
+    "artifact inventories and SHA256",
+    "cross-manifest figure provenance",
+    "finite raw trajectories",
+    "PDF/PNG signatures",
+    "relative documentation links"
+  ]
+}

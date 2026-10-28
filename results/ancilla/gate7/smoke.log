@@ -1,0 +1,23 @@
+Gate 1: verified cache, skipped
+Gate 2: verified cache, skipped
+Gate 3: verified cache, skipped
+Gate 4: verified cache, skipped
+Gate 5: verified cache, skipped
+Figures: verified cache, skipped
+{
+  "gates": {
+    "1": "gate1-f8513f54feb40901",
+    "2": "gate2-c958fac79183775b",
+    "3": "gate3-8b96c8738e01538f",
+    "4": "gate4-2ea2c40950d89264",
+    "5": "gate5-a12e795014558d52"
+  },
+  "actions": {
+    "1": "skipped",
+    "2": "skipped",
+    "3": "skipped",
+    "4": "skipped",
+    "5": "skipped"
+  },
+  "figures": "figures-ac66ceca6fdce52e"
+}
