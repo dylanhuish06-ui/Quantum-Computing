@@ -1,0 +1,36 @@
+{
+  "input_hash": "ac66ceca6fdce52e05aec1fe4de74ceb0a8643f17074d3e8ab59bfa16cdfb21b",
+  "specification": {
+    "schema": 1,
+    "source_sha256": "bc9bd349f931bd2dc96acd663ce838104bd8a3f1a11753886772b4748fd4cf71",
+    "environment": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "matplotlib": "3.10.8",
+      "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+      "threads": 1
+    },
+    "experiment_manifests": {
+      "1": "86761a76d25a38af7dd22ee5517ad30e55306dd2822b45e5007714e6b7cc421c",
+      "2": "51a0374def60db0f3b1f90012955a1f939e796830c72e2372205b85d97ddd8e6",
+      "3": "8532db99a666d0089362e17fb0698a9e157af5409a7ab3cffe80de84a5627f7d",
+      "4": "85239530c1cd27ad5b41602ab8a66a04de94aa4cc32b4eeb3bd8a918e721f2e5",
+      "5": "9785809f894e04bc3c4c1f49345f13a036dbb77f70c44341a963a5aa127f88ac"
+    }
+  },
+  "artifact_sha256": {
+    "adaptive.png": "cedfdab99229a28d9284eb596f70f7faf1bb66872320f31650dd19d2683dc4cd",
+    "accuracy.png": "f1f0efe40866c14ecfe2ac50ef2123e9596cac0155b5bde6d41dd35dfa5ddbce",
+    "large_n.pdf": "77c098fca2a1981d3100d85f9748e8a5eefe066a35b4a9ea15753131b80c689e",
+    "comparison.json": "cb2c999ca26dce759d06b7345bc5e89545b0015f174f419f22d52221adf238b1",
+    "protection.png": "f965e3fdf41bd82b85b69d594514436c8f436d69abe9b9586ff3b1c0dd7ecdce",
+    "report.md": "e66b6a068fee966d3b56af4e1aec52ea5167b8415f5c927586be7bf60013fcf8",
+    "errors.csv": "1c64c496b5cb0833c65459ed51e1b02afc0a7a25ac11825b653dd863a65b5002",
+    "large_n.png": "3e1076201602d6843960a880c93374153ab71de47bfcaa4a135b610b5dd7ef92",
+    "protection.pdf": "f0923a6c128b94e7612de40ac05a996805f384da2850424d09c5e0d11318f036",
+    "accuracy.pdf": "1edfd121257b9a292db7c0944e1c367870388ad6c46adc4529c254b4ac6e42c2",
+    "adaptive.pdf": "125a17dd7b19b4c11cd162cb59e5898a2fe46c388e4a294f76a25bf0ec0503ca",
+    "figure_data.npz": "d2698c35f3977a8ec6c9f2059a4af65889b11307a4f4f7a5a6db96297fc8a33c"
+  }
+}
