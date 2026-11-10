@@ -1,0 +1,155 @@
+{
+  "gate": 5,
+  "passed": true,
+  "utc": "2026-10-28T22:36:46.770878+00:00",
+  "upstream_base": "c6b1cac624ba995966df1249467c7e1367d83b05",
+  "source_sha256": {
+    "src/quantum_project/ancilla/__init__.py": "da128ab5e161aa7b3ca47682756d613c64fa7d24fd83f31068d26df4b163d8c2",
+    "src/quantum_project/ancilla/action.py": "b5415c8b3e5616b4a794fe93465815869881cb422c987ea145b5b86c7d876056",
+    "src/quantum_project/ancilla/approximation.py": "41b7398895a59169927f565c08e59706a4a84229c869aafc27952940531272d0",
+    "src/quantum_project/ancilla/models.py": "431b5a3f8d6b3f457e4dbd36225aa46dcef2993e32d81447c35ca8635b9a8e85",
+    "src/quantum_project/ancilla/propagation.py": "fb97f86693f701ba697585a561bfa5f0d5dd476afa52aa72cf0f03141714a61e",
+    "src/quantum_project/ancilla/protection.py": "75a8e84ca074842776df6d2728f9f6f92fb8365c659eed2f20b96f35f1a1f1a6",
+    "src/quantum_project/ancilla/syndrome.py": "635b2bf9fd56abdccad3512c42b2a847640ebaf3fc8ced3e0cc3d857f3a05c1c",
+    "scripts/ancilla/validate_gate5.py": "f6c100b87ff2990f39276af8025a7d86d22d163c20df568b262285135eeaba50"
+  },
+  "artifact_sha256": {
+    "residuals.csv": "943ec46aace493fbc06dc97d8806213c54118f50fd71cb5c815bad502b80a621",
+    "observables.csv": "4b91651fbd6425f234df38f8d530bdf991ffbf765b7dd43deb464a9afa8a602d",
+    "adaptive.csv": "89043cdf9aa0310a369f0204458f96095d8903481b6cff58294dceeb55a768cd"
+  },
+  "parameters": {
+    "sizes": [
+      64,
+      256,
+      1024
+    ],
+    "m": 1,
+    "T_tau": 0.4,
+    "output_samples": [
+      21,
+      41
+    ],
+    "dt_tau": [
+      0.01,
+      0.005,
+      0.0025
+    ],
+    "action_atol": [
+      1e-11,
+      1e-13
+    ],
+    "Omega_ref_rad_per_s": 6283185.307179586,
+    "profile": "profile(N) in this script"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "elapsed_seconds_provisional": 4.371754729000031,
+  "rows": [
+    {
+      "N": 64,
+      "m": 1,
+      "dimension": 128,
+      "coarse_medium_l2": 5.213261907373548e-05,
+      "medium_fine_l2": 1.3033119591105287e-05,
+      "midpoint_order": 2.000003893932581,
+      "estimated_fine_time_error_l2": 4.3443731970350955e-06,
+      "action_refinement_l2": 5.234588518129083e-16,
+      "independent_action_l2": 6.953698799712912e-16,
+      "output_grid_l2": 6.739590562581142e-16,
+      "norm_drift": 1.0769163338864018e-14,
+      "final_excitation_fraction": 0.04106232169201707,
+      "final_defect_population": 0.04716799361135461
+    },
+    {
+      "N": 256,
+      "m": 1,
+      "dimension": 512,
+      "coarse_medium_l2": 0.0001998337081475359,
+      "medium_fine_l2": 4.995828518018305e-05,
+      "midpoint_order": 2.0000040965310886,
+      "estimated_fine_time_error_l2": 1.6652761726727683e-05,
+      "action_refinement_l2": 9.362006062247306e-16,
+      "independent_action_l2": 1.4783371564090347e-15,
+      "output_grid_l2": 8.412758250581807e-16,
+      "norm_drift": 1.532107773982716e-14,
+      "final_excitation_fraction": 0.04098963618365478,
+      "final_defect_population": 0.04716804762527352
+    },
+    {
+      "N": 1024,
+      "m": 1,
+      "dimension": 2048,
+      "coarse_medium_l2": 0.000790309277273051,
+      "medium_fine_l2": 0.00019757675502765488,
+      "midpoint_order": 2.000004120414362,
+      "estimated_fine_time_error_l2": 6.585891834255163e-05,
+      "action_refinement_l2": 1.3186700926651277e-15,
+      "independent_action_l2": 1.9455500394386162e-14,
+      "output_grid_l2": 1.6964193341034538e-15,
+      "norm_drift": 2.842170943040401e-14,
+      "final_excitation_fraction": 0.040971464605443667,
+      "final_defect_population": 0.04716806115392403
+    }
+  ],
+  "adaptive": [
+    {
+      "m": 0,
+      "dimension": 6,
+      "residual_operator_norm": 0.8534635317340749,
+      "state_error_bound": 0.5974244722138523,
+      "actual_state_error_l2": 0.18103048720499623,
+      "budget_met": false
+    },
+    {
+      "m": 1,
+      "dimension": 10,
+      "residual_operator_norm": 0.6757711644237763,
+      "state_error_bound": 0.47303981509664333,
+      "actual_state_error_l2": 0.13662428842405008,
+      "budget_met": false
+    },
+    {
+      "m": 2,
+      "dimension": 16,
+      "residual_operator_norm": 0.6342099196813489,
+      "state_error_bound": 0.44394694377694416,
+      "actual_state_error_l2": 0.12814859349665111,
+      "budget_met": false
+    },
+    {
+      "m": 3,
+      "dimension": 24,
+      "residual_operator_norm": 0.7500000000000001,
+      "state_error_bound": 0.525,
+      "actual_state_error_l2": 0.12375952299093315,
+      "budget_met": false
+    },
+    {
+      "m": 4,
+      "dimension": 32,
+      "residual_operator_norm": 0.0,
+      "state_error_bound": 0.0,
+      "actual_state_error_l2": 0.0,
+      "budget_met": true
+    },
+    {
+      "m": 4,
+      "dimension": 32,
+      "residual_operator_norm": 0.0,
+      "state_error_bound": 0.0,
+      "actual_state_error_l2": 0.0,
+      "budget_met": true
+    }
+  ],
+  "limitations": [
+    "Taylor truncation bound excludes roundoff and time discretisation",
+    "midpoint error estimate is asymptotic Richardson, not a rigorous bound",
+    "generic-disorder adaptive reference is static and N<=8; worst case reaches full dimension",
+    "large-N trajectories are exact structured hybrid model, without ancilla measurement",
+    "raw complex states regenerated by recipe; compact observable trajectories stored"
+  ]
+}

@@ -1,0 +1,338 @@
+{
+  "schema": 1,
+  "gate": 3,
+  "passed": true,
+  "utc": "2026-10-23T10:04:10.181416+00:00",
+  "git_head": "353b96baf84c8f0b00d0fde4419dbcfc573ce6f1",
+  "git_status": " M docs/ancilla_phase4/STATUS.md\n?? docs/ancilla_phase4/VALIDATION_REPORT.md\n?? results/ancilla/\n?? scripts/ancilla/\n?? src/quantum_project/ancilla/\n?? tests/ancilla/\n",
+  "source_sha256": {
+    "src/quantum_project/ancilla/__init__.py": "dba2d25e7f65f71c99420adaa976ce92e8737da716188568235ff5209ab5c607",
+    "src/quantum_project/ancilla/models.py": "5c27547772035b2a0c3fd57de10212ff83d4a0d3fc7b6e87a5b38cb92bbc1c8e",
+    "src/quantum_project/ancilla/propagation.py": "ff41e4d5d5aab0f97fff5e6bf6b0c3f24eb4d04cb87ffd14dc0ab6e7fc759df6",
+    "src/quantum_project/ancilla/protection.py": "de3834d2339c3b9fade7e5ad65931f49558c88253625a72484d0a1ab9d8caf03",
+    "src/quantum_project/ancilla/syndrome.py": "7bfb5c6ffc4a7bffffbc3391b438e965a3aa7b56ab5bc180f02a205426a3964f",
+    "scripts/ancilla/validate_gates.py": "9d0a47963ec682d3fd412b5796d13d801442efc98ec350069e707f3e68a98255"
+  },
+  "artifact_sha256": {
+    "residuals.csv": "9973563adf30a18f96eef0ba76b3cf0783fcfe5ee9020d392c833b062fb7e080",
+    "trajectories.npz": "bff296021d95b1bfdacafb6d292e2fbfea0866abe5079c49df514c3a74efae6a"
+  },
+  "parameters": {
+    "N": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "T_tau": 1.6,
+    "G_over_Omega_ref": [
+      0,
+      0.5,
+      2,
+      8
+    ],
+    "profile": "broken_profile",
+    "success_probability": 1,
+    "penalty": "G*(Jmax*(Jmax+1)*I-J2); ideal all-to-all coherent control",
+    "dynamical_static_N3": [
+      {
+        "cycles": 1,
+        "state_l2_error": 0.042599910185269714,
+        "swap_count": 14,
+        "cnot_equivalent_count": 42
+      },
+      {
+        "cycles": 2,
+        "state_l2_error": 0.021135735860997026,
+        "swap_count": 28,
+        "cnot_equivalent_count": 84
+      },
+      {
+        "cycles": 4,
+        "state_l2_error": 0.010547562434582056,
+        "swap_count": 56,
+        "cnot_equivalent_count": 168
+      },
+      {
+        "cycles": 8,
+        "state_l2_error": 0.005271249966830526,
+        "swap_count": 112,
+        "cnot_equivalent_count": 336
+      }
+    ],
+    "dynamical_limitations": "instantaneous pulses; finite pulses separately unit tested; no hardware fidelity claim"
+  },
+  "solver": {
+    "dt": 0.04,
+    "rtol": 2e-12,
+    "atol": 2e-14
+  },
+  "units": {
+    "Omega_ref_rad_per_s": 6283185.307179586,
+    "tau": "Omega_ref*t_seconds",
+    "h": "Hbar/Omega_ref",
+    "state_errors": "dimensionless L2, no phase alignment or renormalisation",
+    "QHP_spectral_norm": "in units of Omega_ref"
+  },
+  "environment": {
+    "python": "3.14.2",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "platform": "Linux-6.8.0-1064-azure-x86_64-with-glibc2.39",
+    "threads": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    }
+  },
+  "limits": {
+    "max_seconds": 240,
+    "full_N_max": 12,
+    "dense_expm_dimension_max": 256
+  },
+  "provisional_codespaces_elapsed_seconds": 30.52005487999986,
+  "rows": [
+    {
+      "N": 2,
+      "G_over_Omega_ref": 0.0,
+      "first_gap_over_Omega_ref": 0.0,
+      "final_leakage": 0.24332672547484177,
+      "max_leakage": 0.24332672547484177,
+      "target_probability": 0.733985768418184,
+      "norm_drift": 1.1102230246251565e-15,
+      "ode_refinement_l2": 5.662749647834299e-16,
+      "midpoint_reference_l2": 3.1549653188017714e-07,
+      "penalty_on_Dicke_max": 0.0
+    },
+    {
+      "N": 2,
+      "G_over_Omega_ref": 0.5,
+      "first_gap_over_Omega_ref": 1.0,
+      "final_leakage": 0.18746706837378735,
+      "max_leakage": 0.18746706837378735,
+      "target_probability": 0.7924250037960797,
+      "norm_drift": 1.2212453270876722e-15,
+      "ode_refinement_l2": 9.582710459383785e-16,
+      "midpoint_reference_l2": 3.1871562179927753e-07,
+      "penalty_on_Dicke_max": 0.0
+    },
+    {
+      "N": 2,
+      "G_over_Omega_ref": 2.0,
+      "first_gap_over_Omega_ref": 4.0,
+      "final_leakage": 0.011581776220357564,
+      "max_leakage": 0.021253257046844855,
+      "target_probability": 0.9832564869956923,
+      "norm_drift": 1.3322676295501878e-15,
+      "ode_refinement_l2": 1.1994584125080683e-14,
+      "midpoint_reference_l2": 3.612947099942147e-07,
+      "penalty_on_Dicke_max": 0.0
+    },
+    {
+      "N": 2,
+      "G_over_Omega_ref": 8.0,
+      "first_gap_over_Omega_ref": 16.0,
+      "final_leakage": 0.0009581622881642644,
+      "max_leakage": 0.0011865997289419962,
+      "target_probability": 0.9987439452988591,
+      "norm_drift": 8.43769498715119e-15,
+      "ode_refinement_l2": 2.5964940903031413e-12,
+      "midpoint_reference_l2": 3.629713758965984e-07,
+      "penalty_on_Dicke_max": 0.0
+    },
+    {
+      "N": 3,
+      "G_over_Omega_ref": 0.0,
+      "first_gap_over_Omega_ref": 0.0,
+      "final_leakage": 0.25715100918962397,
+      "max_leakage": 0.25715100918962397,
+      "target_probability": 0.734498422356452,
+      "norm_drift": 2.7755575615628914e-15,
+      "ode_refinement_l2": 2.6284856168046537e-15,
+      "midpoint_reference_l2": 4.584834844708519e-07,
+      "penalty_on_Dicke_max": 0.0
+    },
+    {
+      "N": 3,
+      "G_over_Omega_ref": 0.5,
+      "first_gap_over_Omega_ref": 1.5,
+      "final_leakage": 0.15752557633909164,
+      "max_leakage": 0.15752557633909164,
+      "target_probability": 0.8359008731500263,
+      "norm_drift": 2.55351295663786e-15,
+      "ode_refinement_l2": 2.731818824474769e-15,
+      "midpoint_reference_l2": 4.716098608285216e-07,
+      "penalty_on_Dicke_max": 0.0
+    },
+    {
+      "N": 3,
+      "G_over_Omega_ref": 2.0,
+      "first_gap_over_Omega_ref": 6.0,
+      "final_leakage": 0.008038488032540123,
+      "max_leakage": 0.008038488032540123,
+      "target_probability": 0.9910858032455035,
+      "norm_drift": 8.43769498715119e-15,
+      "ode_refinement_l2": 2.3722871723810403e-13,
+      "midpoint_reference_l2": 5.012443032653993e-07,
+      "penalty_on_Dicke_max": 0.0
+    },
+    {
+      "N": 3,
+      "G_over_Omega_ref": 8.0,
+      "first_gap_over_Omega_ref": 24.0,
+      "final_leakage": 0.00044767565024101395,
+      "max_leakage": 0.0005085861144685632,
+      "target_probability": 0.9994951963265761,
+      "norm_drift": 5.329070518200751e-15,
+      "ode_refinement_l2": 3.471654233745605e-12,
+      "midpoint_reference_l2": 4.997662590901624e-07,
+      "penalty_on_Dicke_max": 0.0
+    },
+    {
+      "N": 4,
+      "G_over_Omega_ref": 0.0,
+      "first_gap_over_Omega_ref": 0.0,
+      "final_leakage": 0.2841775196812633,
+      "max_leakage": 0.2841775196812633,
+      "target_probability": 0.7104002980622502,
+      "norm_drift": 1.2434497875801753e-14,
+      "ode_refinement_l2": 1.5201313226690163e-14,
+      "midpoint_reference_l2": 5.843410961174655e-07,
+      "penalty_on_Dicke_max": 0.0
+    },
+    {
+      "N": 4,
+      "G_over_Omega_ref": 0.5,
+      "first_gap_over_Omega_ref": 2.0,
+      "final_leakage": 0.1278568414536142,
+      "max_leakage": 0.1278568414536142,
+      "target_probability": 0.8683764700461917,
+      "norm_drift": 1.2212453270876722e-14,
+      "ode_refinement_l2": 1.6657457240587303e-14,
+      "midpoint_reference_l2": 6.076601303079187e-07,
+      "penalty_on_Dicke_max": 0.0
+    },
+    {
+      "N": 4,
+      "G_over_Omega_ref": 2.0,
+      "first_gap_over_Omega_ref": 8.0,
+      "final_leakage": 0.003906764305742483,
+      "max_leakage": 0.005378376362700986,
+      "target_probability": 0.9957126877152964,
+      "norm_drift": 1.887379141862766e-14,
+      "ode_refinement_l2": 1.1551596666855522e-12,
+      "midpoint_reference_l2": 6.267481722406751e-07,
+      "penalty_on_Dicke_max": 0.0
+    },
+    {
+      "N": 4,
+      "G_over_Omega_ref": 8.0,
+      "first_gap_over_Omega_ref": 32.0,
+      "final_leakage": 0.00028549628435637676,
+      "max_leakage": 0.0003174222334073328,
+      "target_probability": 0.9996900341640843,
+      "norm_drift": 2.7755575615628914e-15,
+      "ode_refinement_l2": 4.722848736852469e-12,
+      "midpoint_reference_l2": 6.244541125822442e-07,
+      "penalty_on_Dicke_max": 0.0
+    },
+    {
+      "N": 5,
+      "G_over_Omega_ref": 0.0,
+      "first_gap_over_Omega_ref": 0.0,
+      "final_leakage": 0.31435873952992877,
+      "max_leakage": 0.31435873952992877,
+      "target_probability": 0.6813522557100128,
+      "norm_drift": 3.774758283725532e-14,
+      "ode_refinement_l2": 5.3738586510308966e-14,
+      "midpoint_reference_l2": 7.029439970181149e-07,
+      "penalty_on_Dicke_max": 0.0
+    },
+    {
+      "N": 5,
+      "G_over_Omega_ref": 0.5,
+      "first_gap_over_Omega_ref": 2.5,
+      "final_leakage": 0.09491717859322624,
+      "max_leakage": 0.0950694984354275,
+      "target_probability": 0.9024862105158675,
+      "norm_drift": 3.608224830031759e-14,
+      "ode_refinement_l2": 5.91059640872627e-14,
+      "midpoint_reference_l2": 7.323549257113566e-07,
+      "penalty_on_Dicke_max": 1.1102230246251565e-16
+    },
+    {
+      "N": 5,
+      "G_over_Omega_ref": 2.0,
+      "first_gap_over_Omega_ref": 10.0,
+      "final_leakage": 0.003623877026222585,
+      "max_leakage": 0.003623877026222585,
+      "target_probability": 0.9961587478271201,
+      "norm_drift": 4.2521541843143495e-14,
+      "ode_refinement_l2": 3.2032914407858088e-12,
+      "midpoint_reference_l2": 7.410782115672797e-07,
+      "penalty_on_Dicke_max": 4.440892098500626e-16
+    },
+    {
+      "N": 5,
+      "G_over_Omega_ref": 8.0,
+      "first_gap_over_Omega_ref": 40.0,
+      "final_leakage": 0.00020928927862210183,
+      "max_leakage": 0.0002260401380802512,
+      "target_probability": 0.9997765117267388,
+      "norm_drift": 1.9984014443252818e-15,
+      "ode_refinement_l2": 6.246378911246665e-12,
+      "midpoint_reference_l2": 7.383005283485968e-07,
+      "penalty_on_Dicke_max": 1.7763568394002505e-15
+    },
+    {
+      "N": 6,
+      "G_over_Omega_ref": 0.0,
+      "first_gap_over_Omega_ref": 0.0,
+      "final_leakage": 0.34487442206233343,
+      "max_leakage": 0.34487442206233343,
+      "target_probability": 0.6514078059769202,
+      "norm_drift": 8.93729534823251e-14,
+      "ode_refinement_l2": 1.4458544120097644e-13,
+      "midpoint_reference_l2": 8.177095382454098e-07,
+      "penalty_on_Dicke_max": 0.0
+    },
+    {
+      "N": 6,
+      "G_over_Omega_ref": 0.5,
+      "first_gap_over_Omega_ref": 3.0,
+      "final_leakage": 0.06291496359344606,
+      "max_leakage": 0.06901419726480405,
+      "target_probability": 0.935147593297816,
+      "norm_drift": 8.58202398035246e-14,
+      "ode_refinement_l2": 1.543400755133719e-13,
+      "midpoint_reference_l2": 8.517013136072744e-07,
+      "penalty_on_Dicke_max": 2.220446049250313e-16
+    },
+    {
+      "N": 6,
+      "G_over_Omega_ref": 2.0,
+      "first_gap_over_Omega_ref": 12.0,
+      "final_leakage": 0.002285633929481928,
+      "max_leakage": 0.0029133518374262844,
+      "target_probability": 0.9975665830474767,
+      "norm_drift": 3.064215547965432e-14,
+      "ode_refinement_l2": 3.5580766557989103e-12,
+      "midpoint_reference_l2": 8.535113155428576e-07,
+      "penalty_on_Dicke_max": 8.881784197001252e-16
+    },
+    {
+      "N": 6,
+      "G_over_Omega_ref": 8.0,
+      "first_gap_over_Omega_ref": 48.0,
+      "final_leakage": 0.00016537096133672206,
+      "max_leakage": 0.000175427453147963,
+      "target_probability": 0.9998250132096527,
+      "norm_drift": 2.1094237467877974e-15,
+      "ode_refinement_l2": 8.141702530896336e-12,
+      "midpoint_reference_l2": 8.505498600291581e-07,
+      "penalty_on_Dicke_max": 3.552713678800501e-15
+    }
+  ],
+  "postprocessing": "CSV line endings normalized to LF; numeric values unchanged. Artifact checksum updated."
+}

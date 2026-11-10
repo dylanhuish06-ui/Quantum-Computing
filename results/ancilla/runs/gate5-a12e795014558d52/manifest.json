@@ -1,0 +1,39 @@
+{
+  "input_hash": "a12e795014558d522d3c3150399b6e817f4722dd7b7267aab3607438957d00be",
+  "specification": {
+    "schema": 1,
+    "gate": 5,
+    "environment": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "matplotlib": "3.10.8",
+      "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+      "threads": 1
+    },
+    "parameters": {
+      "profile": "canonical validated gate recipe",
+      "gate": 5
+    },
+    "source_sha256": {
+      "src/quantum_project/ancilla/__init__.py": "dba2d25e7f65f71c99420adaa976ce92e8737da716188568235ff5209ab5c607",
+      "src/quantum_project/ancilla/action.py": "b5415c8b3e5616b4a794fe93465815869881cb422c987ea145b5b86c7d876056",
+      "src/quantum_project/ancilla/approximation.py": "41b7398895a59169927f565c08e59706a4a84229c869aafc27952940531272d0",
+      "src/quantum_project/ancilla/models.py": "5c27547772035b2a0c3fd57de10212ff83d4a0d3fc7b6e87a5b38cb92bbc1c8e",
+      "src/quantum_project/ancilla/propagation.py": "fb97f86693f701ba697585a561bfa5f0d5dd476afa52aa72cf0f03141714a61e",
+      "src/quantum_project/ancilla/protection.py": "de3834d2339c3b9fade7e5ad65931f49558c88253625a72484d0a1ab9d8caf03",
+      "src/quantum_project/ancilla/syndrome.py": "7bfb5c6ffc4a7bffffbc3391b438e965a3aa7b56ab5bc180f02a205426a3964f",
+      "scripts/ancilla/validate_gate5.py": "f6c100b87ff2990f39276af8025a7d86d22d163c20df568b262285135eeaba50"
+    }
+  },
+  "local_git_head": "f81c7f9fa9fd44bdf8bfa4710b43b1afabe292fe",
+  "local_git_status": " M docs/ancilla_phase4/MASTER_PLAN.md\n M docs/ancilla_phase4/RESUME_PROMPT.md\n M docs/ancilla_phase4/STATUS.md\n M docs/ancilla_phase4/VALIDATION_REPORT.md\n M docs/symmetry_scaling_extension.md\n M pyproject.toml\n M run_project.py\n M scripts/ancilla/validate_gates.py\n M src/quantum_project/__init__.py\n M src/quantum_project/ancilla/__init__.py\n M src/quantum_project/ancilla/models.py\n M src/quantum_project/ancilla/protection.py\n M src/quantum_project/ancilla/syndrome.py\n M src/quantum_project/convergence.py\n M src/quantum_project/hamiltonian.py\n M src/quantum_project/observables.py\n M src/quantum_project/states.py\n M src/quantum_project/static_limits.py\n M src/quantum_project/static_solver.py\n M src/quantum_project/sweeps.py\n M src/quantum_project/symmetry.py\n M src/quantum_project/trotter.py\n M src/quantum_project/units.py\n M src/quantum_project/validation.py\n M tests/ancilla/test_hybrid.py\n M tests/ancilla/test_phase4_reference.py\n M tests/ancilla/test_propagation.py\n M tests/ancilla/test_syndrome_protection.py\n M tests/test_hamiltonian.py\n M tests/test_launcher.py\n M tests/test_phase_invariance.py\n M tests/test_states_and_observables.py\n M tests/test_static_limits.py\n M tests/test_static_solver.py\n M tests/test_sweeps_and_convergence.py\n M tests/test_symmetry.py\n M tests/test_symmetry_recovery.py\n M tests/test_trotter.py\n M tests/test_validation_and_units.py\n?? __pycache__/\n?? docs/ancilla_phase4/RUNNING_EXPERIMENTS.md\n?? results/ancilla/runs/\n?? results/data/\n?? scripts/__pycache__/\n?? scripts/figure_5_1.py\n?? scripts/figure_5_2.py\n?? scripts/symmetry_benchmark.py\n?? scripts/symmetry_demo.py\n?? scripts/symmetry_figures.py\n?? scripts/symmetry_study.py\n?? src/quantum_project/__pycache__/\n?? src/quantum_project/ancilla/__pycache__/\n?? src/quantum_project/ancilla/figures.py\n?? src/quantum_project/ancilla/run.py\n?? tests/__pycache__/\n?? tests/ancilla/__pycache__/\n?? tests/ancilla/test_figures.py\n?? tests/ancilla/test_resume.py\n",
+  "utc": "2026-10-28T22:47:21.733972+00:00",
+  "artifact_sha256": {
+    "residuals.csv": "943ec46aace493fbc06dc97d8806213c54118f50fd71cb5c815bad502b80a621",
+    "observables.csv": "4b91651fbd6425f234df38f8d530bdf991ffbf765b7dd43deb464a9afa8a602d",
+    "validation.json": "db3d6db295d033c1c60ca9a6a25be3e7baf8d7f93dfadf10c9e5af76207990a2",
+    "adaptive.csv": "89043cdf9aa0310a369f0204458f96095d8903481b6cff58294dceeb55a768cd",
+    "execution.log": "db3d6db295d033c1c60ca9a6a25be3e7baf8d7f93dfadf10c9e5af76207990a2"
+  }
+}

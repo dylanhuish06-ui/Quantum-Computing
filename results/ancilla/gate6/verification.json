@@ -1,0 +1,33 @@
+{
+  "gate": 6,
+  "passed": true,
+  "tests_passed": 447,
+  "tests_seconds_provisional": 33.24,
+  "upstream_base": "c4352023c5bcb5c1dd51550f458802c0cd1047e3",
+  "all_experiments_and_figures_verified": true,
+  "resume_all_skipped": true,
+  "resume_artifact_hashes_and_mtimes_unchanged": true,
+  "selected_outputs": {
+    "gates": {
+      "1": "gate1-f8513f54feb40901",
+      "2": "gate2-c958fac79183775b",
+      "3": "gate3-8b96c8738e01538f",
+      "4": "gate4-2ea2c40950d89264",
+      "5": "gate5-a12e795014558d52"
+    },
+    "actions": {
+      "1": "skipped",
+      "2": "skipped",
+      "3": "skipped",
+      "4": "skipped",
+      "5": "skipped"
+    },
+    "figures": "figures-ac66ceca6fdce52e"
+  },
+  "logs_sha256": {
+    "tests.log": "9e4b0c0575cfb1c0a0e3fd2a9c1789477d05af39edaa0a4da971fc6687e9864f",
+    "experiments.log": "ca41a18cd97f72f99cbfef2e70905f7c04506186ca1592703609eb9e20f9e249",
+    "resume.log": "fd3c88488e7d316c3128f34506fe986d4a65f35088cc683477ee745da2f7ffe1"
+  },
+  "gate7": "not_started"
+}
